@@ -1,0 +1,100 @@
+.dialog {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+
+.dialog:not([open]) {
+  display: none;
+}
+
+.dialog::backdrop {
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(6px);
+}
+
+.figure {
+  margin: 0;
+  max-width: min(1000px, 92vw);
+  animation: in 0.3s var(--ease);
+}
+
+.img {
+  max-height: 80dvh;
+  width: auto;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  animation: in 0.35s var(--ease);
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  color: #ddd;
+  font-size: 15px;
+}
+
+.counter {
+  margin-left: auto;
+  color: #999;
+}
+
+.close,
+.nav {
+  position: fixed;
+  color: var(--c-white);
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s;
+}
+
+.close:hover,
+.nav:hover {
+  background: rgba(251, 219, 179, 0.25);
+}
+
+.close {
+  top: 20px;
+  right: 20px;
+}
+
+.nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+  }
+}

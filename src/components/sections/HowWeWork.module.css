@@ -1,0 +1,195 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.card {
+  min-height: 199px;
+  padding: 14px 12px 25px;
+  border-radius: var(--radius);
+  background: var(--c-glass);
+  border: 0.4px solid var(--c-glass-line);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  width: 30px;
+  height: 29px;
+  border-radius: var(--radius);
+  background: var(--c-gold);
+  color: var(--c-darker);
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 25px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #e2e2e2;
+  margin-bottom: 16px;
+}
+
+.step {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.step i {
+  font-style: normal;
+  width: 20px;
+  height: 19px;
+  border-radius: 50%;
+  border: 1px solid var(--c-gold);
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  margin-right: -12px;
+  background: linear-gradient(90deg, var(--c-gold), rgba(251, 219, 179, 0));
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+
+.card:hover .step::after {
+  transform: scaleX(1.06);
+}
+
+/* Карточка с призывом */
+.cta {
+  grid-column: span 2;
+  position: relative;
+  overflow: hidden;
+  min-height: 199px;
+  border-radius: var(--radius);
+  background: var(--c-white);
+  color: var(--c-dark);
+  padding: 20px 12px;
+}
+
+.cta .text {
+  color: var(--c-dark);
+  max-width: 252px;
+  margin-bottom: 27px;
+}
+
+.cta .title {
+  margin-bottom: 14px;
+}
+
+.ctaBody {
+  position: relative;
+  z-index: 2;
+}
+
+.ctaBtn {
+  height: 40px;
+  width: 149px;
+}
+
+.stripes {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 60%;
+  pointer-events: none;
+}
+
+.stripes i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 174px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), #e3bf92);
+  clip-path: polygon(55% 0, 100% 0, 45% 100%, 0 100%);
+}
+
+.stripes i:nth-child(1) {
+  left: 0;
+}
+
+.stripes i:nth-child(2) {
+  left: 96px;
+}
+
+.stripes i:nth-child(3) {
+  left: 192px;
+}
+
+.car {
+  position: absolute;
+  right: 71px;
+  bottom: -20px;
+  width: 244px;
+  z-index: 1;
+  transition: transform 0.6s var(--ease);
+}
+
+.manager {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  height: 180px;
+  width: auto;
+  z-index: 1;
+}
+
+.cta:hover .car {
+  transform: translateX(-10px);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .cta {
+    grid-column: auto;
+    min-height: 330px;
+  }
+
+  .stripes {
+    width: 100%;
+    top: 45%;
+  }
+
+  .car {
+    right: auto;
+    left: 0;
+    width: 220px;
+  }
+
+  .manager {
+    height: 160px;
+  }
+}

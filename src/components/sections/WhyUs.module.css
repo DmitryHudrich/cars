@@ -1,0 +1,93 @@
+.track {
+  --track-gap: 22px;
+}
+
+.card {
+  width: calc((100% - 44px) / 3);
+  min-height: 168px;
+  padding: 15px 10px 15px;
+  border-radius: var(--radius);
+  background: #eeeeee;
+  color: var(--c-dark);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #939393;
+  margin-bottom: 15px;
+}
+
+.icon {
+  width: 30px;
+  height: 29px;
+  border-radius: var(--radius);
+  background: var(--c-gold);
+  color: var(--c-dark);
+  display: grid;
+  place-items: center;
+  transition: transform 0.4s var(--ease);
+}
+
+.card:hover .icon {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.num {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 10px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #6c6c6c;
+}
+
+.progress {
+  position: relative;
+  height: 3px;
+  margin-top: 36px;
+  border-radius: 3px;
+  background: #e4e4e4;
+  overflow: hidden;
+}
+
+.progress span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px;
+  background: var(--grad-gold);
+  transition:
+    transform 0.15s linear,
+    width 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    width: calc((100% - 22px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 82%;
+  }
+
+  .progress {
+    margin-top: 24px;
+  }
+}

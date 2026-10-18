@@ -1,0 +1,35 @@
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  gap: var(--gap);
+  animation: scroll var(--duration) linear infinite;
+  will-change: transform;
+}
+
+.marquee[data-reverse] .track {
+  animation-direction: reverse;
+}
+
+.pausable:hover .track {
+  animation-play-state: paused;
+}
+
+.group {
+  display: flex;
+  gap: var(--gap);
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}

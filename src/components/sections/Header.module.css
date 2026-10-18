@@ -1,0 +1,284 @@
+.topbar {
+  background: var(--c-dark);
+  color: #eeeeee;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.topbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 46px;
+}
+
+.promo {
+  color: rgba(249, 249, 249, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topLinks {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-shrink: 0;
+}
+
+.topLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.topLink:hover,
+.topPhone:hover {
+  color: var(--c-gold);
+}
+
+.topPhone {
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-light);
+  transition: box-shadow 0.3s;
+}
+
+.header[data-scrolled] {
+  box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.35);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  gap: 24px;
+}
+
+.logo {
+  flex-shrink: 0;
+  margin-right: 36px;
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+}
+
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 80px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--c-darker);
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: var(--c-gold-dark);
+}
+
+.chev {
+  transition: transform 0.25s var(--ease);
+}
+
+.navItem:hover .chev {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: -16px;
+  min-width: 220px;
+  padding: 8px;
+  background: var(--c-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.2s,
+    transform 0.25s var(--ease),
+    visibility 0.2s;
+}
+
+.navItem:hover .dropdown,
+.navItem:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.dropdown a {
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.dropdown a:hover {
+  background: var(--c-light);
+  color: var(--c-gold-dark);
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.iconBtn {
+  color: var(--c-darker);
+  transition: color 0.2s;
+}
+
+.iconBtn:hover {
+  color: var(--c-gold-dark);
+}
+
+.cta {
+  width: 200px;
+  margin-left: 12px;
+}
+
+.burger {
+  display: none;
+  color: var(--c-darker);
+}
+
+/* Мобильное меню */
+.mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--c-dark);
+  color: var(--c-white);
+  display: flex;
+  flex-direction: column;
+  padding: 16px var(--gutter) 24px;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition:
+    transform 0.4s var(--ease),
+    visibility 0.4s;
+  overflow-y: auto;
+}
+
+.mobile[data-open] {
+  transform: none;
+  visibility: visible;
+}
+
+.mobileHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.mobileClose {
+  color: var(--c-white);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.mobileLink {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 150%;
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.mobileSub {
+  display: block;
+  padding: 6px 0;
+  color: #c7c7c7;
+}
+
+.mobileFoot {
+  margin-top: auto;
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobilePhone {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .nav {
+    gap: 24px;
+  }
+
+  .logo {
+    margin-right: 8px;
+  }
+
+  .navLink {
+    font-size: 16px;
+  }
+
+  .cta {
+    width: auto;
+  }
+}
+
+@media (max-width: 1024px) {
+  .topbar {
+    display: none;
+  }
+
+  .nav,
+  .iconBtn {
+    display: none;
+  }
+
+  .inner {
+    height: 64px;
+  }
+
+  .logo img {
+    width: 160px;
+    height: auto;
+  }
+
+  .burger {
+    display: block;
+  }
+}
+
+@media (max-width: 560px) {
+  .cta {
+    display: none;
+  }
+}

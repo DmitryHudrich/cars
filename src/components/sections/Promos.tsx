@@ -1,0 +1,55 @@
+"use client";
+
+import { ArrowRight } from "lucide-react";
+import { useLeadModal } from "@/components/lead/LeadModal";
+import { SliderArrows } from "@/components/ui/SliderArrows";
+import { promos } from "@/data/content";
+import { useScroller } from "@/lib/useScroller";
+import styles from "./Promos.module.css";
+
+export function Promos() {
+  const { trackRef, canPrev, canNext, step } = useScroller();
+  const openLead = useLeadModal();
+
+  return (
+    <section className="section section--white" id="promo">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">[ Выгодные предложения ]</p>
+            <h2 className="h2">Акции и предложения</h2>
+          </div>
+          <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />
+        </div>
+
+        <div className={`track ${styles.track}`} ref={trackRef}>
+          {promos.map((p) => (
+            <article key={p.title} className={styles.card}>
+              <div className={styles.photo}>
+                <img src={p.img} alt="" loading="lazy" draggable={false} />
+              </div>
+              <div className={styles.body}>
+                <h3 className={styles.title}>{p.title}</h3>
+                <p className={styles.text}>{p.text}</p>
+                <button
+                  className={styles.more}
+                  onClick={() =>
+                    openLead({
+                      source: `promo:${p.title}`,
+                      title: p.title,
+                      // TODO: условия акций — от заказчика
+                      subtitle: "Оставьте контакты — менеджер расскажет об условиях акции и рассчитает стоимость автомобиля.",
+                      submitLabel: "Узнать условия",
+                    })
+                  }
+                >
+                  Узнать условия <ArrowRight size={14} />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
