@@ -161,29 +161,14 @@
   margin-left: 12px;
 }
 
-.burger,
-.mobileCall {
+/* та же иконка, что в макете, только крупнее; поле нажатия 48×48 */
+.burger {
   display: none;
   place-items: center;
   width: 48px;
   height: 48px;
-  margin-right: -8px;
-  border-radius: var(--radius);
+  margin-right: -7px;
   color: var(--c-darker);
-  transition: background-color 0.2s;
-}
-
-.burger:active,
-.mobileCall:active {
-  background: rgba(0, 0, 0, 0.06);
-}
-
-.mobileCall {
-  width: 44px;
-  height: 44px;
-  margin-right: 0;
-  border-radius: 50%;
-  background: var(--grad-gold);
 }
 
 /* Мобильное меню */
@@ -319,13 +304,8 @@
     height: auto;
   }
 
-  .burger,
-  .mobileCall {
+  .burger {
     display: grid;
-  }
-
-  .actions {
-    gap: 8px;
   }
 }
 

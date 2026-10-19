@@ -80,11 +80,8 @@ export function Header() {
             <LeadButton source="header" title="Заказать звонок" submitLabel="Жду звонка" className={`btn btn--gold ${styles.cta}`}>
               Заказать звонок
             </LeadButton>
-            <a href={telHref(site.phoneShort)} className={styles.mobileCall} aria-label={`Позвонить: ${site.phoneShort}`}>
-              <Phone size={20} />
-            </a>
             <button className={styles.burger} onClick={() => setOpen(true)} aria-label="Открыть меню">
-              <Menu size={30} />
+              <Menu size={34} strokeWidth={1.8} />
             </button>
           </div>
         </div>
