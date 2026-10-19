@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { ArrowRight, ChevronRight, Ship, Truck } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
 import { CATALOG_FILTER_EVENT } from "./HeroSearch";
@@ -25,16 +25,33 @@ export function Geography() {
 
         <div className={styles.layout}>
           <div className={styles.map}>
-            {geography.map((g, i) => (
-              <img
-                key={g.id}
-                src={g.map}
-                alt={`Карта поставок: ${g.name}`}
-                className={styles.mapImg}
-                data-active={i === active || undefined}
-                loading="lazy"
-              />
-            ))}
+            <div
+              className={styles.stage}
+              style={
+                {
+                  "--fx": c.mapFocus.focus[0],
+                  "--fy": c.mapFocus.focus[1],
+                  "--px": c.mapFocus.pin[0],
+                  "--py": c.mapFocus.pin[1],
+                  "--zoom": c.mapFocus.zoom,
+                  "--r": c.mapFocus.r,
+                } as CSSProperties
+              }
+            >
+              {/* у каждой страны может быть своя карта — пока у всех общая, тогда картинка одна */}
+              {[...new Set(geography.map((g) => g.map))].map((src) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Карта поставок: ${c.name}`}
+                  className={styles.mapImg}
+                  data-active={src === c.map || undefined}
+                  loading="lazy"
+                />
+              ))}
+              <span className={styles.spot} aria-hidden />
+              <span className={styles.pin} key={c.id} aria-hidden />
+            </div>
           </div>
 
           <div className={styles.tabs} role="tablist" aria-label="Страна импорта">

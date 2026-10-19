@@ -136,6 +136,8 @@ export type CountryInfo = {
   features: string[];
   stats: { value: string; label: string }[];
   routes: { kind: "truck" | "ship"; title: string; note: string }[];
+  // Акцент на карте, % от рамки: pin — метка страны, focus — куда приближаем, zoom — во сколько раз, r — радиус подсветки
+  mapFocus: { pin: [number, number]; focus: [number, number]; zoom: number; r: number };
 };
 
 export const geography: CountryInfo[] = [
@@ -153,6 +155,7 @@ export const geography: CountryInfo[] = [
       { value: "2 маршрута", label: "по суше" },
       { value: "от 1,3 млн", label: "цена под ключ" },
     ],
+    mapFocus: { pin: [48.8, 62.8], focus: [50, 57], zoom: 1.3, r: 24 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
@@ -173,6 +176,7 @@ export const geography: CountryInfo[] = [
       { value: "от 1,5 млн", label: "цена под ключ" },
     ],
     // TODO: в макете маршруты скопированы с Китая
+    mapFocus: { pin: [72.7, 68.9], focus: [72, 64], zoom: 2.1, r: 9 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
@@ -192,6 +196,7 @@ export const geography: CountryInfo[] = [
       { value: "5 портов", label: "отгрузки еженедельно" },
     ],
     // TODO: в макете маршруты скопированы с Китая
+    mapFocus: { pin: [86.5, 69.7], focus: [82, 68], zoom: 1.8, r: 13 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },

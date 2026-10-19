@@ -17,22 +17,106 @@
   background: var(--c-dark);
 }
 
+/* Числовые переменные регистрируем, чтобы браузер плавно анимировал их сами —
+   тогда приближение, подсветка и метка переезжают между странами синхронно */
+@property --fx { syntax: "<number>"; inherits: true; initial-value: 50; }
+@property --fy { syntax: "<number>"; inherits: true; initial-value: 50; }
+@property --px { syntax: "<number>"; inherits: true; initial-value: 50; }
+@property --py { syntax: "<number>"; inherits: true; initial-value: 50; }
+@property --zoom { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --r { syntax: "<number>"; inherits: true; initial-value: 20; }
+
+/* Сцена приближается к выбранной стране: масштаб вокруг точки фокуса
+   и сдвиг этой точки ближе к центру рамки */
+.stage {
+  position: absolute;
+  inset: 0;
+  transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
+  transform: translate(calc((50 - var(--fx)) * 0.55%), calc((50 - var(--fy)) * 0.55%)) scale(var(--zoom));
+  transition:
+    --fx 1s var(--ease),
+    --fy 1s var(--ease),
+    --px 1s var(--ease),
+    --py 1s var(--ease),
+    --zoom 1s var(--ease),
+    --r 1s var(--ease);
+  will-change: transform;
+}
+
+/* положение картинки внутри рамки — как в макете */
 .mapImg {
   position: absolute;
-  inset: 3% 9% 3% 5%;
-  width: 86%;
-  height: 94%;
-  object-fit: contain;
+  left: 4.8%;
+  top: 2.6%;
+  width: 90.25%;
+  height: 94.85%;
   opacity: 0;
-  transform: scale(1.04);
-  transition:
-    opacity 0.6s var(--ease),
-    transform 0.8s var(--ease);
+  transition: opacity 0.6s var(--ease);
 }
 
 .mapImg[data-active] {
   opacity: 1;
-  transform: none;
+}
+
+/* всё вокруг выбранной страны притемняется */
+.spot {
+  position: absolute;
+  inset: -60%;
+  pointer-events: none;
+  /* слой в 2,2 раза больше сцены, поэтому координаты и радиус пересчитаны (÷2,2);
+     вертикальный радиус ×1,85 — пропорции рамки карты 646×349 */
+  background: radial-gradient(
+    ellipse calc(var(--r) * 0.455%) calc(var(--r) * 0.842%) at calc(50% + (var(--fx) - 50) * 0.455%)
+      calc(50% + (var(--fy) - 50) * 0.455%),
+    transparent 35%,
+    rgba(28, 28, 28, 0.75) 100%
+  );
+}
+
+/* пульсирующая метка; размер компенсирует масштаб сцены */
+.pin {
+  position: absolute;
+  left: calc(var(--px) * 1%);
+  top: calc(var(--py) * 1%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  box-shadow: 0 0 14px 4px rgba(251, 219, 179, 0.7);
+  transform: translate(-50%, -50%) scale(calc(1 / var(--zoom)));
+  animation: pinIn 0.6s 0.5s var(--ease) both;
+}
+
+.pin::before,
+.pin::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--c-gold);
+  animation: pulse 2.2s ease-out infinite;
+}
+
+.pin::after {
+  animation-delay: 1.1s;
+}
+
+@keyframes pinIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
 }
 
 .tabs {
