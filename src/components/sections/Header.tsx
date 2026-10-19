@@ -127,11 +127,8 @@ export function Header() {
           ))}
         </nav>
         <div className={styles.mobileFoot} onClick={(e) => (e.target as HTMLElement).closest("a[href^='#']") && setOpen(false)}>
-          <a href={telHref(site.phoneShort)} className={styles.mobilePhone}>
-            {site.phoneShort}
-          </a>
           <ul className={styles.mobileContacts}>
-            {site.offices.slice(1).map((o) => (
+            {site.offices.map((o) => (
               <li key={o.phone}>
                 <a href={telHref(o.phone)}>
                   <Phone size={18} />
