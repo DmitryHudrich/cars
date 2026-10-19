@@ -48,7 +48,7 @@ export function Reviews() {
           {reviews.map((r, i) => (
             <li key={i} style={{ "--i": i } as CSSProperties}>
               <button className={styles.item} onClick={() => setOpen(i)} aria-label={`Открыть фото: ${r.car}`}>
-                <img src={r.photo} alt={`${r.name}, ${r.car}`} loading="lazy" />
+                <img src={r.photo} alt={`${r.name}, ${r.car}`} loading="lazy" style={{ objectPosition: r.pos }} />
                 <span className={styles.overlay}>
                   <span>{r.car}</span>
                   <Expand size={18} />

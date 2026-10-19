@@ -17,7 +17,7 @@ export const heroStats = [
   { icon: "shield", value: "Гарантия", label: "на ДВС и КПП" },
 ] as const;
 
-export const clientPhotos = [1, 2, 3, 4, 5, 6].map((n) => ({
+export const clientPhotos = [1, 2, 4, 5, 6].map((n) => ({
   src: asset(`/img/clients/client-${n}.webp`),
   alt: "Клиент Ранг Авто со своим автомобилем",
 }));
@@ -250,16 +250,19 @@ export const reasons = [
   },
 ] as const;
 
-// TODO: все фото отзывов — заказчик пришлёт; пока фото из макета
+// Фото клиентов: 1–6 из макета (без №3), 7–10 прислал заказчик
 export const reviews = [
   { photo: asset("/img/clients/client-1.webp"), name: "Клиент", car: "Audi A3" },
   { photo: asset("/img/clients/client-2.webp"), name: "Клиент", car: "Hyundai Elantra" },
-  { photo: asset("/img/clients/client-3.webp"), name: "Клиент", car: "Hyundai Elantra" },
   { photo: asset("/img/clients/client-4.webp"), name: "Клиент", car: "Mercedes-Benz CLA" },
   { photo: asset("/img/clients/client-5.webp"), name: "Клиент", car: "Audi A5" },
   { photo: asset("/img/clients/client-6.webp"), name: "Клиент", car: "Kia Sorento" },
-  { photo: asset("/img/clients/client-5.webp"), name: "Клиент", car: "Audi A5" },
-  { photo: asset("/img/clients/client-6.webp"), name: "Клиент", car: "Kia Sorento" },
+  // pos — какая часть вертикального фото попадает в горизонтальную карточку
+  { photo: asset("/img/clients/client-7.webp"), name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
+  { photo: asset("/img/clients/client-8.webp"), name: "Клиент", car: "Kia Sorento", pos: "50% 58%" },
+  { photo: asset("/img/clients/client-9.webp"), name: "Клиент", car: "Toyota RAV4" },
+  { photo: asset("/img/clients/client-10.webp"), name: "Клиент", car: "Volkswagen T-Roc", pos: "50% 68%" },
+  { photo: asset("/img/clients/client-11.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
 ];
 
 export const banks = [
