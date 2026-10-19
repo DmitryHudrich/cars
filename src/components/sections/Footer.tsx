@@ -116,10 +116,9 @@ export function Footer() {
       <div className={styles.bottom}>
         <div className={`container ${styles.bottomInner}`}>
           <span>© 2026 Ранг Авто</span>
-          {/* TODO: текст пользовательского соглашения — от заказчика */}
-          <a href="#">
+          <Link href="/agreement">
             Пользовательское соглашение <ArrowRight size={14} />
-          </a>
+          </Link>
           <Link href="/privacy">
             Политика конфиденциальности <ArrowRight size={14} />
           </Link>

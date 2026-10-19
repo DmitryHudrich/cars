@@ -2,6 +2,7 @@ import { asset } from "@/lib/asset";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Icon } from "@/components/ui/Icon";
+import { RevealGroup } from "@/components/ui/RevealGroup";
 import { workSteps } from "@/data/content";
 import styles from "./HowWeWork.module.css";
 
@@ -16,7 +17,7 @@ export function HowWeWork() {
           </div>
         </div>
 
-        <ol className={styles.grid}>
+        <RevealGroup as="ol" className={styles.grid}>
           {workSteps.map((s, i) => (
             <GlowCard as="li" key={s.title} className={styles.card}>
               <span className={styles.icon}>
@@ -48,7 +49,7 @@ export function HowWeWork() {
               </LeadButton>
             </div>
           </GlowCard>
-        </ol>
+        </RevealGroup>
       </div>
     </section>
   );

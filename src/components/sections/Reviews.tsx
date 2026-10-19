@@ -11,6 +11,9 @@ import styles from "./Reviews.module.css";
 export function Reviews() {
   const gridRef = useRef<HTMLUListElement>(null);
   const [open, setOpen] = useState<number | null>(null);
+  // сначала два ряда, остальное — по кнопке
+  const [expanded, setExpanded] = useState(false);
+  const STEP = 8;
 
   useEffect(() => {
     const el = gridRef.current;
@@ -45,8 +48,8 @@ export function Reviews() {
         </div>
 
         <ul className={styles.grid} ref={gridRef}>
-          {reviews.map((r, i) => (
-            <li key={i} style={{ "--i": i } as CSSProperties}>
+          {(expanded ? reviews : reviews.slice(0, STEP)).map((r, i) => (
+            <li key={r.photo} style={{ "--i": i % STEP } as CSSProperties} className={i >= STEP ? styles.more : undefined}>
               <button className={styles.item} onClick={() => setOpen(i)} aria-label={`Открыть фото: ${r.car}`}>
                 <img src={r.photo} alt={`${r.name}, ${r.car}`} loading="lazy" style={{ objectPosition: r.pos }} />
                 <span className={styles.overlay}>
@@ -57,6 +60,13 @@ export function Reviews() {
             </li>
           ))}
         </ul>
+        {reviews.length > STEP && (
+          <div className={styles.moreWrap}>
+            <button className="btn btn--ghost-light" onClick={() => setExpanded((v) => !v)}>
+              {expanded ? "Свернуть" : `Показать ещё ${reviews.length - STEP}`}
+            </button>
+          </div>
+        )}
       </div>
       {open !== null && <Lightbox items={items} start={open} onClose={() => setOpen(null)} />}
     </section>

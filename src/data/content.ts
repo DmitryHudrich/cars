@@ -250,19 +250,39 @@ export const reasons = [
   },
 ] as const;
 
-// Фото клиентов: 1–6 из макета (без №3), 7–10 прислал заказчик
-export const reviews = [
+// Фото клиентов от заказчика (design/reviews), в конце — фото из макета
+// pos — какая часть вертикального фото попадает в горизонтальную карточку
+export const reviews: { photo: string; name: string; car: string; pos?: string }[] = [
+  { photo: asset("/img/clients/review-01.webp"), name: "Клиент", car: "Kia Sorento", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-02.webp"), name: "Клиент", car: "Hyundai Palisade", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-03.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-04.webp"), name: "Клиент", car: "Hyundai Staria", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-05.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-06.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-07.webp"), name: "Клиент", car: "Hyundai Palisade" },
+  { photo: asset("/img/clients/review-08.webp"), name: "Клиент", car: "Kia K5" },
+  { photo: asset("/img/clients/review-09.webp"), name: "Клиент", car: "Hyundai Palisade" },
+  { photo: asset("/img/clients/review-10.webp"), name: "Клиент", car: "Audi Q7" },
+  { photo: asset("/img/clients/review-11.webp"), name: "Клиент", car: "Mercedes-Benz E-Class" },
+  { photo: asset("/img/clients/review-12.webp"), name: "Клиент", car: "Toyota RAV4", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-13.webp"), name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-14.webp"), name: "Клиент", car: "Volkswagen Polo", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-15.webp"), name: "Клиент", car: "Hyundai Staria", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-16.webp"), name: "Клиент", car: "Geely Coolray", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-17.webp"), name: "Клиент", car: "Toyota Passo" },
+  { photo: asset("/img/clients/review-18.webp"), name: "Клиент", car: "Nissan Note Nismo" },
+  { photo: asset("/img/clients/review-19.webp"), name: "Клиент", car: "BMW 3 серии" },
+  { photo: asset("/img/clients/review-20.webp"), name: "Клиент", car: "Kia Sportage", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-21.webp"), name: "Клиент", car: "Hyundai Elantra", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-22.webp"), name: "Клиент", car: "Toyota RAV4" },
+  { photo: asset("/img/clients/review-23.webp"), name: "Клиент", car: "Volkswagen T-Roc", pos: "50% 62%" },
+  { photo: asset("/img/clients/review-24.webp"), name: "Клиент", car: "Hyundai Sonata" },
+  { photo: asset("/img/clients/review-25.webp"), name: "Клиент", car: "Hyundai Palisade" },
   { photo: asset("/img/clients/client-1.webp"), name: "Клиент", car: "Audi A3" },
   { photo: asset("/img/clients/client-2.webp"), name: "Клиент", car: "Hyundai Elantra" },
   { photo: asset("/img/clients/client-4.webp"), name: "Клиент", car: "Mercedes-Benz CLA" },
   { photo: asset("/img/clients/client-5.webp"), name: "Клиент", car: "Audi A5" },
   { photo: asset("/img/clients/client-6.webp"), name: "Клиент", car: "Kia Sorento" },
-  // pos — какая часть вертикального фото попадает в горизонтальную карточку
-  { photo: asset("/img/clients/client-7.webp"), name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
-  { photo: asset("/img/clients/client-8.webp"), name: "Клиент", car: "Kia Sorento", pos: "50% 58%" },
-  { photo: asset("/img/clients/client-9.webp"), name: "Клиент", car: "Toyota RAV4" },
-  { photo: asset("/img/clients/client-10.webp"), name: "Клиент", car: "Volkswagen T-Roc", pos: "50% 68%" },
-  { photo: asset("/img/clients/client-11.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
 ];
 
 export const banks = [

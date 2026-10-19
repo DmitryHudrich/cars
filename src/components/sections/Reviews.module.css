@@ -16,6 +16,25 @@
   transform: translateY(30px) rotate(calc((var(--i) - 3.5) * 0.6deg)) scale(0.96);
 }
 
+/* фото, открытые кнопкой «Показать ещё», плавно проявляются */
+.more {
+  animation: reveal 0.5s var(--ease) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.moreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
 .item {
   position: relative;
   display: block;

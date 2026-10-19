@@ -131,7 +131,7 @@
 
 .car {
   position: absolute;
-  right: 71px;
+  right: 95px;
   bottom: -20px;
   width: 244px;
   z-index: 1;
@@ -140,9 +140,9 @@
 
 .manager {
   position: absolute;
-  right: 8px;
+  right: 4px;
   bottom: 0;
-  height: 180px;
+  height: 212px;
   width: auto;
   z-index: 1;
 }
@@ -184,6 +184,6 @@
   }
 
   .manager {
-    height: 160px;
+    height: 200px;
   }
 }
