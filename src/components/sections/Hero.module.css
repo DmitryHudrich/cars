@@ -108,14 +108,15 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
   animation: wordIn 0.6s var(--ease);
 }
 
+/* без filter: blur — вместе с background-clip: text Safari может не отрисовать слово */
 @keyframes wordIn {
   from {
     opacity: 0;
     transform: translateY(0.35em);
-    filter: blur(6px);
   }
 }
 
@@ -287,6 +288,16 @@
 }
 
 @media (max-width: 1024px) {
+  .btn {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+
+  .btnPrimary,
+  .btnGlass {
+    min-width: 0;
+  }
+
   .stats {
     grid-template-columns: 1fr 1fr;
     gap: 24px;

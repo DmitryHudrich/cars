@@ -10,20 +10,23 @@ import styles from "./Reviews.module.css";
 // на наведении — приближение и подпись, по клику — полноэкранный просмотр с листанием.
 export function Reviews() {
   const gridRef = useRef<HTMLUListElement>(null);
-  const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
     const el = gridRef.current;
-    if (!el) return;
+    if (!el || !("IntersectionObserver" in window)) return;
+    // Прячем фото только если блок ещё ниже экрана: без JS или при сбое наблюдателя
+    // отзывы остаются видимыми, анимация — лишь надстройка.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.dataset.armed = "";
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          setVisible(true);
+          delete el.dataset.armed;
           io.disconnect();
         }
       },
-      { threshold: 0.2 },
+      { rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -41,7 +44,7 @@ export function Reviews() {
           </div>
         </div>
 
-        <ul className={styles.grid} ref={gridRef} data-visible={visible || undefined}>
+        <ul className={styles.grid} ref={gridRef}>
           {reviews.map((r, i) => (
             <li key={i} style={{ "--i": i } as CSSProperties}>
               <button className={styles.item} onClick={() => setOpen(i)} aria-label={`Открыть фото: ${r.car}`}>

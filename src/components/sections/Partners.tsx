@@ -1,11 +1,12 @@
+import type { CSSProperties } from "react";
 import { Marquee } from "@/components/ui/Marquee";
 import { banks } from "@/data/content";
 import styles from "./Partners.module.css";
 
 function BankRow() {
   return banks.map((b) => (
-    <div key={b.name} className={styles.bank} style={{ width: b.w }}>
-      <img src={b.logo} alt={b.name} width={b.w} height={66} loading="lazy" />
+    <div key={b.name} className={styles.bank} style={{ "--w": `${b.w}px` } as CSSProperties}>
+      <img src={b.logo} alt={b.name} width={b.w} height={66} />
     </div>
   ));
 }

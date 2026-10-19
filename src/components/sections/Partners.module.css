@@ -12,6 +12,7 @@
 }
 
 .bank {
+  width: var(--w);
   height: 66px;
   flex-shrink: 0;
   border-radius: var(--radius);
@@ -37,6 +38,7 @@
   }
 
   .bank {
-    zoom: 0.8;
+    width: calc(var(--w) * 0.8);
+    height: 53px;
   }
 }

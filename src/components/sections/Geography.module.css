@@ -328,6 +328,20 @@
     grid-template-columns: 1fr;
   }
 
+  .routes li {
+    height: auto;
+    min-height: 36px;
+    padding: 8px 11px;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 2px;
+  }
+
+  .routes small {
+    flex-basis: 100%;
+    padding-left: 36px;
+  }
+
   .name {
     font-size: 24px;
   }

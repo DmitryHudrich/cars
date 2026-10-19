@@ -84,7 +84,7 @@ export function LeadSection() {
                 <input
                   className={styles.wide}
                   name="wishes"
-                  placeholder="Пожелания к автомобилю (марка, модель)"
+                  placeholder="Пожелания: марка, модель"
                   aria-label="Пожелания к автомобилю"
                 />
                 {phoneError && <p className={`${styles.wide} ${styles.error}`}>Введите номер телефона полностью</p>}

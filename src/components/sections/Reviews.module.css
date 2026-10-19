@@ -5,17 +5,15 @@
 }
 
 .grid li {
-  opacity: 0;
-  transform: translateY(30px) rotate(calc((var(--i) - 3.5) * 0.6deg)) scale(0.96);
   transition:
     opacity 0.7s var(--ease),
     transform 0.8s var(--ease);
   transition-delay: calc(var(--i) * 80ms);
 }
 
-.grid[data-visible] li {
-  opacity: 1;
-  transform: none;
+.grid[data-armed] li {
+  opacity: 0;
+  transform: translateY(30px) rotate(calc((var(--i) - 3.5) * 0.6deg)) scale(0.96);
 }
 
 .item {
@@ -69,13 +67,15 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+/* на тач-устройствах наведения нет — подпись показываем сразу */
+@media (hover: none) {
+  .overlay {
+    opacity: 1;
+    transform: none;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
