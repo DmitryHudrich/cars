@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { formatPhone, isPhoneComplete, useLeadSubmit } from "@/lib/lead";
 import { site } from "@/data/site";
@@ -96,7 +97,12 @@ export function LeadSection() {
                 )}
                 <label className={`${styles.wide} ${styles.consent}`}>
                   <input type="checkbox" required defaultChecked />
-                  Отправляя форму, вы соглашаетесь с политикой обработки персональных данных
+                  <span>
+                    Отправляя форму, вы соглашаетесь с{" "}
+                    <Link href="/privacy" target="_blank">
+                      политикой обработки персональных данных
+                    </Link>
+                  </span>
                 </label>
               </form>
             )}

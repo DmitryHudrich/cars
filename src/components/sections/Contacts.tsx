@@ -1,9 +1,24 @@
+"use client";
+
+import { useState } from "react";
+import { MousePointerClick } from "lucide-react";
 import { asset } from "@/lib/asset";
 import { site, telHref } from "@/data/site";
 import styles from "./Contacts.module.css";
 
-// TODO: заказчик думает над переделкой блока; карта — пока картинка, позже Яндекс.Карты.
+// Виджет Яндекс Карт не требует ключа. Тёмная тема — CSS-фильтром (см. .mapFrame).
+function mapUrl([lat, lon]: number[]) {
+  const ll = `${lon},${lat}`;
+  return `https://yandex.ru/map-widget/v1/?ll=${ll}&z=16&pt=${ll},pm2rdm`;
+}
+
+// TODO: заказчик думает над переделкой блока.
 export function Contacts() {
+  const [office, setOffice] = useState(0);
+  // карта ловит колесо мыши — включаем её только по клику, чтобы не мешать прокрутке страницы
+  const [active, setActive] = useState(false);
+  const current = site.offices[office];
+
   return (
     <section className={styles.section} id="contacts">
       <div className="container">
@@ -17,9 +32,10 @@ export function Contacts() {
         <div className={styles.cols}>
           <div className={styles.col}>
             <h3 className={styles.label}>Телефон</h3>
-            {site.phones.map((p, i) => (
-              <a key={i} href={telHref(p)} className={styles.link}>
-                {p}
+            {site.offices.map((o, i) => (
+              <a key={o.phone} href={telHref(o.phone)} className={styles.phone} data-active={i === office || undefined}>
+                <span className={styles.link}>{o.phone}</span>
+                <small>{o.city}</small>
               </a>
             ))}
             <h3 className={`${styles.label} ${styles.gap}`}>Почта</h3>
@@ -30,16 +46,20 @@ export function Contacts() {
 
           <div className={styles.col}>
             <h3 className={styles.label}>Адреса офисов</h3>
-            {site.offices.map((o) => (
-              <a
+            {site.offices.map((o, i) => (
+              <button
                 key={o.address}
-                href={`https://yandex.ru/maps/?text=${encodeURIComponent(o.address)}`}
-                target="_blank"
-                rel="noopener"
-                className={`${styles.link} ${o.main ? styles.accent : ""}`}
+                type="button"
+                className={styles.link}
+                aria-pressed={i === office}
+                onClick={() => {
+                  setOffice(i);
+                  setActive(false);
+                  document.getElementById("office-map")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                }}
               >
                 {o.address}
-              </a>
+              </button>
             ))}
             <h3 className={`${styles.label} ${styles.gap}`}>График работы</h3>
             <p className={styles.schedule}>
@@ -66,8 +86,28 @@ export function Contacts() {
         </div>
       </div>
 
-      <div className={styles.map}>
-        <img src={asset("/img/map-office.webp")} alt={`Карта: ${site.offices[0].address}`} loading="lazy" />
+      <div className={styles.map} id="office-map" onMouseLeave={() => setActive(false)}>
+        <iframe
+          key={current.address}
+          className={styles.mapFrame}
+          src={mapUrl(current.coords)}
+          title={`Карта: ${current.address}`}
+          loading="lazy"
+          allowFullScreen
+        />
+        {!active && (
+          <button type="button" className={styles.mapShield} onClick={() => setActive(true)}>
+            <span>
+              <MousePointerClick size={18} />
+              Нажмите, чтобы управлять картой
+            </span>
+          </button>
+        )}
+        <div className={styles.mapBadge}>
+          <b>{current.city}</b>
+          <span>{current.address}</span>
+          <a href={telHref(current.phone)}>{current.phone}</a>
+        </div>
       </div>
     </section>
   );

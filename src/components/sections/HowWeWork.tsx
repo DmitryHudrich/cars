@@ -25,7 +25,7 @@ export function HowWeWork() {
               <h3 className={styles.title}>{s.title}</h3>
               <p className={styles.text}>{s.text}</p>
               <span className={styles.step}>
-                <i>{String(i + 1).padStart(2, "0")}</i>
+                <i className="num-badge">{String(i + 1).padStart(2, "0")}</i>
               </span>
             </GlowCard>
           ))}

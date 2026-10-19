@@ -23,10 +23,10 @@ export function Partners() {
         </div>
       </div>
       <div className={styles.rows}>
-        <Marquee reverse duration={50}>
+        <Marquee reverse duration={50} className={styles.row}>
           <BankRow />
         </Marquee>
-        <Marquee duration={50}>
+        <Marquee duration={50} className={styles.row}>
           <BankRow />
         </Marquee>
       </div>

@@ -2,7 +2,7 @@
 
 import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
-import { ChevronDown, Heart, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Heart, Mail, MapPin, Menu, Phone, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { nav, site, telHref } from "@/data/site";
 import styles from "./Header.module.css";
@@ -80,8 +80,11 @@ export function Header() {
             <LeadButton source="header" title="Заказать звонок" submitLabel="Жду звонка" className={`btn btn--gold ${styles.cta}`}>
               Заказать звонок
             </LeadButton>
+            <a href={telHref(site.phoneShort)} className={styles.mobileCall} aria-label={`Позвонить: ${site.phoneShort}`}>
+              <Phone size={20} />
+            </a>
             <button className={styles.burger} onClick={() => setOpen(true)} aria-label="Открыть меню">
-              <Menu size={26} />
+              <Menu size={30} />
             </button>
           </div>
         </div>
@@ -108,10 +111,45 @@ export function Header() {
             </div>
           ))}
         </nav>
-        <div className={styles.mobileFoot}>
+        <div className={styles.mobileFoot} onClick={(e) => (e.target as HTMLElement).closest("a[href^='#']") && setOpen(false)}>
           <a href={telHref(site.phoneShort)} className={styles.mobilePhone}>
             {site.phoneShort}
           </a>
+          <ul className={styles.mobileContacts}>
+            {site.offices.slice(1).map((o) => (
+              <li key={o.phone}>
+                <a href={telHref(o.phone)}>
+                  <Phone size={18} />
+                  {o.phone} — {o.city}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href={`mailto:${site.email}`}>
+                <Mail size={18} />
+                {site.email}
+              </a>
+            </li>
+            {site.offices.map((o) => (
+              <li key={o.address}>
+                <a href="#contacts">
+                  <MapPin size={18} />
+                  {o.address}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className={styles.mobileSocials}>
+            <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
+              <img src={asset("/icons/soc-tg.svg")} alt="" width={40} height={40} />
+            </a>
+            <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
+              <img src={asset("/icons/soc-max.svg")} alt="" width={40} height={40} />
+            </a>
+            <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
+              <img src={asset("/icons/soc-vk.svg")} alt="" width={40} height={40} />
+            </a>
+          </div>
           <LeadButton source="mobile-menu" title="Заказать звонок" submitLabel="Жду звонка" className="btn btn--gold">
             Заказать звонок
           </LeadButton>

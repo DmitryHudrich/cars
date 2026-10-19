@@ -5,10 +5,15 @@
 .rows {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
   /* мягкое затухание по краям */
   -webkit-mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* запас под подъём и тень логотипа при наведении (overflow строки иначе срезает край) */
+.row {
+  padding-block: 8px 12px;
 }
 
 .bank {
@@ -34,7 +39,7 @@
 
 @media (max-width: 640px) {
   .rows {
-    gap: 12px;
+    gap: 0;
   }
 
   .bank {

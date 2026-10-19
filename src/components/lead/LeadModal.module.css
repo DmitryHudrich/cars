@@ -162,6 +162,11 @@
   color: var(--c-muted);
 }
 
+.consent a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .consent input {
   margin: 1px 0 0;
   accent-color: var(--c-gold-dark);

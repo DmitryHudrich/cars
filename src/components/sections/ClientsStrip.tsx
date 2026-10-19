@@ -15,7 +15,7 @@ export function ClientsStrip() {
       <Marquee duration={45} gap={20}>
         {clientPhotos.map((p, i) => (
           <button key={i} className={styles.stripItem} onClick={() => setOpen(i)} aria-label="Открыть фото">
-            <img src={p.src} alt={p.alt} width={274} height={206} loading="lazy" />
+            <img src={p.src} alt={p.alt} width={360} height={270} loading="lazy" />
           </button>
         ))}
       </Marquee>

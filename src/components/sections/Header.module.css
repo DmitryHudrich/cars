@@ -161,9 +161,29 @@
   margin-left: 12px;
 }
 
-.burger {
+.burger,
+.mobileCall {
   display: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-right: -8px;
+  border-radius: var(--radius);
   color: var(--c-darker);
+  transition: background-color 0.2s;
+}
+
+.burger:active,
+.mobileCall:active {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.mobileCall {
+  width: 44px;
+  height: 44px;
+  margin-right: 0;
+  border-radius: 50%;
+  background: var(--grad-gold);
 }
 
 /* Мобильное меню */
@@ -238,6 +258,30 @@
   font-weight: 600;
 }
 
+.mobileContacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 15px;
+  color: #c7c7c7;
+}
+
+.mobileContacts a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobileContacts svg {
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+.mobileSocials {
+  display: flex;
+  gap: 14px;
+}
+
 @media (max-width: 1200px) {
   .nav {
     gap: 24px;
@@ -275,8 +319,13 @@
     height: auto;
   }
 
-  .burger {
-    display: block;
+  .burger,
+  .mobileCall {
+    display: grid;
+  }
+
+  .actions {
+    gap: 8px;
   }
 }
 

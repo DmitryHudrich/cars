@@ -22,7 +22,7 @@ export function Promos() {
           <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />
         </div>
 
-        <div className={`track ${styles.track}`} ref={trackRef}>
+        <div className={`track track--bleed ${styles.track}`} ref={trackRef}>
           {promos.map((p) => (
             <article key={p.title} className={styles.card}>
               <div className={styles.photo}>

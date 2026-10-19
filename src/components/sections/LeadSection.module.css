@@ -111,6 +111,11 @@
   color: var(--c-white);
 }
 
+.consent a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .consent input {
   margin: 0;
   accent-color: var(--c-gold);

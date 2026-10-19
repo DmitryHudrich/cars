@@ -71,7 +71,7 @@ export function Geography() {
               <ul className={styles.features}>
                 {c.features.map((f, i) => (
                   <li key={f}>
-                    <i>{String(i + 1).padStart(2, "0")}</i>
+                    <i className="num-badge">{String(i + 1).padStart(2, "0")}</i>
                     <span>{f}</span>
                   </li>
                 ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { X } from "lucide-react";
 import { formatPhone, isPhoneComplete, useLeadSubmit } from "@/lib/lead";
 import styles from "./LeadModal.module.css";
@@ -129,7 +130,12 @@ function LeadDialog({ opts, onClose }: { opts: LeadOptions; onClose: () => void 
 
             <label className={styles.consent}>
               <input type="checkbox" required defaultChecked />
-              <span>Отправляя форму, вы соглашаетесь с политикой обработки персональных данных</span>
+              <span>
+                Отправляя форму, вы соглашаетесь с{" "}
+                <Link href="/privacy" target="_blank">
+                  политикой обработки персональных данных
+                </Link>
+              </span>
             </label>
           </form>
         )}

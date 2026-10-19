@@ -49,16 +49,10 @@
 }
 
 .step i {
-  font-style: normal;
   width: 20px;
-  height: 19px;
-  border-radius: 50%;
+  height: 20px;
   border: 1px solid var(--c-gold);
-  display: grid;
-  place-items: center;
   font-size: 10px;
-  font-weight: 600;
-  flex-shrink: 0;
 }
 
 .step::after {

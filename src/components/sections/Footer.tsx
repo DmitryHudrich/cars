@@ -1,4 +1,5 @@
 import { asset } from "@/lib/asset";
+import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { site, telHref } from "@/data/site";
 import styles from "./Footer.module.css";
@@ -80,15 +81,17 @@ export function Footer() {
 
         <div className={styles.col}>
           <h3 className={styles.title}>Контакты</h3>
-          <a href={telHref(site.phones[0])} className={styles.contact}>
-            <span className={styles.ci}>
-              <Phone size={16} />
-            </span>
-            <span>
-              {site.phones[0]}
-              <small>Бесплатно по РФ, 10:00-19:00 по МСК</small>
-            </span>
-          </a>
+          {site.offices.map((o) => (
+            <a key={o.phone} href={telHref(o.phone)} className={styles.contact}>
+              <span className={styles.ci}>
+                <Phone size={16} />
+              </span>
+              <span>
+                {o.phone}
+                <small>{o.city}, 10:00-19:00 по МСК</small>
+              </span>
+            </a>
+          ))}
           <a href={`mailto:${site.email}`} className={styles.contact}>
             <span className={styles.ci}>
               <Mail size={16} />
@@ -113,13 +116,13 @@ export function Footer() {
       <div className={styles.bottom}>
         <div className={`container ${styles.bottomInner}`}>
           <span>© 2026 Ранг Авто</span>
-          {/* TODO: страницы документов */}
+          {/* TODO: текст пользовательского соглашения — от заказчика */}
           <a href="#">
             Пользовательское соглашение <ArrowRight size={14} />
           </a>
-          <a href="#">
+          <Link href="/privacy">
             Политика конфиденциальности <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

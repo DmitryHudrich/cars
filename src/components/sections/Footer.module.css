@@ -4,26 +4,31 @@
   border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.grid {
+.footer .grid {
   display: grid;
-  grid-template-columns: 301px 334px 213px 1fr;
-  padding-top: 48px;
-  padding-bottom: 68px;
+  grid-template-columns: 280px 300px 190px 1fr;
+  column-gap: 20px;
+  /* .container задаёт padding шорткатом — здесь специфичнее, чтобы линии не прилипали к тексту */
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .desc {
   font-size: 12px;
-  line-height: 14px;
+  line-height: 1.4;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
   max-width: 235px;
-  margin: 20px 0 30px;
+  margin: 16px 0 20px;
 }
 
 .req {
-  margin: 0 0 30px;
+  margin: 0 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  font-size: 14px;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
   letter-spacing: 0.02em;
 }
 
@@ -33,7 +38,8 @@
 }
 
 .req dt {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--c-white);
 }
 
 .req dd {
@@ -57,7 +63,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
+  gap: 11px;
   font-size: 14px;
   color: #c7c7c7;
 }
@@ -75,11 +81,11 @@
   font-weight: 800;
   font-stretch: 200%;
   font-size: 18px;
-  line-height: 50px;
+  line-height: 1.4;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--c-white);
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 
 .contact {
@@ -100,6 +106,13 @@
 
 .contact u {
   text-underline-offset: 3px;
+}
+
+/* адрес в одну строку там, где колонке хватает места */
+@media (min-width: 1201px) {
+  .contact u {
+    white-space: nowrap;
+  }
 }
 
 .contact:hover {
@@ -126,12 +139,15 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  min-height: 70px;
+  min-height: 56px;
   font-size: 14px;
   letter-spacing: 0.02em;
 }
 
 .bottomInner a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -143,14 +159,14 @@
 }
 
 @media (max-width: 1100px) {
-  .grid {
+  .footer .grid {
     grid-template-columns: 1fr 1fr;
     gap: 40px;
   }
 }
 
 @media (max-width: 600px) {
-  .grid {
+  .footer .grid {
     grid-template-columns: 1fr;
     gap: 32px;
     padding-bottom: 40px;
@@ -160,7 +176,7 @@
     line-height: 1.4;
   }
 
-  .bottomInner {
+  .footer .bottomInner {
     flex-direction: column;
     align-items: flex-start;
     padding-top: 16px;

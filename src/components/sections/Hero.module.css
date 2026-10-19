@@ -245,8 +245,8 @@
 
 .stripItem {
   display: block;
-  width: 274px;
-  height: 206px;
+  width: 360px;
+  height: 270px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   flex-shrink: 0;
@@ -340,6 +340,27 @@
     height: 17px;
   }
 
+  .chip {
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .chips {
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 14px;
+    gap: 6px;
+    padding: 0 6px;
+  }
+
+  .chip img {
+    width: 22px;
+    height: 14px;
+  }
+
   .title {
     font-size: 30px;
     line-height: 1.2;
@@ -399,8 +420,8 @@
   }
 
   .stripItem {
-    width: 220px;
-    height: 165px;
+    width: 280px;
+    height: 210px;
   }
 
   .bg {

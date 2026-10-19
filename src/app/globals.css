@@ -287,6 +287,20 @@ ol {
   background: var(--c-dark-2);
 }
 
+/* Номер в кружке: центрируем по высоте цифр, а не по метрикам шрифта */
+.num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-box: trim-both cap alphabetic;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -378,12 +392,20 @@ ol {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  /* запас, чтобы увеличение карточек при наведении не обрезалось */
-  padding: 14px 14px 18px;
-  margin: -14px -14px -18px;
-  scroll-padding-inline: 14px;
+  /* запас под увеличение и тень карточек при наведении — иначе их обрезает overflow */
+  /* не больше бокового поля страницы — иначе лента вылезает за экран */
+  --track-pad-x: var(--gutter);
+  padding: 20px var(--track-pad-x) 48px;
+  margin: -20px calc(var(--track-pad-x) * -1) -48px;
+  scroll-padding-inline: var(--track-pad-x);
   overscroll-behavior-x: contain;
   cursor: grab;
+}
+
+/* Лента до краёв окна: первая карточка — по сетке контейнера, остальные уходят за край */
+.track--bleed {
+  --track-pad-x: max(var(--gutter), calc((100vw - var(--container)) / 2));
+  margin-inline: calc(50% - 50vw);
 }
 
 .track::-webkit-scrollbar {
