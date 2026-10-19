@@ -106,14 +106,9 @@
 
 .contact u {
   text-underline-offset: 3px;
+  white-space: nowrap;
 }
 
-/* адрес в одну строку там, где колонке хватает места */
-@media (min-width: 1201px) {
-  .contact u {
-    white-space: nowrap;
-  }
-}
 
 .contact:hover {
   color: var(--c-gold);

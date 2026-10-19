@@ -340,27 +340,6 @@
     height: 17px;
   }
 
-  .chip {
-    padding: 0 8px;
-  }
-}
-
-@media (max-width: 360px) {
-  .chips {
-    gap: 6px;
-  }
-
-  .chip {
-    font-size: 14px;
-    gap: 6px;
-    padding: 0 6px;
-  }
-
-  .chip img {
-    width: 22px;
-    height: 14px;
-  }
-
   .title {
     font-size: 30px;
     line-height: 1.2;
