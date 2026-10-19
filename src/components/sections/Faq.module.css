@@ -184,19 +184,29 @@
   border-color: #000;
 }
 
+/* квадратные кнопки мессенджеров — как в макете */
 .msg {
   width: 41px;
   height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
   border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.25s var(--ease);
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
 }
 
-.msg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.12);
+.tg {
+  background: #1b92d1;
+}
+
+.max {
+  background: linear-gradient(45deg, #8f33df 0%, #45ccff 100%);
+}
+
+.msg:hover {
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.45);
 }
 
 .msg:hover {

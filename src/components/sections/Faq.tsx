@@ -80,10 +80,10 @@ export function Faq() {
                 Задать вопрос <ArrowRight size={14} />
               </button>
               <a href={site.socials.telegram} target="_blank" rel="noopener" className={`${styles.msg} ${styles.tg}`} aria-label="Telegram">
-                <img src={asset("/icons/soc-tg.svg")} alt="" width={40} height={40} />
+                <img src={asset("/icons/glyph-tg.svg")} alt="" width={21} height={17} />
               </a>
-              <a href={site.socials.max} target="_blank" rel="noopener" className={styles.msg} aria-label="MAX">
-                <img src={asset("/icons/soc-max.svg")} alt="" width={40} height={40} />
+              <a href={site.socials.max} target="_blank" rel="noopener" className={`${styles.msg} ${styles.max}`} aria-label="MAX">
+                <img src={asset("/icons/glyph-max.svg")} alt="" width={17} height={17} />
               </a>
             </div>
           </div>

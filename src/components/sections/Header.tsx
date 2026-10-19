@@ -20,6 +20,10 @@ export function Header() {
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
@@ -87,7 +91,21 @@ export function Header() {
         </div>
       </header>
 
-      <div className={styles.mobile} data-open={open || undefined} aria-hidden={!open}>
+      {/* боковое меню: затемнение страницы + панель справа */}
+      <div
+        className={styles.backdrop}
+        data-open={open || undefined}
+        onClick={() => setOpen(false)}
+        aria-hidden
+      />
+      <div
+        className={styles.mobile}
+        data-open={open || undefined}
+        aria-hidden={!open}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Меню"
+      >
         <div className={styles.mobileHead}>
           <img src={asset("/icons/logo-light.svg")} alt="Ранг Авто" width={160} height={36} />
           <button onClick={() => setOpen(false)} aria-label="Закрыть меню" className={styles.mobileClose}>

@@ -172,15 +172,38 @@
 }
 
 /* Мобильное меню */
-.mobile {
+.backdrop {
   position: fixed;
   inset: 0;
+  z-index: 99;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s var(--ease),
+    visibility 0.35s;
+}
+
+.backdrop[data-open] {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Боковая панель справа */
+.mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(86vw, 380px);
   z-index: 100;
   background: var(--c-dark);
   color: var(--c-white);
+  box-shadow: -20px 0 40px -10px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  padding: 16px var(--gutter) 24px;
+  padding: 16px 20px 24px;
   /* прячем обрезкой, а не сдвигом за экран: элемент за правым краем
      даёт мобильным браузерам «таскать» страницу вбок */
   clip-path: inset(0 0 0 100%);
@@ -188,6 +211,7 @@
   transition:
     clip-path 0.45s var(--ease),
     visibility 0.45s;
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -197,11 +221,31 @@
   visibility: visible;
 }
 
+/* содержимое панели «доезжает» следом за ней */
+.mobile > * {
+  opacity: 0;
+  transform: translateX(28px);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.45s var(--ease);
+}
+
+.mobile[data-open] > * {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+
 .mobileHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
+}
+
+.mobileHead img {
+  width: 150px;
+  height: auto;
 }
 
 .mobileClose {
