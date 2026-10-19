@@ -109,6 +109,12 @@
   white-space: nowrap;
 }
 
+@media (max-width: 600px) {
+  .contact u {
+    white-space: normal;
+  }
+}
+
 
 .contact:hover {
   color: var(--c-gold);
