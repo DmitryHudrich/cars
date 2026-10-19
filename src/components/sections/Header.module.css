@@ -176,16 +176,19 @@
   display: flex;
   flex-direction: column;
   padding: 16px var(--gutter) 24px;
-  transform: translateX(100%);
+  /* прячем обрезкой, а не сдвигом за экран: элемент за правым краем
+     даёт мобильным браузерам «таскать» страницу вбок */
+  clip-path: inset(0 0 0 100%);
   visibility: hidden;
   transition:
-    transform 0.4s var(--ease),
-    visibility 0.4s;
+    clip-path 0.45s var(--ease),
+    visibility 0.45s;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .mobile[data-open] {
-  transform: none;
+  clip-path: inset(0);
   visibility: visible;
 }
 

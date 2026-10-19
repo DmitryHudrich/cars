@@ -51,6 +51,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  /* clip, а не hidden: не создаёт скролл-контейнер и надёжно режет
+     горизонтальное переполнение на iOS/Android */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
@@ -65,7 +73,6 @@ body {
   font-size: 16px;
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 img,
@@ -375,6 +382,7 @@ ol {
   padding: 14px 14px 18px;
   margin: -14px -14px -18px;
   scroll-padding-inline: 14px;
+  overscroll-behavior-x: contain;
   cursor: grab;
 }
 

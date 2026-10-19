@@ -234,6 +234,7 @@
     margin: 20px 0 28px;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     margin-left: calc(var(--gutter) * -1);
     margin-right: calc(var(--gutter) * -1);
