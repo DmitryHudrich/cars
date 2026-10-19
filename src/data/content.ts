@@ -136,8 +136,8 @@ export type CountryInfo = {
   features: string[];
   stats: { value: string; label: string }[];
   routes: { kind: "truck" | "ship"; title: string; note: string }[];
-  // Акцент на карте, % от рамки: pin — метка страны, focus — куда приближаем, zoom — во сколько раз, r — радиус подсветки
-  mapFocus: { pin: [number, number]; focus: [number, number]; zoom: number; r: number };
+  // Лёгкое приближение карты к стране: focus — точка в % от рамки карты, zoom — во сколько раз
+  mapFocus: { focus: [number, number]; zoom: number };
 };
 
 export const geography: CountryInfo[] = [
@@ -155,7 +155,7 @@ export const geography: CountryInfo[] = [
       { value: "2 маршрута", label: "по суше" },
       { value: "от 1,3 млн", label: "цена под ключ" },
     ],
-    mapFocus: { pin: [48.8, 62.8], focus: [50, 57], zoom: 1.3, r: 24 },
+    mapFocus: { focus: [47, 60], zoom: 1.12 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
@@ -166,8 +166,7 @@ export const geography: CountryInfo[] = [
     name: "Корея",
     tabText: "Популярные модели\nи редкие комплектации",
     tabImg: asset("/img/geo/tab-kr.webp"),
-    // TODO: карта для Кореи — заказчик пришлёт
-    map: asset("/img/geo/map-cn.webp"),
+    map: asset("/img/geo/map-kr.webp"),
     description: "Честный пробег, идеальное состояние, максимальные комплектации, прозрачная история",
     features: ["Новые и б/у\nавтомобили", "Гибриды\nи электромобили", "Надежные\nкроссоверы", "Богатые\nкомплектации"],
     stats: [
@@ -176,7 +175,7 @@ export const geography: CountryInfo[] = [
       { value: "от 1,5 млн", label: "цена под ключ" },
     ],
     // TODO: в макете маршруты скопированы с Китая
-    mapFocus: { pin: [72.7, 68.9], focus: [72, 64], zoom: 2.1, r: 9 },
+    mapFocus: { focus: [83, 68], zoom: 1.3 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
@@ -187,8 +186,7 @@ export const geography: CountryInfo[] = [
     name: "Япония",
     tabText: "Аукционные автомобили\nс прозрачной историей",
     tabImg: asset("/img/geo/tab-jp.webp"),
-    // TODO: карта для Японии — заказчик пришлёт
-    map: asset("/img/geo/map-cn.webp"),
+    map: asset("/img/geo/map-jp.webp"),
     description: "Легендарная надежность, честный пробег, строгий техосмотр и идеальное состояние",
     features: ["Новые и б/у\nавтомобили", "Гибриды\nи электромобили", "Надежные\nкроссоверы", "Богатые\nкомплектации"],
     stats: [
@@ -196,7 +194,7 @@ export const geography: CountryInfo[] = [
       { value: "5 портов", label: "отгрузки еженедельно" },
     ],
     // TODO: в макете маршруты скопированы с Китая
-    mapFocus: { pin: [86.5, 69.7], focus: [82, 68], zoom: 1.8, r: 13 },
+    mapFocus: { focus: [82, 68], zoom: 1.3 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
       { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },

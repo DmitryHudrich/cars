@@ -31,26 +31,21 @@ export function Geography() {
                 {
                   "--fx": c.mapFocus.focus[0],
                   "--fy": c.mapFocus.focus[1],
-                  "--px": c.mapFocus.pin[0],
-                  "--py": c.mapFocus.pin[1],
                   "--zoom": c.mapFocus.zoom,
-                  "--r": c.mapFocus.r,
                 } as CSSProperties
               }
             >
-              {/* у каждой страны может быть своя карта — пока у всех общая, тогда картинка одна */}
+              {/* у каждой страны своя карта с подсвеченным регионом — плавно сменяем их */}
               {[...new Set(geography.map((g) => g.map))].map((src) => (
                 <img
                   key={src}
                   src={src}
-                  alt={`Карта поставок: ${c.name}`}
+                  alt={src === c.map ? `Карта поставок: ${c.name}` : ""}
                   className={styles.mapImg}
                   data-active={src === c.map || undefined}
                   loading="lazy"
                 />
               ))}
-              <span className={styles.spot} aria-hidden />
-              <span className={styles.pin} key={c.id} aria-hidden />
             </div>
           </div>
 
