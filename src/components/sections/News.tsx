@@ -6,7 +6,6 @@ import { news } from "@/data/content";
 import { useScroller } from "@/lib/useScroller";
 import styles from "./News.module.css";
 
-// TODO: формат блока новостей обсуждается с заказчиком; пока — лента карточек в стиле сайта.
 export function News() {
   const { trackRef, canPrev, canNext, step } = useScroller();
 
