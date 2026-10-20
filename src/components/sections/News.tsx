@@ -15,7 +15,7 @@ export function News() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Автоновости и блог ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">Главное из мира автомобилей</h2>
           </div>
           <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />

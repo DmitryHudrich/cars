@@ -17,8 +17,8 @@ export function Partners() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Банки-партнёры ]</p>
-            <h2 className="h2">Надёжные партнёры для вашей покупки</h2>
+            <span className="eyebrow" aria-hidden />
+            <h2 className="h2">Наши надёжные партнёры для вашей покупки</h2>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function LeadSection() {
       <div className="container">
         <div className={styles.card}>
           <div className={styles.info}>
-            <p className="eyebrow">[ Персональный подбор ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">
               Найдём автомобиль <br />
               под ваш бюджет

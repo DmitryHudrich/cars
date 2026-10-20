@@ -25,7 +25,7 @@ export function CatalogPreview() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Подбери себе авто ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">
               Каталог автомобилей <br />с актуальными ценами
             </h2>

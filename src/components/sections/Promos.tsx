@@ -16,7 +16,7 @@ export function Promos() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Выгодные предложения ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">Акции и предложения</h2>
           </div>
           <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />

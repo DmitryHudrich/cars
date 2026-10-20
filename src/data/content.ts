@@ -261,13 +261,10 @@ export const reviews: { photo: string; name: string; car: string; pos?: string }
   { photo: asset("/img/clients/review-06.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
   { photo: asset("/img/clients/review-07.webp"), name: "Клиент", car: "Hyundai Palisade" },
   { photo: asset("/img/clients/review-08.webp"), name: "Клиент", car: "Kia K5" },
-  { photo: asset("/img/clients/review-09.webp"), name: "Клиент", car: "Hyundai Palisade" },
   { photo: asset("/img/clients/review-10.webp"), name: "Клиент", car: "Audi Q7" },
   { photo: asset("/img/clients/review-11.webp"), name: "Клиент", car: "Mercedes-Benz E-Class" },
   { photo: asset("/img/clients/review-12.webp"), name: "Клиент", car: "Toyota RAV4", pos: "50% 62%" },
   { photo: asset("/img/clients/review-13.webp"), name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-14.webp"), name: "Клиент", car: "Volkswagen Polo", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-15.webp"), name: "Клиент", car: "Hyundai Staria", pos: "50% 62%" },
   { photo: asset("/img/clients/review-16.webp"), name: "Клиент", car: "Geely Coolray", pos: "50% 62%" },
   { photo: asset("/img/clients/review-17.webp"), name: "Клиент", car: "Toyota Passo" },
   { photo: asset("/img/clients/review-18.webp"), name: "Клиент", car: "Nissan Note Nismo" },
@@ -294,6 +291,7 @@ export const banks = [
   { name: "Локо-Банк", logo: asset("/img/banks/bank-loko.svg"), w: 178 },
   { name: "ОТП Банк", logo: asset("/img/banks/bank-otp.svg"), w: 178 },
   { name: "Кредит Европа Банк", logo: asset("/img/banks/bank-crediteurope.svg"), w: 293 },
+  { name: "Ингосстрах", logo: asset("/img/banks/ingosstrakh.svg"), w: 233 },
 ];
 
 export const faqCategories = [

@@ -24,7 +24,7 @@ export function Contacts() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Контакты ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">Свяжитесь с нами удобным способом</h2>
           </div>
         </div>
@@ -32,12 +32,10 @@ export function Contacts() {
         <div className={styles.cols}>
           <div className={styles.col}>
             <h3 className={styles.label}>Телефон</h3>
-            {site.offices.map((o, i) => (
-              <a key={o.phone} href={telHref(o.phone)} className={styles.phone} data-active={i === office || undefined}>
-                <span className={styles.link}>{o.phone}</span>
-                <small>{o.city}</small>
-              </a>
-            ))}
+            <a href={telHref(site.phone)} className={styles.phone}>
+              <span className={styles.link}>{site.phone}</span>
+              <small>{site.phoneNote}</small>
+            </a>
             <h3 className={`${styles.label} ${styles.gap}`}>Почта</h3>
             <a href={`mailto:${site.email}`} className={styles.link}>
               {site.email}
@@ -106,7 +104,7 @@ export function Contacts() {
         <div className={styles.mapBadge}>
           <b>{current.city}</b>
           <span>{current.address}</span>
-          <a href={telHref(current.phone)}>{current.phone}</a>
+          <a href={telHref(site.phone)}>{site.phone}</a>
         </div>
       </div>
     </section>

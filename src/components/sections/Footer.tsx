@@ -81,17 +81,15 @@ export function Footer() {
 
         <div className={styles.col}>
           <h3 className={styles.title}>Контакты</h3>
-          {site.offices.map((o) => (
-            <a key={o.phone} href={telHref(o.phone)} className={styles.contact}>
-              <span className={styles.ci}>
-                <Phone size={16} />
-              </span>
-              <span>
-                {o.phone}
-                <small>{o.city}, 10:00-19:00 по МСК</small>
-              </span>
-            </a>
-          ))}
+          <a href={telHref(site.phone)} className={styles.contact}>
+            <span className={styles.ci}>
+              <Phone size={16} />
+            </span>
+            <span>
+              {site.phone}
+              <small>{site.phoneNote}</small>
+            </span>
+          </a>
           <a href={`mailto:${site.email}`} className={styles.contact}>
             <span className={styles.ci}>
               <Mail size={16} />

@@ -41,7 +41,21 @@ export function RevealGroup<T extends ElementType = "div">({
       { rootMargin: "0px 0px -8% 0px" },
     );
     hidden.forEach((c) => io.observe(c));
-    return () => io.disconnect();
+
+    // переход по якорю мимо блока: карточки над экраном показываем без ожидания
+    const onScroll = () => {
+      for (const c of hidden) {
+        if (c.dataset.reveal === "hidden" && c.getBoundingClientRect().bottom < 0) {
+          c.dataset.reveal = "shown";
+          io.unobserve(c);
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return <Tag ref={ref} {...props} className={`reveal-group ${className ?? ""}`} />;

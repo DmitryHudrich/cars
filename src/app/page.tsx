@@ -12,6 +12,7 @@ import { News } from "@/components/sections/News";
 import { Contacts } from "@/components/sections/Contacts";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { Footer } from "@/components/sections/Footer";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
         <LeadSection />
       </main>
       <Footer />
+      <ScrollReveal />
     </>
   );
 }

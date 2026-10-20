@@ -12,7 +12,7 @@ export function HowWeWork() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Как мы работаем ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">Ваш путь к новому автомобилю</h2>
           </div>
         </div>

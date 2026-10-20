@@ -2,7 +2,7 @@
 
 import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
-import { ChevronDown, Heart, Mail, MapPin, Menu, Phone, Search, X } from "lucide-react";
+import { ChevronDown, Heart, Mail, MapPin, Menu, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { nav, site, telHref } from "@/data/site";
 import styles from "./Header.module.css";
@@ -127,15 +127,10 @@ export function Header() {
           ))}
         </nav>
         <div className={styles.mobileFoot} onClick={(e) => (e.target as HTMLElement).closest("a[href^='#']") && setOpen(false)}>
+          <a href={telHref(site.phone)} className={styles.mobilePhone}>
+            {site.phone}
+          </a>
           <ul className={styles.mobileContacts}>
-            {site.offices.map((o) => (
-              <li key={o.phone}>
-                <a href={telHref(o.phone)}>
-                  <Phone size={18} />
-                  {o.phone} — {o.city}
-                </a>
-              </li>
-            ))}
             <li>
               <a href={`mailto:${site.email}`}>
                 <Mail size={18} />

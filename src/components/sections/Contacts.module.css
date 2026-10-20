@@ -5,7 +5,7 @@
 }
 
 .section :global(.eyebrow) {
-  color: var(--c-gold);
+  background: var(--grad-gold);
 }
 
 .cols {
@@ -72,14 +72,10 @@
 
 .phone small {
   font-size: 13px;
-  color: #9a9a9a;
+  color: #ffffff;
   transition: color 0.2s;
 }
 
-.phone[data-active] .link,
-.phone[data-active] small {
-  color: var(--c-gold);
-}
 
 .link[aria-pressed="true"] {
   color: var(--c-gold);

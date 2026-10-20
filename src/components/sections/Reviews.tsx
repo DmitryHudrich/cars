@@ -42,8 +42,8 @@ export function Reviews() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Отзывы клиентов ]</p>
-            <h2 className="h2">Реальные отзывы</h2>
+            <span className="eyebrow" aria-hidden />
+            <h2 className="h2">Наши довольные клиенты</h2>
           </div>
         </div>
 

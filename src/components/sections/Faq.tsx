@@ -19,7 +19,7 @@ export function Faq() {
   return (
     <section className="section section--dark" id="faq">
       <div className="container">
-        <p className="eyebrow">[ Прозрачно о главном ]</p>
+        <span className="eyebrow" aria-hidden />
         <h2 className="h2">Всё, что вы хотели знать об импорте авто</h2>
 
         <div className={styles.tabs} role="tablist" aria-label="Разделы вопросов">

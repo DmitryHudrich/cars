@@ -17,7 +17,7 @@ export function WhyUs() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Почему Ранг Авто ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">Покупка автомобиля без сложностей</h2>
           </div>
           <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />

@@ -18,7 +18,7 @@ export function Geography() {
       <div className="container">
         <div className="section-head">
           <div>
-            <p className="eyebrow">[ Направление импорта ]</p>
+            <span className="eyebrow" aria-hidden />
             <h2 className="h2">География поставок РАНГ АВТО</h2>
           </div>
         </div>
