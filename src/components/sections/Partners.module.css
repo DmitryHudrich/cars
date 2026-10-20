@@ -20,7 +20,10 @@
   width: var(--w);
   height: 66px;
   flex-shrink: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.13);
   border-radius: var(--radius);
+  background: var(--c-white);
   overflow: hidden;
   transition:
     transform 0.3s var(--ease),
@@ -28,8 +31,10 @@
 }
 
 .bank img {
+  display: block;
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .bank:hover {
