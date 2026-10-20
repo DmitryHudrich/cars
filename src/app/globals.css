@@ -455,4 +455,13 @@
       transform: translateY(48px) scale(0.96);
     }
   }
+
+  /* Поле-ловушка для спам-ботов: людям не видно */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
 }

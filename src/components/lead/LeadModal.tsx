@@ -66,6 +66,7 @@ function LeadDialog({ opts, onClose }: { opts: LeadOptions; onClose: () => void 
       phone,
       comment: String(fd.get("comment") ?? ""),
       topic: opts.title ?? DEFAULTS.title,
+      website: String(fd.get("website") ?? ""),
     });
   }
 
@@ -94,6 +95,7 @@ function LeadDialog({ opts, onClose }: { opts: LeadOptions; onClose: () => void 
           </div>
         ) : (
           <form className={styles.form} onSubmit={onSubmit} noValidate>
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hp-field" />
             <h2 className={styles.title}>{opts.title ?? DEFAULTS.title}</h2>
             <p className={styles.subtitle}>{opts.subtitle ?? DEFAULTS.subtitle}</p>
 

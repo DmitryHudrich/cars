@@ -56,6 +56,7 @@ export function LeadSection() {
               </div>
             ) : (
               <form className={styles.form} onSubmit={onSubmit} noValidate>
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hp-field" />
                 <input className={styles.wide} name="name" placeholder="Ваше имя" autoComplete="name" aria-label="Ваше имя" />
                 <input
                   name="phone"
