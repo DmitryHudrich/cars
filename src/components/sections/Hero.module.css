@@ -46,7 +46,7 @@
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 0.03em;
-  color: rgba(249, 249, 249, 0.82);
+  color: #ffffff;
   margin-bottom: 24px;
 }
 
@@ -220,7 +220,7 @@
   display: block;
   font-size: 18px;
   line-height: 22px;
-  color: #dddddd;
+  color: #ffffff;
   margin-top: 6px;
 }
 

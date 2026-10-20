@@ -71,7 +71,7 @@
 }
 
 .close:hover {
-  background: var(--c-light);
+  background: var(--c-hover);
 }
 
 .form,

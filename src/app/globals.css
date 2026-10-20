@@ -6,13 +6,15 @@
     --c-dark: #2b2b2b;
     --c-darker: #1c1c1c;
     --c-dark-2: #3b3b3b;
-    --c-light: #f6f6f6;
+    --c-light: #ffffff;
+    /* фон подсветки при наведении на белом */
+    --c-hover: #f1f1f1;
     --c-white: #ffffff;
     --c-gold: #fbdbb3;
     --c-gold-dark: #a97b41;
     --c-text: #2b2b2b;
     --c-muted: #737373;
-    --c-muted-light: #d4d4d4;
+    --c-muted-light: #ffffff;
     --c-line: rgba(0, 0, 0, 0.13);
     --c-glass: rgba(169, 169, 169, 0.2);
     --c-glass-line: rgba(255, 255, 255, 0.35);
@@ -24,8 +26,8 @@
     --radius-lg: 8px;
     --radius-xl: 10px;
 
-    --container: 1160px;
-    --gutter: 20px;
+    /* контент на всю ширину окна; боковые отступы растут с экраном */
+    --gutter: clamp(20px, 4.5vw, 96px);
     --section-py: 100px;
 
     --font-body: var(--font-onest), "Gilroy", system-ui, sans-serif;
@@ -129,7 +131,7 @@
 
   .container {
     width: 100%;
-    max-width: calc(var(--container) + var(--gutter) * 2);
+    max-width: none;
     margin: 0 auto;
     padding: 0 var(--gutter);
   }
@@ -408,7 +410,7 @@
 
   /* Лента до краёв окна: первая карточка — по сетке контейнера, остальные уходят за край */
   .track--bleed {
-    --track-pad-x: max(var(--gutter), calc((100vw - var(--container)) / 2));
+    --track-pad-x: var(--gutter);
     margin-inline: calc(50% - 50vw);
   }
 

@@ -164,7 +164,7 @@
 
 .mapBadge {
   position: absolute;
-  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  left: var(--gutter);
   top: 24px;
   display: flex;
   flex-direction: column;

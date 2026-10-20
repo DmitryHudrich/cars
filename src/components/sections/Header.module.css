@@ -1,6 +1,6 @@
 .topbar {
   background: var(--c-dark);
-  color: #eeeeee;
+  color: #ffffff;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -15,7 +15,7 @@
 }
 
 .promo {
-  color: rgba(249, 249, 249, 0.82);
+  color: #ffffff;
   font-weight: 400;
   letter-spacing: 0.01em;
   /* текст целиком: если не влезает в строку — уменьшаем шрифт, а не обрезаем */
@@ -152,7 +152,7 @@
 }
 
 .dropdown a:hover {
-  background: var(--c-light);
+  background: var(--c-hover);
   color: var(--c-gold-dark);
 }
 
