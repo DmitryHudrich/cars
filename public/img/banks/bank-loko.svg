@@ -1,6 +1,4 @@
 <svg width="178" height="66" viewBox="0 0 178 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="178" height="66" rx="10" fill="white"/>
-<rect x="0.5" y="0.5" width="177" height="65" rx="9.5" stroke="black" stroke-opacity="0.13"/>
 <mask id="mask0_7_127" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="14" width="39" height="39">
 <path d="M59 14H20V53H59V14Z" fill="white"/>
 </mask>
