@@ -285,14 +285,16 @@
 }
 
 .actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
 }
 
 .actions :global(.btn) {
+  flex: 1 1 0;
+  min-width: max-content;
   height: 44px;
-  padding: 0 10px;
+  padding: 0 16px;
 }
 
 @media (max-width: 1024px) {
