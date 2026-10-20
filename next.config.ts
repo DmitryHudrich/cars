@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
-// STATIC_EXPORT=1 — сборка статики для GitHub Pages (см. .github/workflows/pages.yml).
+// STATIC_EXPORT=1 — статика для GitHub Pages (ветка main, .github/workflows/pages.yml).
+// Иначе — standalone-сервер для продакшена (ветка production, .github/workflows/deploy.yml).
 const isStatic = process.env.STATIC_EXPORT === "1";
 
 const nextConfig: NextConfig = isStatic
@@ -11,6 +12,7 @@ const nextConfig: NextConfig = isStatic
       trailingSlash: true,
     }
   : {
+      output: "standalone",
       cacheComponents: true,
       partialPrefetching: true,
     };
