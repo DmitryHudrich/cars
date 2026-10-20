@@ -158,7 +158,7 @@ export const geography: CountryInfo[] = [
     mapFocus: { focus: [47, 60], zoom: 1.12 },
     routes: [
       { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
-      { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
+      { kind: "truck", title: "Хоргос → Москва", note: "автовозом, 30-35 дней" },
     ],
   },
   {
@@ -177,8 +177,8 @@ export const geography: CountryInfo[] = [
     // TODO: в макете маршруты скопированы с Китая
     mapFocus: { focus: [83, 68], zoom: 1.3 },
     routes: [
-      { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
-      { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
+      { kind: "ship", title: "Пусан → Владивосток", note: "море, 14-20 дней" },
+      { kind: "truck", title: "Инчхон → Бишкек → Москва", note: "через Киргизию, 30-40 дней" },
     ],
   },
   {
@@ -196,8 +196,8 @@ export const geography: CountryInfo[] = [
     // TODO: в макете маршруты скопированы с Китая
     mapFocus: { focus: [82, 68], zoom: 1.3 },
     routes: [
-      { kind: "truck", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
-      { kind: "ship", title: "Суйфэньхэ → Владивосток", note: "автовозом, 15-30 дней" },
+      { kind: "ship", title: "Тояма и Майдзуру → Владивосток", note: "море, 30-40 дней" },
+      { kind: "ship", title: "Иокогама и Нагоя → Владивосток", note: "море, 35-45 дней" },
     ],
   },
 ];
