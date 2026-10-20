@@ -16,9 +16,25 @@
 
 .promo {
   color: rgba(249, 249, 249, 0.82);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  /* текст целиком: если не влезает в строку — уменьшаем шрифт, а не обрезаем */
+  font-size: clamp(13px, 1.25vw, 17px);
+  min-width: 0;
+}
+
+@media (max-width: 1200px) {
+  .topbarInner {
+    height: auto;
+    min-height: 46px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .topLinks {
+    gap: 20px;
+    font-size: 15px;
+  }
 }
 
 .topLinks {
