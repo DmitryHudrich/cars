@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ru" className={`${advent.variable} ${onest.variable}`}>
+    <html lang="ru" data-scroll-behavior="smooth" className={`${advent.variable} ${onest.variable}`}>
       <body>
         <LeadModalProvider>{children}</LeadModalProvider>
       </body>
