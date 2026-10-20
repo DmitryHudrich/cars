@@ -156,12 +156,11 @@
   /* Декоративная золотая полоска над заголовком блока (вместо подписи в скобках) */
   .eyebrow {
     display: block;
-    width: 132px;
-    height: 14px;
-    margin-bottom: 18px;
-    background: linear-gradient(90deg, #a97b41, #d9b07a 50%, #a97b41);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='14' viewBox='0 0 132 14'%3E%3Cpath d='M1 7 5 3 9 7 5 11z'/%3E%3Cpath d='M14 7q6-6 12 0t12 0 12 0 12 0 12 0 12 0 12 0 12 0 12 0' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M123 7 127 3 131 7 127 11z'/%3E%3C/svg%3E") no-repeat left center / contain;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='14' viewBox='0 0 132 14'%3E%3Cpath d='M1 7 5 3 9 7 5 11z'/%3E%3Cpath d='M14 7q6-6 12 0t12 0 12 0 12 0 12 0 12 0 12 0 12 0 12 0' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M123 7 127 3 131 7 127 11z'/%3E%3C/svg%3E") no-repeat left center / contain;
+    width: 56px;
+    height: 3px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #a97b41, #d9b07a);
   }
 
   .section--dark .eyebrow {
@@ -180,9 +179,8 @@
 
   @media (max-width: 640px) {
     .eyebrow {
-      width: 104px;
-      height: 11px;
-      margin-bottom: 12px;
+      width: 44px;
+      margin-bottom: 14px;
     }
 
     .h2 {
