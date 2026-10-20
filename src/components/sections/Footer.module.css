@@ -17,7 +17,7 @@
   font-size: 12px;
   line-height: 1.4;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
   max-width: 235px;
   margin: 16px 0 20px;
 }
@@ -28,7 +28,7 @@
   flex-direction: column;
   gap: 8px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff;
   letter-spacing: 0.02em;
 }
 
@@ -65,7 +65,7 @@
   align-items: flex-start;
   gap: 11px;
   font-size: 14px;
-  color: #c7c7c7;
+  color: #ffffff;
 }
 
 .col > a:not(.contact) {
@@ -100,7 +100,7 @@
 .contact small {
   display: block;
   font-size: 8px;
-  color: #c7c7c7;
+  color: #ffffff;
   margin-top: 4px;
 }
 

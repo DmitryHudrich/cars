@@ -22,7 +22,7 @@
     --grad-gold: linear-gradient(90deg, #f9b854 0%, #fbdbb3 50%, #fa9a47 100%);
     --grad-gold-soft: linear-gradient(90deg, #ffffff 0%, #fbdbb3 100%);
 
-    --radius: 5px;
+    --radius: 10px;
     --radius-lg: 8px;
     --radius-xl: 10px;
 
