@@ -37,22 +37,6 @@
   will-change: transform;
 }
 
-/* у каждой страны своя карта с подсвеченным регионом; положение — как в макете */
-.mapImg {
-  position: absolute;
-  left: 3%;
-  top: 2%;
-  width: 94%;
-  height: 96%;
-  object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.7s var(--ease);
-}
-
-.mapImg[data-active] {
-  opacity: 1;
-}
-
 .tabs {
   grid-column: 1;
   grid-row: 2;

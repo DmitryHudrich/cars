@@ -1,7 +1,7 @@
 "use client";
 
 import { asset } from "@/lib/asset";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, Clock, UserRound, VolumeX } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
 import { Icon } from "@/components/ui/Icon";
@@ -10,6 +10,35 @@ import { site } from "@/data/site";
 import styles from "./Faq.module.css";
 
 type CatId = (typeof faqCategories)[number]["id"];
+
+function inline(text: string): ReactNode[] {
+  return text.split(/\*\*(.+?)\*\*/).map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
+}
+
+function Answer({ text }: { text: string }) {
+  const out: ReactNode[] = [];
+  let list: { ordered: boolean; items: string[] } | null = null;
+  const flush = () => {
+    if (!list) return;
+    const items = list.items.map((l, i) => <li key={i}>{inline(l)}</li>);
+    out.push(list.ordered ? <ol key={out.length}>{items}</ol> : <ul key={out.length}>{items}</ul>);
+    list = null;
+  };
+  for (const line of text.split("\n")) {
+    const bullet = line.startsWith("— ");
+    const step = /^\d+\. /.test(line);
+    if (bullet || step) {
+      if (list && list.ordered !== step) flush();
+      list ??= { ordered: step, items: [] };
+      list.items.push(line.replace(/^(— |\d+\. )/, ""));
+      continue;
+    }
+    flush();
+    out.push(<p key={out.length}>{inline(line)}</p>);
+  }
+  flush();
+  return out;
+}
 
 export function Faq() {
   const [cat, setCat] = useState<CatId>("general");
@@ -55,7 +84,9 @@ export function Faq() {
                 </button>
                 <div className={styles.a}>
                   <div>
-                    <p>{item.a}</p>
+                    <div className={styles.answer}>
+                      <Answer text={item.a} />
+                    </div>
                   </div>
                 </div>
               </li>
