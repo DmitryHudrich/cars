@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import { Marquee } from "@/components/ui/Marquee";
-import { banks } from "@/data/content";
+import type { Partner } from "@/data/content";
 import styles from "./Partners.module.css";
 
-function BankRow() {
+function BankRow({ banks }: { banks: Partner[] }) {
   return banks.map((b) => (
     <div key={b.name} className={styles.bank} style={{ "--w": `${b.w}px` } as CSSProperties}>
       <img src={b.logo} alt={b.name} width={b.w} height={66} />
@@ -11,7 +11,7 @@ function BankRow() {
   ));
 }
 
-export function Partners() {
+export function Partners({ banks }: { banks: Partner[] }) {
   return (
     <section className={`section section--white ${styles.section}`} id="partners">
       <div className="container">
@@ -24,10 +24,10 @@ export function Partners() {
       </div>
       <div className={styles.rows}>
         <Marquee reverse duration={50} className={styles.row}>
-          <BankRow />
+          <BankRow banks={banks} />
         </Marquee>
         <Marquee duration={50} className={styles.row}>
-          <BankRow />
+          <BankRow banks={banks} />
         </Marquee>
       </div>
     </section>

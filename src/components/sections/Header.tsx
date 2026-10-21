@@ -4,10 +4,11 @@ import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
 import { ChevronDown, Heart, Mail, MapPin, Menu, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
-import { nav, site, telHref } from "@/data/site";
+import { nav, telHref } from "@/data/site";
+import type { Site } from "@/lib/cms";
 import styles from "./Header.module.css";
 
-export function Header() {
+export function Header({ site }: { site: Site }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

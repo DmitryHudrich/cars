@@ -10,6 +10,9 @@ const nextConfig: NextConfig = isStatic
       output: "export",
       basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
       trailingSlash: true,
+      turbopack: {
+        resolveAlias: { "@/lib/cms/cmsFetch": "./src/lib/cms/cmsFetch.static.ts" },
+      },
     }
   : {
       output: "standalone",

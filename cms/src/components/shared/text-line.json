@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_text_line",
+  "info": {
+    "displayName": "Строка"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

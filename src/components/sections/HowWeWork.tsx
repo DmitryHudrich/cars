@@ -3,10 +3,10 @@ import { LeadButton } from "@/components/lead/LeadModal";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Icon } from "@/components/ui/Icon";
 import { RevealGroup } from "@/components/ui/RevealGroup";
-import { workSteps } from "@/data/content";
+import type { WorkStep } from "@/data/content";
 import styles from "./HowWeWork.module.css";
 
-export function HowWeWork() {
+export function HowWeWork({ workSteps }: { workSteps: WorkStep[] }) {
   return (
     <section className="section section--dark" id="how">
       <div className="container">

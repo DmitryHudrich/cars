@@ -13,26 +13,29 @@ import { Contacts } from "@/components/sections/Contacts";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { getContent } from "@/lib/cms";
 
-export default function Home() {
+export default async function Home() {
+  const c = await getContent();
+
   return (
     <>
-      <Header />
+      <Header site={c.site} />
       <main>
-        <Hero />
-        <CatalogPreview />
-        <HowWeWork />
-        <Promos />
-        <Geography />
-        <WhyUs />
-        <Reviews />
-        <Partners />
-        <Faq />
-        <News />
-        <Contacts />
-        <LeadSection />
+        <Hero heroStats={c.heroStats} />
+        <CatalogPreview cars={c.cars} />
+        <HowWeWork workSteps={c.workSteps} />
+        <Promos promos={c.promos} />
+        <Geography geography={c.geography} />
+        <WhyUs reasons={c.reasons} />
+        <Reviews reviews={c.reviews} />
+        <Partners banks={c.banks} />
+        <Faq faq={c.faq} faqCategories={c.faqCategories} site={c.site} />
+        <News news={c.news} />
+        <Contacts site={c.site} />
+        <LeadSection site={c.site} />
       </main>
-      <Footer />
+      <Footer site={c.site} />
       <ScrollReveal />
     </>
   );

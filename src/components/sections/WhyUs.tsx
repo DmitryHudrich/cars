@@ -3,11 +3,11 @@
 import { GlowCard } from "@/components/ui/GlowCard";
 import { Icon } from "@/components/ui/Icon";
 import { SliderArrows } from "@/components/ui/SliderArrows";
-import { reasons } from "@/data/content";
+import type { Reason } from "@/data/content";
 import { useScroller } from "@/lib/useScroller";
 import styles from "./WhyUs.module.css";
 
-export function WhyUs() {
+export function WhyUs({ reasons }: { reasons: Reason[] }) {
   const { trackRef, canPrev, canNext, progress, visible, step } = useScroller();
   // ширина «ползунка» = доля видимой области, позиция = прогресс прокрутки
   const thumb = Math.min(1, visible);

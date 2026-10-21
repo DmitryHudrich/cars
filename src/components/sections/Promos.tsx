@@ -3,11 +3,11 @@
 import { ArrowRight } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
 import { SliderArrows } from "@/components/ui/SliderArrows";
-import { promos } from "@/data/content";
+import type { Promo } from "@/data/content";
 import { useScroller } from "@/lib/useScroller";
 import styles from "./Promos.module.css";
 
-export function Promos() {
+export function Promos({ promos }: { promos: Promo[] }) {
   const { trackRef, canPrev, canNext, step } = useScroller();
   const openLead = useLeadModal();
 

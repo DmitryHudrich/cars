@@ -4,11 +4,11 @@ import { useState, type CSSProperties } from "react";
 import { ArrowRight, ChevronRight, Ship, Truck } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
 import { CATALOG_FILTER_EVENT } from "./HeroSearch";
-import { countries, geography } from "@/data/content";
+import { countries, type CountryInfo } from "@/data/content";
 import { GeoMap } from "./GeoMap";
 import styles from "./Geography.module.css";
 
-export function Geography() {
+export function Geography({ geography }: { geography: CountryInfo[] }) {
   const [active, setActive] = useState(0);
   const openLead = useLeadModal();
   const c = geography[active];
