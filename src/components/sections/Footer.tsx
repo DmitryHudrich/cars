@@ -1,7 +1,8 @@
 import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
-import { site, telHref } from "@/data/site";
+import { telHref } from "@/data/site";
+import type { Site } from "@/lib/cms";
 import styles from "./Footer.module.css";
 
 const catalogLinks = [
@@ -24,7 +25,7 @@ const companyLinks = [
   { label: "Контакты", href: "#contacts" },
 ];
 
-export function Footer() {
+export function Footer({ site }: { site: Site }) {
   const office = site.offices[0];
   return (
     <footer className={styles.footer}>

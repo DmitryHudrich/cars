@@ -2,13 +2,13 @@ import { asset } from "@/lib/asset";
 import { ArrowUpRight } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { Icon } from "@/components/ui/Icon";
-import { heroStats } from "@/data/content";
+import type { HeroStat } from "@/data/content";
 import { HeroCountry } from "./HeroCountry";
 import { HeroSearch } from "./HeroSearch";
 import { ClientsStrip } from "./ClientsStrip";
 import styles from "./Hero.module.css";
 
-export function Hero() {
+export function Hero({ heroStats }: { heroStats: HeroStat[] }) {
   return (
     <section className={styles.hero} id="top">
       <div className={styles.bg} aria-hidden>

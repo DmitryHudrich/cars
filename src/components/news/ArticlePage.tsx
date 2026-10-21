@@ -1,64 +1,11 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { asset } from "@/lib/asset";
-import { news, type Article } from "@/data/news";
+import type { Article } from "@/data/news";
+import { Markdown } from "@/components/ui/Markdown";
 import styles from "./ArticlePage.module.css";
 
-function inline(text: string): ReactNode[] {
-  return text.split(/\*\*(.+?)\*\*/).map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
-}
-
-function render(text: string) {
-  const out: ReactNode[] = [];
-  let list: string[] = [];
-  let steps: string[] = [];
-  let table: string[][] = [];
-  const flush = () => {
-    if (list.length) {
-      out.push(<ul key={`l${out.length}`}>{list.map((l, i) => <li key={i}>{inline(l)}</li>)}</ul>);
-      list = [];
-    }
-    if (steps.length) {
-      out.push(<ol key={`o${out.length}`}>{steps.map((l, i) => <li key={i}>{inline(l)}</li>)}</ol>);
-      steps = [];
-    }
-    if (table.length) {
-      const [head, ...rows] = table;
-      out.push(
-        <div key={`t${out.length}`} className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>{head.map((c) => <th key={c}>{c}</th>)}</tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r[0]}>{r.map((c, i) => <td key={i}>{c}</td>)}</tr>
-              ))}
-            </tbody>
-          </table>
-        </div>,
-      );
-      table = [];
-    }
-  };
-  for (const raw of text.trim().split("\n")) {
-    const line = raw.trim();
-    if (!line) continue;
-    if (line.startsWith("— ")) { if (steps.length || table.length) flush(); list.push(line.slice(2)); continue; }
-    if (/^\d+\. /.test(line)) { if (list.length || table.length) flush(); steps.push(line.replace(/^\d+\. /, "")); continue; }
-    if (line.startsWith(":: ")) { if (list.length || steps.length) flush(); table.push(line.slice(3).split(" | ")); continue; }
-    flush();
-    if (line.startsWith("## ")) out.push(<h2 key={out.length}>{line.slice(3)}</h2>);
-    else if (line.startsWith("### ")) out.push(<h3 key={out.length}>{line.slice(4)}</h3>);
-    else if (line.startsWith("! ")) out.push(<p key={out.length} className={styles.note}>{inline(line.slice(2))}</p>);
-    else out.push(<p key={out.length}>{inline(line)}</p>);
-  }
-  flush();
-  return out;
-}
-
-export function ArticlePage({ article }: { article: Article }) {
+export function ArticlePage({ article, news }: { article: Article; news: Article[] }) {
   const more = news.filter((n) => n.slug !== article.slug);
   return (
     <div className={styles.page}>
@@ -82,7 +29,7 @@ export function ArticlePage({ article }: { article: Article }) {
         <div className={styles.cover}>
           <img src={article.img} alt="" />
         </div>
-        {render(article.body)}
+        <Markdown text={article.body} classes={{ note: styles.note, tableWrap: styles.tableWrap, table: styles.table }} />
 
         <div className={styles.cta}>
           <p>Нужен расчёт стоимости автомобиля под ключ?</p>
@@ -95,7 +42,7 @@ export function ArticlePage({ article }: { article: Article }) {
       <section className={`container ${styles.more}`}>
         <h2 className={styles.moreTitle}>Читайте также</h2>
         <div className={styles.moreGrid}>
-          {more.map((n) => (
+          {more.slice(0, 3).map((n) => (
             <Link key={n.slug} href={`/news/${n.slug}`} className={styles.moreCard}>
               <img src={n.img} alt="" loading="lazy" />
               <span className={styles.moreTag}>{n.tag}</span>

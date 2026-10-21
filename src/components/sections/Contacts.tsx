@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { MousePointerClick } from "lucide-react";
 import { asset } from "@/lib/asset";
-import { site, telHref } from "@/data/site";
+import { telHref } from "@/data/site";
+import type { Site } from "@/lib/cms";
 import styles from "./Contacts.module.css";
 
 // Виджет Яндекс Карт не требует ключа. Тёмная тема — CSS-фильтром (см. .mapFrame).
@@ -13,7 +14,7 @@ function mapUrl([lat, lon]: number[]) {
 }
 
 // TODO: заказчик думает над переделкой блока.
-export function Contacts() {
+export function Contacts({ site }: { site: Site }) {
   const [office, setOffice] = useState(0);
   // карта ловит колесо мыши — включаем её только по клику, чтобы не мешать прокрутке страницы
   const [active, setActive] = useState(false);

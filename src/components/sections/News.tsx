@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SliderArrows } from "@/components/ui/SliderArrows";
-import { news } from "@/data/news";
+import type { Article } from "@/data/news";
 import { useScroller } from "@/lib/useScroller";
 import styles from "./News.module.css";
 
-export function News() {
+export function News({ news }: { news: Article[] }) {
   const { trackRef, canPrev, canNext, step } = useScroller();
 
   return (

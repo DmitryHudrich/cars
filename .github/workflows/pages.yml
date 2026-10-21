@@ -31,6 +31,8 @@ jobs:
           STATIC_EXPORT: "1"
           NEXT_PUBLIC_BASE_PATH: /cars
           NEXT_PUBLIC_LEAD_ENDPOINT: demo
+          CMS_URL: https://rangauto.ru/cms
+          CMS_PUBLIC_URL: https://rangauto.ru/cms
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

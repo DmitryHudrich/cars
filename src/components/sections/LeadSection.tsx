@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { formatPhone, isPhoneComplete, useLeadSubmit } from "@/lib/lead";
-import { site } from "@/data/site";
+import type { Site } from "@/lib/cms";
 import styles from "./LeadSection.module.css";
 
-export function LeadSection() {
+export function LeadSection({ site }: { site: Site }) {
   const { status, submit } = useLeadSubmit("personal-selection");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
