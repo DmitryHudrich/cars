@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Expand } from "lucide-react";
 import { Lightbox } from "@/components/ui/Lightbox";
-import { reviews } from "@/data/content";
+import type { Review } from "@/data/content";
 import styles from "./Reviews.module.css";
 
 // Анимация (вариант на согласование): фото «раскладываются» каскадом при появлении блока,
 // на наведении — приближение и подпись, по клику — полноэкранный просмотр с листанием.
-export function Reviews() {
+export function Reviews({ reviews }: { reviews: Review[] }) {
   const gridRef = useRef<HTMLUListElement>(null);
   const [open, setOpen] = useState<number | null>(null);
   // сначала два ряда, остальное — по кнопке
