@@ -1,0 +1,33 @@
+name: Server diagnostics
+
+on:
+  push:
+    branches: [claude/update-website-news-16fehx]
+    paths: [.github/workflows/server-diag.yml]
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      - name: Inspect server (read-only)
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          ssh rangauto@$HOST 'set +e
+            echo "== host"; hostname; head -3 /etc/os-release; uname -m
+            echo "== resources"; nproc; free -m; df -h / /srv
+            echo "== node"; command -v node; node -v; npm -v
+            echo "== sudo"; sudo -n true 2>&1 && echo "sudo: yes" || echo "sudo: no"
+            echo "== srv"; ls -la /srv/rangauto
+            echo "== units"; systemctl list-units --type=service --all --no-pager | grep -iE "rang|caddy"
+            for u in $(systemctl list-unit-files --no-pager | grep -i rang | cut -d" " -f1); do echo "--- $u"; systemctl cat --no-pager $u; done
+            echo "== caddy"; cat /etc/caddy/Caddyfile 2>&1 | head -80
+            echo "== ports"; ss -ltn | head -20
+          '
