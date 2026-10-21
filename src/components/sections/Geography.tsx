@@ -5,6 +5,7 @@ import { ArrowRight, ChevronRight, Ship, Truck } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
 import { CATALOG_FILTER_EVENT } from "./HeroSearch";
 import { countries, geography } from "@/data/content";
+import { GeoMap } from "./GeoMap";
 import styles from "./Geography.module.css";
 
 export function Geography() {
@@ -35,17 +36,7 @@ export function Geography() {
                 } as CSSProperties
               }
             >
-              {/* у каждой страны своя карта с подсвеченным регионом — плавно сменяем их */}
-              {[...new Set(geography.map((g) => g.map))].map((src) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt={src === c.map ? `Карта поставок: ${c.name}` : ""}
-                  className={styles.mapImg}
-                  data-active={src === c.map || undefined}
-                  loading="lazy"
-                />
-              ))}
+              <GeoMap active={c.id} />
             </div>
           </div>
 

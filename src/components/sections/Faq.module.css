@@ -105,11 +105,45 @@
   overflow: hidden;
 }
 
-.a p {
+.answer {
   padding: 0 60px 20px 20px;
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
+}
+
+.answer p + p,
+.answer p + ul,
+.answer p + ol,
+.answer ul + p,
+.answer ol + p {
+  margin-top: 10px;
+}
+
+.answer ul,
+.answer ol {
+  padding-left: 22px;
+}
+
+.answer ul {
+  list-style: disc;
+}
+
+.answer ol {
+  list-style: decimal;
+}
+
+.answer li + li {
+  margin-top: 6px;
+}
+
+.answer li::marker {
+  color: var(--c-gold);
+}
+
+.answer strong {
+  color: var(--c-gold);
+  font-weight: 600;
 }
 
 /* «Не нашли ответ?» */
@@ -266,7 +300,7 @@
     padding: 14px;
   }
 
-  .a p {
+  .answer {
     padding: 0 14px 16px;
     font-size: 15px;
   }
