@@ -2,7 +2,7 @@
 
 import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
-import { ChevronDown, Heart, Mail, MapPin, Menu, Search, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Heart, Mail, MapPin, Menu, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { nav, telHref } from "@/data/site";
 import type { Site } from "@/lib/cms";
@@ -63,11 +63,27 @@ export function Header({ site }: { site: Site }) {
                 </a>
                 {item.children && (
                   <div className={styles.dropdown}>
-                    {item.children.map((c) => (
-                      <a key={c.label} href={c.href}>
-                        {c.label}
-                      </a>
-                    ))}
+                    {item.children.map((c) =>
+                      c.children ? (
+                        <div key={c.label} className={styles.subItem}>
+                          <a href={c.href} className={styles.subLink}>
+                            {c.label}
+                            <ChevronRight size={14} />
+                          </a>
+                          <div className={styles.submenu}>
+                            {c.children.map((s) => (
+                              <a key={s.label} href={s.href}>
+                                {s.label}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <a key={c.label} href={c.href}>
+                          {c.label}
+                        </a>
+                      ),
+                    )}
                   </div>
                 )}
               </div>
@@ -120,9 +136,16 @@ export function Header({ site }: { site: Site }) {
                 {item.label}
               </a>
               {item.children?.map((c) => (
-                <a key={c.label} href={c.href} className={styles.mobileSub}>
-                  {c.label}
-                </a>
+                <div key={c.label}>
+                  <a href={c.href} className={styles.mobileSub}>
+                    {c.label}
+                  </a>
+                  {c.children?.map((s) => (
+                    <a key={s.label} href={s.href} className={styles.mobileSubSub}>
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
               ))}
             </div>
           ))}
