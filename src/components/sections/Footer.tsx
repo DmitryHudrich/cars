@@ -1,17 +1,17 @@
 import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
-import { telHref } from "@/data/site";
+import { catalogUrls, telHref } from "@/data/site";
 import type { Site } from "@/lib/cms";
 import styles from "./Footer.module.css";
 
 const catalogLinks = [
-  "Авто из Китая",
-  "Авто из Кореи",
-  "Авто из Японии",
-  "Новое авто из Китая",
-  "Новое авто из Кореи",
-  "Новое авто из Японии",
+  { label: "Авто из Китая", href: catalogUrls.cn },
+  { label: "Авто из Кореи", href: catalogUrls.kr },
+  { label: "Авто из Японии", href: catalogUrls.jp },
+  { label: "Новое авто из Китая", href: "#catalog" },
+  { label: "Новое авто из Кореи", href: "#catalog" },
+  { label: "Новое авто из Японии", href: "#catalog" },
 ];
 
 const companyLinks = [
@@ -65,8 +65,8 @@ export function Footer({ site }: { site: Site }) {
         <nav className={styles.col} aria-label="Каталог автомобилей">
           <h3 className={styles.title}>Каталог автомобилей</h3>
           {catalogLinks.map((l) => (
-            <a key={l} href="#catalog">
-              {l}
+            <a key={l.label} href={l.href}>
+              {l.label}
             </a>
           ))}
         </nav>
