@@ -28,14 +28,20 @@ export function telHref(phone: string) {
   return `tel:+${digits}`;
 }
 
+export const catalogUrls = {
+  cn: "https://catalog.rangauto.ru/china-used/",
+  kr: "https://catalog.rangauto.ru/korea/",
+  jp: "https://catalog.rangauto.ru/statistika/",
+};
+
 export const nav = [
   {
     label: "Каталог",
     href: "#catalog",
     children: [
-      { label: "Авто из Китая", href: "#catalog" },
-      { label: "Авто из Кореи", href: "#catalog" },
-      { label: "Авто из Японии", href: "#catalog" },
+      { label: "Авто из Китая", href: catalogUrls.cn },
+      { label: "Авто из Кореи", href: catalogUrls.kr },
+      { label: "Авто из Японии", href: catalogUrls.jp },
     ],
   },
   { label: "Калькулятор", href: "#lead" },
