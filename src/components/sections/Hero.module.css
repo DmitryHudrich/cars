@@ -86,7 +86,7 @@
   background: rgba(217, 217, 217, 0.32);
 }
 
-.chip[aria-selected="true"] {
+.chip[data-active] {
   border-color: rgba(251, 219, 179, 0.7);
   background: rgba(251, 219, 179, 0.18);
 }
