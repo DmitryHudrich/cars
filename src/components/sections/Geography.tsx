@@ -3,8 +3,8 @@
 import { useState, type CSSProperties } from "react";
 import { ArrowRight, ChevronRight, Ship, Truck } from "lucide-react";
 import { useLeadModal } from "@/components/lead/LeadModal";
-import { CATALOG_FILTER_EVENT } from "./HeroSearch";
 import { countries, type CountryInfo } from "@/data/content";
+import { catalogUrls } from "@/data/site";
 import { GeoMap } from "./GeoMap";
 import styles from "./Geography.module.css";
 
@@ -101,13 +101,7 @@ export function Geography({ geography }: { geography: CountryInfo[] }) {
               </ul>
 
               <div className={styles.actions}>
-                <a
-                  href="#catalog"
-                  className="btn btn--gold"
-                  onClick={() =>
-                    window.dispatchEvent(new CustomEvent(CATALOG_FILTER_EVENT, { detail: { country: c.id } }))
-                  }
-                >
+                <a href={catalogUrls[c.id]} className="btn btn--gold">
                   Смотреть каталог из {country.genitive}
                   <ArrowRight size={14} />
                 </a>

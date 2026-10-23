@@ -31,12 +31,22 @@ export function telHref(phone: string) {
 const CATALOG = "https://catalog.rangauto.ru";
 
 export const catalogUrls = {
+  home: `${CATALOG}/`,
+  jpNew: `${CATALOG}/catalog/`,
   cn: `${CATALOG}/china-used/`,
   kr: `${CATALOG}/korea/`,
   jp: `${CATALOG}/statistika/`,
 };
 
 export type NavLink = { label: string; href: string; children?: NavLink[] };
+
+export const japanCatalogLinks: NavLink[] = [
+  { label: "Аукционы Японии", href: `${CATALOG}/auktsiony/` },
+  { label: "Статистика продаж", href: `${CATALOG}/statistika/` },
+  { label: "Новые авто из Японии", href: catalogUrls.jpNew },
+  { label: "Комплектации авто Японии", href: `${CATALOG}/katalog-komplektatsiy/` },
+  { label: "Как читать аукционный лист", href: `${CATALOG}/catalog/kak-chitat-auktsionnyy-list/` },
+];
 
 export const nav: NavLink[] = [
   {
@@ -48,13 +58,7 @@ export const nav: NavLink[] = [
       {
         label: "Авто из Японии",
         href: catalogUrls.jp,
-        children: [
-          { label: "Аукционы Японии", href: `${CATALOG}/auktsiony/` },
-          { label: "Статистика продаж", href: `${CATALOG}/statistika/` },
-          { label: "Новые авто из Японии", href: `${CATALOG}/catalog/` },
-          { label: "Комплектации авто Японии", href: `${CATALOG}/katalog-komplektatsiy/` },
-          { label: "Как читать аукционный лист", href: `${CATALOG}/catalog/kak-chitat-auktsionnyy-list/` },
-        ],
+        children: japanCatalogLinks,
       },
     ],
   },

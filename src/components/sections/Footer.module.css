@@ -76,6 +76,14 @@
   color: var(--c-gold);
 }
 
+.title a {
+  transition: color 0.2s;
+}
+
+.title a:hover {
+  color: var(--c-gold);
+}
+
 .title {
   font-family: var(--font-display);
   font-weight: 800;

@@ -5,6 +5,7 @@ import { Heart, Info, TrendingDown } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { countries, type Car, type CountryId } from "@/data/content";
 import { CATALOG_FILTER_EVENT } from "./HeroSearch";
+import { catalogUrls } from "@/data/site";
 import styles from "./CatalogPreview.module.css";
 
 const rub = (n: number) => n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₽";
@@ -63,7 +64,7 @@ export function CatalogPreview({ cars }: { cars: Car[] }) {
         )}
 
         <div className={styles.more}>
-          <a href="#catalog" className="btn btn--outline">
+          <a href={catalogUrls[country]} className="btn btn--outline">
             Смотреть весь каталог
           </a>
         </div>
