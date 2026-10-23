@@ -1,7 +1,11 @@
+import { sendToAll } from "@/lib/telegram";
+
 // Приём заявок со всех форм сайта: лог + уведомление в Telegram.
 // Настройки — переменные окружения сервера (/etc/rangauto.env):
 //   TELEGRAM_BOT_TOKEN — токен бота от @BotFather
 //   TELEGRAM_CHAT_IDS  — ID чатов через запятую (личка менеджера, группа)
+//   TELEGRAM_ADMIN_IDS — кто может подключать группы (плюс личные чаты из TELEGRAM_CHAT_IDS)
+// Группы, куда бота добавил администратор, подключаются сами (см. src/lib/telegram.ts).
 
 type LeadPayload = Record<string, unknown>;
 
@@ -51,27 +55,6 @@ function formatMessage(data: LeadPayload, digits: string) {
   return lines.join("\n");
 }
 
-async function notifyTelegram(text: string) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chats = (process.env.TELEGRAM_CHAT_IDS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-  if (!token || !chats.length) return false;
-
-  const results = await Promise.allSettled(
-    chats.map((chat_id) =>
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id, text, parse_mode: "HTML", disable_web_page_preview: true }),
-        signal: AbortSignal.timeout(8000),
-      }).then(async (r) => {
-        if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
-      }),
-    ),
-  );
-  results.forEach((r, i) => r.status === "rejected" && console.error("[lead] telegram", chats[i], r.reason));
-  return results.some((r) => r.status === "fulfilled");
-}
-
 // Простая защита от спама: не больше 5 заявок в 10 минут с одного IP
 const hits = new Map<string, number[]>();
 function tooMany(ip: string) {
@@ -105,7 +88,7 @@ export async function POST(request: Request) {
   }
 
   console.log("[lead]", new Date().toISOString(), ip, JSON.stringify(data));
-  const sent = await notifyTelegram(formatMessage(data, digits));
+  const sent = await sendToAll(formatMessage(data, digits));
   if (!sent) console.warn("[lead] telegram: не отправлено (нет настроек или ошибка)");
 
   // Заявка в любом случае сохранена в логе — пользователю отвечаем успехом
