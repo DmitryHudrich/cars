@@ -33,7 +33,7 @@ export function ArticlePage({ article, news }: { article: Article; news: Article
 
         <div className={styles.cta}>
           <p>Нужен расчёт стоимости автомобиля под ключ?</p>
-          <Link href="/#contacts" className={styles.ctaBtn}>
+          <Link href="/#lead" className={styles.ctaBtn}>
             Получить расчёт <ArrowRight size={16} />
           </Link>
         </div>
