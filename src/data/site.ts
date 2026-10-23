@@ -33,6 +33,7 @@ const CATALOG = "https://catalog.rangauto.ru";
 export const catalogUrls = {
   home: `${CATALOG}/`,
   jpNew: `${CATALOG}/catalog/`,
+  calculator: `${CATALOG}/calculator/`,
   cn: `${CATALOG}/china-used/`,
   kr: `${CATALOG}/korea/`,
   jp: `${CATALOG}/statistika/`,
@@ -62,7 +63,7 @@ export const nav: NavLink[] = [
       },
     ],
   },
-  { label: "Калькулятор", href: "#lead" },
+  { label: "Калькулятор", href: catalogUrls.calculator },
   {
     label: "О компании",
     href: "#how",
