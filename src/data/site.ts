@@ -28,20 +28,34 @@ export function telHref(phone: string) {
   return `tel:+${digits}`;
 }
 
+const CATALOG = "https://catalog.rangauto.ru";
+
 export const catalogUrls = {
-  cn: "https://catalog.rangauto.ru/china-used/",
-  kr: "https://catalog.rangauto.ru/korea/",
-  jp: "https://catalog.rangauto.ru/statistika/",
+  cn: `${CATALOG}/china-used/`,
+  kr: `${CATALOG}/korea/`,
+  jp: `${CATALOG}/statistika/`,
 };
 
-export const nav = [
+export type NavLink = { label: string; href: string; children?: NavLink[] };
+
+export const nav: NavLink[] = [
   {
     label: "Каталог",
     href: "#catalog",
     children: [
       { label: "Авто из Китая", href: catalogUrls.cn },
       { label: "Авто из Кореи", href: catalogUrls.kr },
-      { label: "Авто из Японии", href: catalogUrls.jp },
+      {
+        label: "Авто из Японии",
+        href: catalogUrls.jp,
+        children: [
+          { label: "Аукционы Японии", href: `${CATALOG}/auktsiony/` },
+          { label: "Статистика продаж", href: `${CATALOG}/statistika/` },
+          { label: "Новые авто из Японии", href: `${CATALOG}/catalog/` },
+          { label: "Комплектации авто Японии", href: `${CATALOG}/katalog-komplektatsiy/` },
+          { label: "Как читать аукционный лист", href: `${CATALOG}/catalog/kak-chitat-auktsionnyy-list/` },
+        ],
+      },
     ],
   },
   { label: "Калькулятор", href: "#lead" },
