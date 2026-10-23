@@ -3,15 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { countries } from "@/data/content";
-import { japanCatalogLinks } from "@/data/site";
+import { catalogUrls, japanCatalogLinks } from "@/data/site";
 import styles from "./Hero.module.css";
 
-// Чипсы стран + заголовок, в котором слово страны меняется (автоматически, пока пользователь не кликнет).
 export function HeroCountry() {
   const [idx, setIdx] = useState(0);
   const [auto, setAuto] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const touch = useRef(false);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -32,28 +32,39 @@ export function HeroCountry() {
 
   return (
     <>
-      <div className={styles.chips} role="tablist" aria-label="Страна импорта">
+      <nav className={styles.chips} aria-label="Каталог по странам">
         {countries.map((c, i) => {
+          const isJp = c.id === "jp";
           const chip = (
-            <button
+            <a
               key={c.id}
-              role="tab"
-              aria-selected={i === idx}
-              aria-haspopup={c.id === "jp" ? "menu" : undefined}
-              aria-expanded={c.id === "jp" ? menuOpen : undefined}
+              href={catalogUrls[c.id]}
+              data-active={i === idx || undefined}
+              aria-haspopup={isJp ? "menu" : undefined}
+              aria-expanded={isJp ? menuOpen : undefined}
               className={styles.chip}
-              onClick={() => {
+              onMouseEnter={() => {
                 setIdx(i);
                 setAuto(false);
-                if (c.id === "jp") setMenuOpen((o) => !o);
+              }}
+              onPointerDown={(e) => {
+                touch.current = e.pointerType !== "mouse";
+              }}
+              onClick={(e) => {
+                setIdx(i);
+                setAuto(false);
+                if (isJp && touch.current && !menuOpen) {
+                  e.preventDefault();
+                  setMenuOpen(true);
+                }
               }}
             >
               <img src={c.flag} alt="" width={40} height={24} />
               {c.name}
-              {c.id === "jp" && <ChevronDown size={18} className={styles.chipChev} />}
-            </button>
+              {isJp && <ChevronDown size={18} className={styles.chipChev} />}
+            </a>
           );
-          if (c.id !== "jp") return chip;
+          if (!isJp) return chip;
           return (
             <div key={c.id} ref={menuRef} className={styles.chipWrap} data-open={menuOpen || undefined}>
               {chip}
@@ -67,7 +78,7 @@ export function HeroCountry() {
             </div>
           );
         })}
-      </div>
+      </nav>
 
       <h1 className={styles.title}>
         Авто из{" "}
