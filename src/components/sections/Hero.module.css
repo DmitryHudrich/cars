@@ -91,6 +91,76 @@
   background: rgba(251, 219, 179, 0.18);
 }
 
+.chipWrap {
+  position: relative;
+  z-index: 3;
+}
+
+.chipChev {
+  margin-left: -2px;
+  opacity: 0.8;
+  transition: transform 0.25s var(--ease);
+}
+
+.chipWrap:hover .chipChev,
+.chipWrap[data-open] .chipChev {
+  transform: rotate(180deg);
+}
+
+.chipMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 270px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(251, 219, 179, 0.35);
+  background: rgba(43, 43, 43, 0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s,
+    transform 0.25s var(--ease),
+    visibility 0.2s;
+}
+
+.chipMenu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 10px;
+}
+
+.chipWrap:hover .chipMenu,
+.chipWrap[data-open] .chipMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.chipMenu a {
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 15px;
+  white-space: nowrap;
+  color: var(--c-white);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.chipMenu a:hover {
+  background: rgba(251, 219, 179, 0.12);
+  color: var(--c-gold);
+}
+
 .title {
   font-family: var(--font-display);
   font-weight: 800;
@@ -333,6 +403,12 @@
     height: 40px;
     font-size: 16px;
     gap: 8px;
+  }
+
+  .chipMenu {
+    left: auto;
+    right: 0;
+    min-width: 240px;
   }
 
   .chip img {

@@ -63,7 +63,9 @@ export function Footer({ site }: { site: Site }) {
         </div>
 
         <nav className={styles.col} aria-label="Каталог автомобилей">
-          <h3 className={styles.title}>Каталог автомобилей</h3>
+          <h3 className={styles.title}>
+            <a href={catalogUrls.home}>Каталог автомобилей</a>
+          </h3>
           {catalogLinks.map((l) => (
             <a key={l.label} href={l.href}>
               {l.label}
