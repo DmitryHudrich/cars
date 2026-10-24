@@ -37,8 +37,8 @@ export function HowWeWork({ workSteps }: { workSteps: WorkStep[] }) {
               <i />
               <i />
             </span>
-            <img className={styles.car} src={asset("/img/cta-car.webp")} alt="" loading="lazy" />
-            <img className={styles.manager} src={asset("/img/cta-manager.webp")} alt="" loading="lazy" />
+            <img className={styles.car} src={asset("/img/cta-car.webp")} alt="Автомобиль под заказ" loading="lazy" />
+            <img className={styles.manager} src={asset("/img/cta-manager.webp")} alt="Менеджер Ранг Авто" loading="lazy" />
             <div className={styles.ctaBody}>
               <h3 className={styles.title}>Готовы сделать первый шаг?</h3>
               <p className={styles.text}>

@@ -68,22 +68,22 @@ export function Contacts({ site }: { site: Site }) {
             <h3 className={styles.label}>Соц. сети</h3>
             <div className={styles.socials}>
               <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
-                <img src={asset("/icons/soc-vk.svg")} alt="" width={44} height={44} />
+                <img src={asset("/icons/soc-vk.svg")} alt="ВКонтакте" width={44} height={44} />
               </a>
               <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram-канал">
-                <img src={asset("/icons/soc-tg.svg")} alt="" width={44} height={44} />
+                <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={44} height={44} />
               </a>
               <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
-                <img src={asset("/icons/soc-max.svg")} alt="" width={44} height={44} />
+                <img src={asset("/icons/soc-max.svg")} alt="MAX" width={44} height={44} />
               </a>
             </div>
             <h3 className={`${styles.label} ${styles.gap}`}>Мессенджеры</h3>
             <div className={styles.socials}>
               <a href={site.socials.chat} target="_blank" rel="noopener" aria-label="Написать в Telegram">
-                <img src={asset("/icons/soc-tg.svg")} alt="" width={44} height={44} />
+                <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={44} height={44} />
               </a>
               <a href={site.socials.max} target="_blank" rel="noopener" aria-label="Написать в MAX">
-                <img src={asset("/icons/soc-max.svg")} alt="" width={44} height={44} />
+                <img src={asset("/icons/soc-max.svg")} alt="MAX" width={44} height={44} />
               </a>
             </div>
           </div>

@@ -24,8 +24,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Статический экспорт не поддерживает POST-обработчики — убираем API только для этой сборки
-      - run: rm -rf src/app/api
+      # Статический экспорт не поддерживает API, robots и sitemap — убираем их только для этой сборки
+      - run: rm -rf src/app/api src/app/robots.ts src/app/sitemap.ts
       - run: npx next build
         env:
           STATIC_EXPORT: "1"

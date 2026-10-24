@@ -13,7 +13,7 @@ export function Hero({ heroStats, brands }: { heroStats: HeroStat[]; brands: Cat
   return (
     <section className={styles.hero} id="top">
       <div className={styles.bg} aria-hidden>
-        <img src={asset("/img/hero.webp")} alt="" fetchPriority="high" />
+        <img src={asset("/img/hero.webp")} alt="Автомобили на складе Ранг Авто" fetchPriority="high" />
       </div>
 
       <div className={`container ${styles.content}`}>
