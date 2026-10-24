@@ -1,0 +1,12 @@
+name: Site probe
+on:
+  push:
+    branches: [claude/update-website-news-16fehx]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sS -A "Mozilla/5.0" https://rangauto.ru/ -o page.html
+          wc -c page.html
+          grep -oE 'https://catalog\.rangauto\.ru/(china-used|korea|statistika)/[^"]+' page.html | sort -u | head -20
