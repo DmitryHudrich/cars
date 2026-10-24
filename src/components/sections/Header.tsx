@@ -59,11 +59,11 @@ export function Header({ site }: { site: Site }) {
           <Typewriter className={styles.promo} text="Узнавайте первыми о новых поступлениях с выгодными ценами - в наших каналах" />
           <div className={styles.topLinks}>
             <a href={site.socials.telegram} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-tg.svg")} alt="" width={18} height={18} className={styles.blink} />
+              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={18} height={18} className={styles.blink} />
               Telegram
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-max.svg")} alt="" width={16} height={16} className={styles.blink} />
+              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={16} height={16} className={styles.blink} />
               MAX
             </a>
             <a href={telHref(site.phoneShort)} className={styles.topPhone}>
@@ -117,11 +117,13 @@ export function Header({ site }: { site: Site }) {
 
           <div className={styles.actions}>
             {/* TODO: поиск и избранное — после появления каталога */}
-            <a href="#catalog" className={styles.iconBtn} aria-label="Поиск по каталогу">
-              <Search size={20} />
+            <a href="#catalog" className={styles.iconBtn}>
+              <Search size={20} aria-hidden />
+              <span className="visually-hidden">Поиск по каталогу</span>
             </a>
-            <a href="#catalog" className={styles.iconBtn} aria-label="Избранное">
-              <Heart size={20} />
+            <a href="#catalog" className={styles.iconBtn}>
+              <Heart size={20} aria-hidden />
+              <span className="visually-hidden">Избранное</span>
             </a>
             <LeadButton source="header" title="Заказать звонок" submitLabel="Жду звонка" className={`btn btn--gold ${styles.cta}`}>
               Заказать звонок
@@ -191,13 +193,13 @@ export function Header({ site }: { site: Site }) {
           </ul>
           <div className={styles.mobileSocials}>
             <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
-              <img src={asset("/icons/soc-tg.svg")} alt="" width={40} height={40} />
+              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={40} height={40} />
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
-              <img src={asset("/icons/soc-max.svg")} alt="" width={40} height={40} />
+              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={40} height={40} />
             </a>
             <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
-              <img src={asset("/icons/soc-vk.svg")} alt="" width={40} height={40} />
+              <img src={asset("/icons/soc-vk.svg")} alt="ВКонтакте" width={40} height={40} />
             </a>
           </div>
           <LeadButton source="mobile-menu" title="Заказать звонок" submitLabel="Жду звонка" className="btn btn--gold">

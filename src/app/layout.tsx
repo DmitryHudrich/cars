@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Advent_Pro, Onest } from "next/font/google";
 import { LeadModalProvider } from "@/components/lead/LeadModal";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 // Заголовки — Advent Pro (ширина UltraExpanded через ось wdth).
@@ -17,6 +18,7 @@ const onest = Onest({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Ранг Авто — авто из Китая, Кореи и Японии под ключ",
   description:
     "Подберём, проверим, растаможим и привезём автомобиль из Китая, Кореи и Японии до вашего города. Импорт авто с 2018 года, гарантия на ДВС и КПП.",

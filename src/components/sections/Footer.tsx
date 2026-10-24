@@ -47,13 +47,13 @@ export function Footer({ site }: { site: Site }) {
           </dl>
           <div className={styles.socials}>
             <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
-              <img src={asset("/icons/soc-vk.svg")} alt="" width={30} height={30} />
+              <img src={asset("/icons/soc-vk.svg")} alt="ВКонтакте" width={30} height={30} />
             </a>
             <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
-              <img src={asset("/icons/soc-tg.svg")} alt="" width={30} height={30} />
+              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={30} height={30} />
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
-              <img src={asset("/icons/soc-max.svg")} alt="" width={30} height={30} />
+              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={30} height={30} />
             </a>
           </div>
         </div>

@@ -59,7 +59,7 @@ export function HeroCountry() {
                 }
               }}
             >
-              <img src={c.flag} alt="" width={40} height={24} />
+              <img src={c.flag} alt={`Флаг ${c.genitive}`} width={40} height={24} />
               {c.name}
               {isJp ? <ChevronDown size={18} className={styles.chipChev} /> : <ArrowUpRight size={18} className={styles.chipArrow} />}
             </a>

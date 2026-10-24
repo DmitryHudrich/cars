@@ -27,7 +27,7 @@ export function News({ news }: { news: Article[] }) {
             <article key={n.slug} className={styles.card}>
               <Link href={`/news/${n.slug}`} className={styles.link}>
                 <div className={styles.photo}>
-                  <img src={n.img} alt="" loading="lazy" draggable={false} />
+                  <img src={n.img} alt={n.title} loading="lazy" draggable={false} />
                   <span className={styles.tag}>{n.tag}</span>
                 </div>
                 <div className={styles.body}>

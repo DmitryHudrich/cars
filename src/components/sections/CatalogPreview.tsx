@@ -32,7 +32,7 @@ export function CatalogPreview({ cars }: { cars: Car[] }) {
                 onClick={() => setCountry(c.id)}
               >
                 <span className={styles.flag} data-bare={c.id === "cn" || undefined}>
-                  <img src={c.flag} alt="" width={38} height={23} />
+                  <img src={c.flag} alt={`Флаг ${c.genitive}`} width={38} height={23} />
                 </span>
                 {c.name}
               </button>
