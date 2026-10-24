@@ -13,17 +13,19 @@ import { Contacts } from "@/components/sections/Contacts";
 import { LeadSection } from "@/components/sections/LeadSection";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { getCatalogCars } from "@/lib/catalog";
 import { getContent } from "@/lib/cms";
 
 export default async function Home() {
   const c = await getContent();
+  const cars = await getCatalogCars(c.cars);
 
   return (
     <>
       <Header site={c.site} />
       <main>
         <Hero heroStats={c.heroStats} />
-        <CatalogPreview cars={c.cars} />
+        <CatalogPreview cars={cars} />
         <HowWeWork workSteps={c.workSteps} />
         <Promos promos={c.promos} />
         <Geography geography={c.geography} />
