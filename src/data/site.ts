@@ -14,11 +14,11 @@ export const site = {
     { city: "Краснодар", address: "Краснодар, ул. Западный Обход, 29", coords: [45.080338, 38.893745] },
     { city: "Астрахань", address: "Астрахань, Славянская 1л", coords: [46.359931, 48.096326] },
   ],
-  schedule: ["Пн - Пт - с 8:00 до 19:00", "Сб - Вс - с 8:00 до 17:00"],
+  schedule: ["Пн - Пт - с 9:00 до 18:00", "Сб - Вс - с 10:00 до 17:00"],
   socials: {
     telegram: "https://t.me/rangauto",
-    // TODO: ссылка на канал в MAX — от заказчика
-    max: "https://max.ru/",
+    chat: "https://t.me/RangAuto_Global",
+    max: "https://max.ru/+79375055588",
     vk: "https://vk.ru/rangauto",
   },
 };

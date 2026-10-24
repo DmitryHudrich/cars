@@ -88,7 +88,7 @@ export function Faq({
               >
                 Задать вопрос <ArrowRight size={14} />
               </button>
-              <a href={site.socials.telegram} target="_blank" rel="noopener" className={`${styles.msg} ${styles.tg}`} aria-label="Telegram">
+              <a href={site.socials.chat} target="_blank" rel="noopener" className={`${styles.msg} ${styles.tg}`} aria-label="Telegram">
                 <img src={asset("/icons/glyph-tg.svg")} alt="" width={21} height={17} />
               </a>
               <a href={site.socials.max} target="_blank" rel="noopener" className={`${styles.msg} ${styles.max}`} aria-label="MAX">

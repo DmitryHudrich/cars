@@ -69,10 +69,25 @@
   color: var(--c-white);
   font-size: 24px;
   font-weight: 600;
+  cursor: pointer;
   transition:
     background-color 0.25s,
     border-color 0.25s,
+    box-shadow 0.25s,
     transform 0.25s var(--ease);
+}
+
+.chipArrow {
+  margin-left: -2px;
+  opacity: 0.7;
+  transition:
+    opacity 0.25s,
+    transform 0.25s var(--ease);
+}
+
+.chip:hover .chipArrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
 }
 
 .chip img {
@@ -82,8 +97,15 @@
   border-radius: 3px;
 }
 
-.chip:hover {
+.chip:hover,
+.chip:focus-visible {
   background: rgba(217, 217, 217, 0.32);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 0 18px rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .chip[data-active] {
@@ -194,7 +216,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 29px;
-  max-width: 560px;
+  max-width: 720px;
   margin-bottom: 55px;
 }
 

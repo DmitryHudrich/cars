@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { countries } from "@/data/content";
 import { catalogUrls, japanCatalogLinks } from "@/data/site";
 import styles from "./Hero.module.css";
@@ -61,7 +61,7 @@ export function HeroCountry() {
             >
               <img src={c.flag} alt="" width={40} height={24} />
               {c.name}
-              {isJp && <ChevronDown size={18} className={styles.chipChev} />}
+              {isJp ? <ChevronDown size={18} className={styles.chipChev} /> : <ArrowUpRight size={18} className={styles.chipArrow} />}
             </a>
           );
           if (!isJp) return chip;
