@@ -1,6 +1,6 @@
 import { asset } from "@/lib/asset";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { catalogUrls, telHref } from "@/data/site";
 import type { Site } from "@/lib/cms";
 import styles from "./Footer.module.css";
@@ -9,9 +9,6 @@ const catalogLinks = [
   { label: "Авто из Китая", href: catalogUrls.cn },
   { label: "Авто из Кореи", href: catalogUrls.kr },
   { label: "Авто из Японии", href: catalogUrls.jp },
-  { label: "Новое авто из Китая", href: "#catalog" },
-  { label: "Новое авто из Кореи", href: "#catalog" },
-  { label: "Новое авто из Японии", href: "#catalog" },
 ];
 
 const companyLinks = [
@@ -26,7 +23,6 @@ const companyLinks = [
 ];
 
 export function Footer({ site }: { site: Site }) {
-  const office = site.offices[0];
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.grid}`}>
@@ -93,24 +89,17 @@ export function Footer({ site }: { site: Site }) {
               <small>{site.phoneNote}</small>
             </span>
           </a>
-          <a href={`mailto:${site.email}`} className={styles.contact}>
-            <span className={styles.ci}>
-              <Mail size={16} />
-            </span>
-            <span>
-              {site.email}
-              <small>Для связи и сотрудничества</small>
-            </span>
-          </a>
-          <a href="#contacts" className={styles.contact}>
-            <span className={styles.ci}>
-              <MapPin size={16} />
-            </span>
-            <span>
-              <u>{office.address}</u>
-              <small>Наш офис</small>
-            </span>
-          </a>
+          {site.offices.map((office) => (
+            <a key={office.address} href="#contacts" className={styles.contact}>
+              <span className={styles.ci}>
+                <MapPin size={16} />
+              </span>
+              <span>
+                <u>{office.address}</u>
+                <small>Офис в г. {office.city}</small>
+              </span>
+            </a>
+          ))}
         </div>
       </div>
 

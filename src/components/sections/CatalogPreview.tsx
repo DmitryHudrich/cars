@@ -17,12 +17,10 @@ export function CatalogPreview({ cars }: { cars: Car[] }) {
   return (
     <section className="section section--light" id="catalog">
       <div className="container">
-        <div className="section-head">
+        <div className={`section-head ${styles.head}`}>
           <div>
             <span className="eyebrow" aria-hidden />
-            <h2 className="h2">
-              Каталог автомобилей <br />с актуальными ценами
-            </h2>
+            <h2 className={`h2 ${styles.heading}`}>Подобрать автомобиль за 1 минуту</h2>
           </div>
           <div className={styles.tabs} role="tablist" aria-label="Страна">
             {countries.map((c) => (
@@ -33,7 +31,9 @@ export function CatalogPreview({ cars }: { cars: Car[] }) {
                 className={styles.tab}
                 onClick={() => setCountry(c.id)}
               >
-                <img src={c.flag} alt="" width={38} height={23} />
+                <span className={styles.flag}>
+                  <img src={c.flag} alt="" width={38} height={23} />
+                </span>
                 {c.name}
               </button>
             ))}
@@ -105,9 +105,15 @@ function CarCard({ car }: { car: Car }) {
           </p>
         )}
         <p className={styles.specs}>{car.specs}</p>
-        <button className={styles.decode}>
-          Расшифровка цены <Info size={13} />
-        </button>
+        {car.url ? (
+          <a href={car.url} className={styles.decode}>
+            Расшифровка цены <Info size={13} />
+          </a>
+        ) : (
+          <LeadButton source="price-decode" title={`Расшифровка цены: ${car.title}`} className={styles.decode}>
+            Расшифровка цены <Info size={13} />
+          </LeadButton>
+        )}
         {market && (
           <div className={styles.market}>
             <div className={styles.marketLabels}>

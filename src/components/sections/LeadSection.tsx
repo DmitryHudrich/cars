@@ -38,7 +38,7 @@ export function LeadSection({ site }: { site: Site }) {
             </p>
             <p className={styles.small}>
               Или свяжитесь с нами в{" "}
-              <a href={site.socials.telegram} target="_blank" rel="noopener">
+              <a href={site.socials.chat} target="_blank" rel="noopener">
                 Telegram
               </a>{" "}
               или{" "}

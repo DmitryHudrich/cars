@@ -81,6 +81,7 @@ export async function getContent(): Promise<SiteContent> {
           telegram: (settings.telegram as string) || localSite.socials.telegram,
           max: (settings.max as string) || localSite.socials.max,
           vk: (settings.vk as string) || localSite.socials.vk,
+          chat: localSite.socials.chat,
         },
       }
     : localSite;

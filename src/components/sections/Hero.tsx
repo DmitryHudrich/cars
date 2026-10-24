@@ -22,8 +22,7 @@ export function Hero({ heroStats, brands }: { heroStats: HeroStat[]; brands: Cat
         <HeroCountry />
 
         <p className={styles.lead}>
-          Подберём, проверим, растаможим и привезём <br className={styles.br} />
-          до вашего города из Китая, Кореи и Японии
+          Берём на себя все этапы покупки автомобиля за рубежом: от поиска, проверки и доставки до вашего города
         </p>
 
         <div className={styles.buttons}>
