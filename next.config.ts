@@ -11,7 +11,10 @@ const nextConfig: NextConfig = isStatic
       basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
       trailingSlash: true,
       turbopack: {
-        resolveAlias: { "@/lib/cms/cmsFetch": "./src/lib/cms/cmsFetch.static.ts" },
+        resolveAlias: {
+          "@/lib/cms/cmsFetch": "./src/lib/cms/cmsFetch.static.ts",
+          "@/lib/catalog/catalogFetch": "./src/lib/catalog/catalogFetch.static.ts",
+        },
       },
     }
   : {

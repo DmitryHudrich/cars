@@ -54,7 +54,6 @@ export function CatalogPreview({ cars }: { cars: Car[] }) {
             ))}
           </div>
         ) : (
-          // TODO: убрать, когда каталог будет подключён к API
           <div className={styles.empty} key={country}>
             <p>Автомобили из этой страны скоро появятся в каталоге.</p>
             <LeadButton source="catalog-empty" title="Подобрать автомобиль под заказ" className="btn btn--gold">
@@ -80,7 +79,13 @@ function CarCard({ car }: { car: Car }) {
   return (
     <article className={styles.card}>
       <div className={styles.photo}>
-        <img src={car.img} alt={car.title} loading="lazy" />
+        {car.url ? (
+          <a href={car.url} className={styles.photoLink}>
+            <img src={car.img} alt={car.title} loading="lazy" />
+          </a>
+        ) : (
+          <img src={car.img} alt={car.title} loading="lazy" />
+        )}
         <button
           className={styles.fav}
           aria-pressed={fav}
@@ -97,7 +102,7 @@ function CarCard({ car }: { car: Car }) {
         </span>
       </div>
       <div className={styles.body}>
-        <h3 className={styles.title}>{car.title}</h3>
+        <h3 className={styles.title}>{car.url ? <a href={car.url}>{car.title}</a> : car.title}</h3>
         <p className={styles.price}>{rub(car.price)}</p>
         <p className={styles.note}>под ключ с доставкой во Владивосток</p>
         {car.priceDrop && (
@@ -110,16 +115,18 @@ function CarCard({ car }: { car: Car }) {
         <button className={styles.decode}>
           Расшифровка цены <Info size={13} />
         </button>
-        <div className={styles.market}>
-          <div className={styles.marketLabels}>
-            <span>{rub(market.min)}</span>
-            <b data-tone={market.tone}>{market.label}</b>
-            <span>{rub(market.max)}</span>
+        {market && (
+          <div className={styles.market}>
+            <div className={styles.marketLabels}>
+              <span>{rub(market.min)}</span>
+              <b data-tone={market.tone}>{market.label}</b>
+              <span>{rub(market.max)}</span>
+            </div>
+            <div className={styles.scale}>
+              <i style={{ left: `${market.position * 100}%` }} />
+            </div>
           </div>
-          <div className={styles.scale}>
-            <i style={{ left: `${market.position * 100}%` }} />
-          </div>
-        </div>
+        )}
       </div>
     </article>
   );

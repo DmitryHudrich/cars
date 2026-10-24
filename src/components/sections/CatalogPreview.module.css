@@ -211,6 +211,24 @@
   color: #2a8a45;
 }
 
+.marketLabels b[data-tone="mid"] {
+  color: #b7791f;
+}
+
+.photoLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.title a {
+  transition: color 0.2s;
+}
+
+.title a:hover {
+  color: var(--c-gold-dark);
+}
+
 .scale {
   position: relative;
   height: 4px;
