@@ -1,7 +1,6 @@
 .head {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 28px;
+  align-items: flex-end;
+  gap: 20px 40px;
 }
 
 @media (min-width: 900px) {
@@ -13,21 +12,22 @@
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 12px;
+  margin-bottom: 4px;
 }
 
 .tab {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  height: 56px;
-  padding: 0 22px 0 8px;
-  border-radius: 10px;
+  gap: 10px;
+  height: 42px;
+  padding: 0 16px 0 6px;
+  border-radius: 8px;
   border: 1px solid transparent;
   background: var(--c-dark);
   color: #ffffff;
   font-family: var(--font-body);
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -41,18 +41,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 38px;
+  width: 40px;
+  height: 30px;
+  padding: 3px;
   border-radius: 5px;
   background: #ffffff;
-  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .flag img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 2px;
 }
 
 .tab:hover {
@@ -324,18 +325,6 @@
   .tabs {
     gap: 10px;
   }
-
-  .tab {
-    height: 46px;
-    gap: 10px;
-    padding: 0 14px 0 6px;
-    font-size: 19px;
-  }
-
-  .flag {
-    width: 42px;
-    height: 30px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -354,6 +343,7 @@
   .flag {
     width: 32px;
     height: 24px;
+    padding: 2px;
   }
 }
 
