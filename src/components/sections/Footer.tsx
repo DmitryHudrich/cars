@@ -1,4 +1,3 @@
-import { asset } from "@/lib/asset";
 import Link from "next/link";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { catalogUrls, telHref } from "@/data/site";
@@ -27,7 +26,7 @@ export function Footer({ site }: { site: Site }) {
     <footer className={styles.footer}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.about}>
-          <img src={asset("/icons/logo-light.svg")} alt="Ранг Авто" width={200} height={45} />
+          <img src={"/icons/logo-light.svg"} alt="Ранг Авто" width={200} height={45} />
           <p className={styles.desc}>
             Импорт автомобилей из Китая, Кореи и Японии с 2018 года. Помогаем выбрать, купить и доставить автомобиль
           </p>
@@ -47,13 +46,13 @@ export function Footer({ site }: { site: Site }) {
           </dl>
           <div className={styles.socials}>
             <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
-              <img src={asset("/icons/soc-vk.svg")} alt="ВКонтакте" width={30} height={30} />
+              <img src={"/icons/soc-vk.svg"} alt="ВКонтакте" width={30} height={30} />
             </a>
             <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
-              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={30} height={30} />
+              <img src={"/icons/soc-tg.svg"} alt="Telegram" width={30} height={30} />
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
-              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={30} height={30} />
+              <img src={"/icons/soc-max.svg"} alt="MAX" width={30} height={30} />
             </a>
           </div>
         </div>
