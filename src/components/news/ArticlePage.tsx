@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { asset } from "@/lib/asset";
 import type { Article } from "@/data/news";
 import { Markdown } from "@/components/ui/Markdown";
 import styles from "./ArticlePage.module.css";
@@ -15,7 +14,7 @@ export function ArticlePage({ article, news }: { article: Article; news: Article
             <ArrowLeft size={18} /> Все статьи
           </Link>
           <Link href="/">
-            <img src={asset("/icons/logo-light.svg")} alt="Ранг Авто" width={180} height={40} />
+            <img src={"/icons/logo-light.svg"} alt="Ранг Авто" width={180} height={40} />
           </Link>
         </div>
       </header>

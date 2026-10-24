@@ -1,4 +1,3 @@
-import { asset } from "@/lib/asset";
 import { ArrowUpRight } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { Icon } from "@/components/ui/Icon";
@@ -13,7 +12,7 @@ export function Hero({ heroStats, brands }: { heroStats: HeroStat[]; brands: Cat
   return (
     <section className={styles.hero} id="top">
       <div className={styles.bg} aria-hidden>
-        <img src={asset("/img/hero.webp")} alt="Автомобили на складе Ранг Авто" fetchPriority="high" />
+        <img src={"/img/hero.webp"} alt="Автомобили на складе Ранг Авто" fetchPriority="high" />
       </div>
 
       <div className={`container ${styles.content}`}>

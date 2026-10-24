@@ -25,23 +25,14 @@ export function isPhoneComplete(phone: string) {
 
 type Status = "idle" | "sending" | "done" | "error";
 
-// На статическом хостинге (GitHub Pages) серверного /api/lead нет:
-// NEXT_PUBLIC_LEAD_ENDPOINT=demo — форма только имитирует отправку.
-const ENDPOINT = process.env.NEXT_PUBLIC_LEAD_ENDPOINT || "/api/lead";
 
 export function useLeadSubmit(source: string) {
   const [status, setStatus] = useState<Status>("idle");
 
   async function submit(fields: Record<string, string>) {
     setStatus("sending");
-    if (ENDPOINT === "demo") {
-      console.info("[lead:demo]", { source, ...fields });
-      await new Promise((r) => setTimeout(r, 500));
-      setStatus("done");
-      return;
-    }
     try {
-      const res = await fetch(ENDPOINT, {
+      const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ source, ...fields }),

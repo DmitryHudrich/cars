@@ -1,6 +1,5 @@
 "use client";
 
-import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
 import { ChevronDown, ChevronRight, Heart, MapPin, Menu, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
@@ -59,11 +58,11 @@ export function Header({ site }: { site: Site }) {
           <Typewriter className={styles.promo} text="Узнавайте первыми о новых поступлениях с выгодными ценами - в наших каналах" />
           <div className={styles.topLinks}>
             <a href={site.socials.telegram} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={18} height={18} className={styles.blink} />
+              <img src={"/icons/soc-tg.svg"} alt="Telegram" width={18} height={18} className={styles.blink} />
               Telegram
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={16} height={16} className={styles.blink} />
+              <img src={"/icons/soc-max.svg"} alt="MAX" width={16} height={16} className={styles.blink} />
               MAX
             </a>
             <a href={telHref(site.phoneShort)} className={styles.topPhone}>
@@ -76,7 +75,7 @@ export function Header({ site }: { site: Site }) {
       <header className={styles.header} data-scrolled={scrolled || undefined}>
         <div className={`container ${styles.inner}`}>
           <a href="#top" className={styles.logo} aria-label="Ранг Авто — на главную">
-            <img src={asset("/icons/logo-dark.svg")} alt="Ранг Авто" width={200} height={40} />
+            <img src={"/icons/logo-dark.svg"} alt="Ранг Авто" width={200} height={40} />
           </a>
 
           <nav className={styles.nav} aria-label="Основное меню">
@@ -151,7 +150,7 @@ export function Header({ site }: { site: Site }) {
         aria-label="Меню"
       >
         <div className={styles.mobileHead}>
-          <img src={asset("/icons/logo-light.svg")} alt="Ранг Авто" width={160} height={36} />
+          <img src={"/icons/logo-light.svg"} alt="Ранг Авто" width={160} height={36} />
           <button onClick={() => setOpen(false)} aria-label="Закрыть меню" className={styles.mobileClose}>
             <X size={28} />
           </button>
@@ -193,13 +192,13 @@ export function Header({ site }: { site: Site }) {
           </ul>
           <div className={styles.mobileSocials}>
             <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
-              <img src={asset("/icons/soc-tg.svg")} alt="Telegram" width={40} height={40} />
+              <img src={"/icons/soc-tg.svg"} alt="Telegram" width={40} height={40} />
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
-              <img src={asset("/icons/soc-max.svg")} alt="MAX" width={40} height={40} />
+              <img src={"/icons/soc-max.svg"} alt="MAX" width={40} height={40} />
             </a>
             <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
-              <img src={asset("/icons/soc-vk.svg")} alt="ВКонтакте" width={40} height={40} />
+              <img src={"/icons/soc-vk.svg"} alt="ВКонтакте" width={40} height={40} />
             </a>
           </div>
           <LeadButton source="mobile-menu" title="Заказать звонок" submitLabel="Жду звонка" className="btn btn--gold">

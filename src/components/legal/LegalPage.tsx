@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
-import { asset } from "@/lib/asset";
 import styles from "./LegalPage.module.css";
 
 // Почта и ссылки в тексте делаем кликабельными
@@ -57,7 +56,7 @@ export function LegalPage({ title, subtitle, text }: { title: string; subtitle?:
           <Link href="/" className={styles.back}>
             <ArrowLeft size={18} /> На главную
           </Link>
-          <img src={asset("/icons/logo-light.svg")} alt="Ранг Авто" width={180} height={40} />
+          <img src={"/icons/logo-light.svg"} alt="Ранг Авто" width={180} height={40} />
         </div>
       </header>
 
