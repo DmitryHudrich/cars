@@ -26,7 +26,7 @@ export function Promos({ promos }: { promos: Promo[] }) {
           {promos.map((p) => (
             <article key={p.title} className={styles.card}>
               <div className={styles.photo}>
-                <img src={p.img} alt="" loading="lazy" draggable={false} />
+                <img src={p.img} alt={p.title} loading="lazy" draggable={false} />
               </div>
               <div className={styles.body}>
                 <h3 className={styles.title}>{p.title}</h3>

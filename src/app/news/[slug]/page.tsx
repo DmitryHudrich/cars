@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/news/ArticlePage";
 import { getContent } from "@/lib/cms";
+import { pageMeta, pageTitle } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const { news } = await getContent();
@@ -16,7 +17,13 @@ async function getArticle(slug: string) {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { article } = await getArticle((await params).slug);
   if (!article) return {};
-  return { title: `${article.title} — Ранг Авто`, description: article.excerpt };
+  return pageMeta({
+    title: pageTitle(article.title),
+    description: article.excerpt,
+    path: `/news/${article.slug}`,
+    image: article.img,
+    type: "article",
+  });
 }
 
 export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {

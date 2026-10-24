@@ -49,7 +49,7 @@ export function Geography({ geography }: { geography: CountryInfo[] }) {
                 className={styles.tab}
                 onClick={() => setActive(i)}
               >
-                <img src={g.tabImg} alt="" loading="lazy" />
+                <img src={g.tabImg} alt={`Авто из ${countries.find((x) => x.id === g.id)?.genitive ?? g.name}`} loading="lazy" />
                 <span className={styles.tabText}>
                   <b>{g.name}</b>
                   <span>{g.tabText}</span>
@@ -64,7 +64,7 @@ export function Geography({ geography }: { geography: CountryInfo[] }) {
           <div className={styles.card} role="tabpanel" aria-live="polite">
             <div className={styles.cardInner} key={c.id}>
               <div className={styles.head}>
-                <img src={country.flag} alt="" width={40} height={24} />
+                <img src={country.flag} alt={`Флаг ${country.genitive}`} width={40} height={24} />
                 <div>
                   <h3 className={styles.name}>{c.name}</h3>
                   <p className={styles.desc}>{c.description}</p>

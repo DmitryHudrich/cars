@@ -27,7 +27,7 @@ export function ArticlePage({ article, news }: { article: Article; news: Article
         </div>
         <h1 className="h2">{article.title}</h1>
         <div className={styles.cover}>
-          <img src={article.img} alt="" />
+          <img src={article.img} alt={article.title} />
         </div>
         <Markdown text={article.body} classes={{ note: styles.note, tableWrap: styles.tableWrap, table: styles.table }} />
 
@@ -44,7 +44,7 @@ export function ArticlePage({ article, news }: { article: Article; news: Article
         <div className={styles.moreGrid}>
           {more.slice(0, 3).map((n) => (
             <Link key={n.slug} href={`/news/${n.slug}`} className={styles.moreCard}>
-              <img src={n.img} alt="" loading="lazy" />
+              <img src={n.img} alt={n.title} loading="lazy" />
               <span className={styles.moreTag}>{n.tag}</span>
               <span className={styles.moreName}>{n.title}</span>
             </Link>

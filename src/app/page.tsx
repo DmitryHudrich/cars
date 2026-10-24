@@ -15,6 +15,14 @@ import { Footer } from "@/components/sections/Footer";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { getCatalog } from "@/lib/catalog";
 import { getContent } from "@/lib/cms";
+import { pageMeta } from "@/lib/seo";
+
+export const metadata = pageMeta({
+  title: "Ранг Авто — авто из Китая, Кореи и Японии под ключ",
+  description:
+    "Подберём, проверим, растаможим и привезём автомобиль из Китая, Кореи и Японии до вашего города. Импорт авто с 2018 года, гарантия на ДВС и КПП.",
+  path: "/",
+});
 
 export default async function Home() {
   const c = await getContent();

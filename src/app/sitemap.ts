@@ -1,0 +1,14 @@
+import type { MetadataRoute } from "next";
+import { getContent } from "@/lib/cms";
+import { SITE_URL } from "@/lib/seo";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { news } = await getContent();
+  const url = (path: string) => new URL(path, SITE_URL).toString();
+  return [
+    { url: url("/"), changeFrequency: "daily", priority: 1 },
+    ...news.map((n) => ({ url: url(`/news/${n.slug}`), changeFrequency: "monthly" as const, priority: 0.7 })),
+    { url: url("/privacy"), changeFrequency: "yearly", priority: 0.2 },
+    { url: url("/agreement"), changeFrequency: "yearly", priority: 0.2 },
+  ];
+}
