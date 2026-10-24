@@ -32,7 +32,8 @@ export type Car = {
   price: number;
   specs: string;
   img: string;
-  market: { min: number; max: number; position: number; label: string; tone: "up" | "down" };
+  url?: string;
+  market?: { min: number; max: number; position: number; label: string; tone: "up" | "down" | "mid" };
   priceDrop?: string;
 };
 
