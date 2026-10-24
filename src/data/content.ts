@@ -1,14 +1,13 @@
 import type { IconName } from "@/components/ui/Icon";
-import { asset } from "@/lib/asset";
 // Контент лендинга. Всё, что помечено TODO, — заглушки до получения материалов от заказчика.
 // Структура данных повторяет будущие сущности админки.
 
 export type CountryId = "cn" | "kr" | "jp";
 
 export const countries: { id: CountryId; name: string; genitive: string; flag: string }[] = [
-  { id: "cn", name: "Китай", genitive: "Китая", flag: asset("/img/flags/cn.webp") },
-  { id: "kr", name: "Корея", genitive: "Кореи", flag: asset("/img/flags/kr.webp") },
-  { id: "jp", name: "Япония", genitive: "Японии", flag: asset("/img/flags/jp.webp") },
+  { id: "cn", name: "Китай", genitive: "Китая", flag: "/img/flags/cn.webp" },
+  { id: "kr", name: "Корея", genitive: "Кореи", flag: "/img/flags/kr.webp" },
+  { id: "jp", name: "Япония", genitive: "Японии", flag: "/img/flags/jp.webp" },
 ];
 
 export type HeroStat = { icon: IconName; value: string; label: string; accent?: boolean };
@@ -21,7 +20,7 @@ export const heroStats: HeroStat[] = [
 ];
 
 export const clientPhotos = [1, 2, 4, 5, 6].map((n) => ({
-  src: asset(`/img/clients/client-${n}.webp`),
+  src: `/img/clients/client-${n}.webp`,
   alt: "Клиент Ранг Авто со своим автомобилем",
 }));
 
@@ -45,7 +44,7 @@ export const cars: Car[] = [
     title: "Volkswagen Passat, мар 2020",
     price: 4176959,
     specs: "2.0 л · 186 л.с. · Автомат · Передний · 31 000 км · Бензин · Седан · Черный",
-    img: asset("/img/cars/car-1.jpg"),
+    img: "/img/cars/car-1.jpg",
     market: { min: 3283087, max: 4138722, position: 0.97, label: "Дороже 95 % похожих", tone: "up" },
   },
   {
@@ -54,7 +53,7 @@ export const cars: Car[] = [
     title: "Geely Panda, окт 2025",
     price: 1136435,
     specs: "41 л.с. · Автомат · Задний · 9 000 км · Электромобиль · Хэтчбек · Зеленый",
-    img: asset("/img/cars/car-2.jpg"),
+    img: "/img/cars/car-2.jpg",
     market: { min: 785160, max: 1206210, position: 0.82, label: "Дороже 82 % похожих", tone: "up" },
   },
   {
@@ -63,7 +62,7 @@ export const cars: Car[] = [
     title: "Honda Accord, июн 2023",
     price: 3504177,
     specs: "1.5 л · 194 л.с. · Автомат · Передний · 90 000 км · Бензин · Седан · Белый",
-    img: asset("/img/cars/car-3.jpg"),
+    img: "/img/cars/car-3.jpg",
     market: { min: 3236156, max: 3906065, position: 0.18, label: "Дешевле 82 % похожих", tone: "down" },
   },
   {
@@ -72,7 +71,7 @@ export const cars: Car[] = [
     title: "Nissan Sylphy, мар 2024",
     price: 1658530,
     specs: "1.6 л · 135 л.с. · Автомат · Передний · 75 000 км · Бензин · Седан · Белый",
-    img: asset("/img/cars/car-4.jpg"),
+    img: "/img/cars/car-4.jpg",
     market: { min: 1224772, max: 2024110, position: 0.58, label: "Дороже 58 % похожих", tone: "up" },
     priceDrop: "дешевле на 41 тыс ₽ через 5 мес.",
   },
@@ -119,12 +118,12 @@ export const promos: Promo[] = [
   {
     title: "Детейлинг за наш счёт",
     text: "При заказе автомобиля делаем профессиональный детейлинг перед выдачей. Подготовим кузов и салон, чтобы первая встреча с вашим автомобилем была особенной.",
-    img: asset("/img/promo/detailing.webp"),
+    img: "/img/promo/detailing.webp",
   },
   {
     title: "Комплект для ТО",
     text: "При покупке автомобиля в РАНГ АВТО комплект для первого технического обслуживания — за наш счёт!",
-    img: asset("/img/promo/to-kit.webp"),
+    img: "/img/promo/to-kit.webp",
   },
 ];
 
@@ -146,7 +145,7 @@ export const geography: CountryInfo[] = [
     id: "cn",
     name: "Китай",
     tabText: "Новые и б/у авто\nс внутреннего рынка",
-    tabImg: asset("/img/geo/tab-cn.webp"),
+    tabImg: "/img/geo/tab-cn.webp",
     description:
       "Новые и б/у авто с внутреннего рынка Китая: машины эксплуатировались в мягком климате, не видели солевых зим и жестких реагентов",
     features: ["Новые и б/у\nавтомобили", "Гибриды\nи электромобили", "Турбо-\nкроссоверы", "Богатые\nкомплектации"],
@@ -165,7 +164,7 @@ export const geography: CountryInfo[] = [
     id: "kr",
     name: "Корея",
     tabText: "Популярные модели\nи редкие комплектации",
-    tabImg: asset("/img/geo/tab-kr.webp"),
+    tabImg: "/img/geo/tab-kr.webp",
     description: "Честный пробег, идеальное состояние, максимальные комплектации, прозрачная история",
     features: ["Новые и б/у\nавтомобили", "Гибриды\nи электромобили", "Надежные\nкроссоверы", "Богатые\nкомплектации"],
     stats: [
@@ -184,7 +183,7 @@ export const geography: CountryInfo[] = [
     id: "jp",
     name: "Япония",
     tabText: "Аукционные автомобили\nс прозрачной историей",
-    tabImg: asset("/img/geo/tab-jp.webp"),
+    tabImg: "/img/geo/tab-jp.webp",
     description: "Легендарная надежность, честный пробег, строгий техосмотр и идеальное состояние",
     features: ["Новые и б/у\nавтомобили", "Гибриды\nи электромобили", "Надежные\nкроссоверы", "Богатые\nкомплектации"],
     stats: [
@@ -255,47 +254,47 @@ export const reasons: Reason[] = [
 export type Review = { photo: string; name: string; car: string; pos?: string };
 
 export const reviews: Review[] = [
-  { photo: asset("/img/clients/review-01.webp"), name: "Клиент", car: "Kia Sorento", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-02.webp"), name: "Клиент", car: "Hyundai Palisade", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-03.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-04.webp"), name: "Клиент", car: "Hyundai Staria", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-05.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-06.webp"), name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-07.webp"), name: "Клиент", car: "Hyundai Palisade" },
-  { photo: asset("/img/clients/review-08.webp"), name: "Клиент", car: "Kia K5" },
-  { photo: asset("/img/clients/review-10.webp"), name: "Клиент", car: "Audi Q7" },
-  { photo: asset("/img/clients/review-11.webp"), name: "Клиент", car: "Mercedes-Benz E-Class" },
-  { photo: asset("/img/clients/review-12.webp"), name: "Клиент", car: "Toyota RAV4", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-13.webp"), name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-16.webp"), name: "Клиент", car: "Geely Coolray", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-17.webp"), name: "Клиент", car: "Toyota Passo" },
-  { photo: asset("/img/clients/review-18.webp"), name: "Клиент", car: "Nissan Note Nismo" },
-  { photo: asset("/img/clients/review-19.webp"), name: "Клиент", car: "BMW 3 серии" },
-  { photo: asset("/img/clients/review-20.webp"), name: "Клиент", car: "Kia Sportage", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-21.webp"), name: "Клиент", car: "Hyundai Elantra", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-22.webp"), name: "Клиент", car: "Toyota RAV4" },
-  { photo: asset("/img/clients/review-23.webp"), name: "Клиент", car: "Volkswagen T-Roc", pos: "50% 62%" },
-  { photo: asset("/img/clients/review-24.webp"), name: "Клиент", car: "Hyundai Sonata" },
-  { photo: asset("/img/clients/review-25.webp"), name: "Клиент", car: "Hyundai Palisade" },
-  { photo: asset("/img/clients/client-1.webp"), name: "Клиент", car: "Audi A3" },
-  { photo: asset("/img/clients/client-2.webp"), name: "Клиент", car: "Hyundai Elantra" },
-  { photo: asset("/img/clients/client-4.webp"), name: "Клиент", car: "Mercedes-Benz CLA" },
-  { photo: asset("/img/clients/client-5.webp"), name: "Клиент", car: "Audi A5" },
-  { photo: asset("/img/clients/client-6.webp"), name: "Клиент", car: "Kia Sorento" },
+  { photo: "/img/clients/review-01.webp", name: "Клиент", car: "Kia Sorento", pos: "50% 62%" },
+  { photo: "/img/clients/review-02.webp", name: "Клиент", car: "Hyundai Palisade", pos: "50% 62%" },
+  { photo: "/img/clients/review-03.webp", name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: "/img/clients/review-04.webp", name: "Клиент", car: "Hyundai Staria", pos: "50% 62%" },
+  { photo: "/img/clients/review-05.webp", name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: "/img/clients/review-06.webp", name: "Клиент", car: "Hyundai Santa Fe", pos: "50% 62%" },
+  { photo: "/img/clients/review-07.webp", name: "Клиент", car: "Hyundai Palisade" },
+  { photo: "/img/clients/review-08.webp", name: "Клиент", car: "Kia K5" },
+  { photo: "/img/clients/review-10.webp", name: "Клиент", car: "Audi Q7" },
+  { photo: "/img/clients/review-11.webp", name: "Клиент", car: "Mercedes-Benz E-Class" },
+  { photo: "/img/clients/review-12.webp", name: "Клиент", car: "Toyota RAV4", pos: "50% 62%" },
+  { photo: "/img/clients/review-13.webp", name: "Клиент", car: "Audi Q5", pos: "50% 62%" },
+  { photo: "/img/clients/review-16.webp", name: "Клиент", car: "Geely Coolray", pos: "50% 62%" },
+  { photo: "/img/clients/review-17.webp", name: "Клиент", car: "Toyota Passo" },
+  { photo: "/img/clients/review-18.webp", name: "Клиент", car: "Nissan Note Nismo" },
+  { photo: "/img/clients/review-19.webp", name: "Клиент", car: "BMW 3 серии" },
+  { photo: "/img/clients/review-20.webp", name: "Клиент", car: "Kia Sportage", pos: "50% 62%" },
+  { photo: "/img/clients/review-21.webp", name: "Клиент", car: "Hyundai Elantra", pos: "50% 62%" },
+  { photo: "/img/clients/review-22.webp", name: "Клиент", car: "Toyota RAV4" },
+  { photo: "/img/clients/review-23.webp", name: "Клиент", car: "Volkswagen T-Roc", pos: "50% 62%" },
+  { photo: "/img/clients/review-24.webp", name: "Клиент", car: "Hyundai Sonata" },
+  { photo: "/img/clients/review-25.webp", name: "Клиент", car: "Hyundai Palisade" },
+  { photo: "/img/clients/client-1.webp", name: "Клиент", car: "Audi A3" },
+  { photo: "/img/clients/client-2.webp", name: "Клиент", car: "Hyundai Elantra" },
+  { photo: "/img/clients/client-4.webp", name: "Клиент", car: "Mercedes-Benz CLA" },
+  { photo: "/img/clients/client-5.webp", name: "Клиент", car: "Audi A5" },
+  { photo: "/img/clients/client-6.webp", name: "Клиент", car: "Kia Sorento" },
 ];
 
 export type Partner = { name: string; logo: string; w: number };
 
 export const banks: Partner[] = [
-  { name: "Сбер", logo: asset("/img/banks/bank-sber.svg"), w: 178 },
-  { name: "ВТБ", logo: asset("/img/banks/bank-vtb.svg"), w: 178 },
-  { name: "Т-Банк", logo: asset("/img/banks/bank-tbank.svg"), w: 178 },
-  { name: "Альфа-Банк", logo: asset("/img/banks/bank-alfa.svg"), w: 178 },
-  { name: "Совкомбанк", logo: asset("/img/banks/bank-sovcom.svg"), w: 233 },
-  { name: "Локо-Банк", logo: asset("/img/banks/bank-loko.svg"), w: 178 },
-  { name: "ОТП Банк", logo: asset("/img/banks/bank-otp.svg"), w: 178 },
-  { name: "Кредит Европа Банк", logo: asset("/img/banks/bank-crediteurope.svg"), w: 293 },
-  { name: "Ингосстрах", logo: asset("/img/banks/ingosstrakh.svg"), w: 233 },
+  { name: "Сбер", logo: "/img/banks/bank-sber.svg", w: 178 },
+  { name: "ВТБ", logo: "/img/banks/bank-vtb.svg", w: 178 },
+  { name: "Т-Банк", logo: "/img/banks/bank-tbank.svg", w: 178 },
+  { name: "Альфа-Банк", logo: "/img/banks/bank-alfa.svg", w: 178 },
+  { name: "Совкомбанк", logo: "/img/banks/bank-sovcom.svg", w: 233 },
+  { name: "Локо-Банк", logo: "/img/banks/bank-loko.svg", w: 178 },
+  { name: "ОТП Банк", logo: "/img/banks/bank-otp.svg", w: 178 },
+  { name: "Кредит Европа Банк", logo: "/img/banks/bank-crediteurope.svg", w: 293 },
+  { name: "Ингосстрах", logo: "/img/banks/ingosstrakh.svg", w: 233 },
 ];
 
 export type FaqKey = "general" | "warranty" | "payment" | "logistics" | "docs" | "check";
