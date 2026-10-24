@@ -1,0 +1,29 @@
+name: Catalog probe
+on:
+  push:
+    branches: [claude/update-website-news-16fehx]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for p in china-used korea statistika; do
+            curl -sS -A "Mozilla/5.0" "https://catalog.rangauto.ru/$p/" -o $p.html
+            echo "===== $p $(wc -c < $p.html)"
+            python3 - $p.html <<'PY'
+          import re, sys
+          s = open(sys.argv[1], encoding="utf-8", errors="ignore").read()
+          for m in re.finditer(r'<form[^>]*>', s):
+              print("FORM", m.group(0)[:300])
+          for m in re.finditer(r'<(select|input)[^>]*name="([^"]+)"[^>]*>', s):
+              print(m.group(1), m.group(0)[:250])
+          for m in re.finditer(r'<select[^>]*>([\s\S]*?)</select>', s):
+              opts = re.findall(r'<option[^>]*value="([^"]*)"[^>]*>([^<]*)', m.group(1))
+              print("OPTS", len(opts), opts[:15])
+          i = s.find('filter')
+          print("FILTER CONTEXT", s[i-200:i+3000] if i >= 0 else None)
+          PY
+          done
+          curl -sS -A "Mozilla/5.0" -o /dev/null -w "brand %{http_code} %{url_effective}\n" -L "https://catalog.rangauto.ru/china-used/zeekr/"
+          curl -sS -A "Mozilla/5.0" -o /dev/null -w "brand %{http_code} %{url_effective}\n" -L "https://catalog.rangauto.ru/korea/hyundai/"
+          curl -sS -A "Mozilla/5.0" -o /dev/null -w "brand %{http_code} %{url_effective}\n" -L "https://catalog.rangauto.ru/statistika/toyota/"
