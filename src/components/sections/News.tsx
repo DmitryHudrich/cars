@@ -17,6 +17,7 @@ export function News({ news }: { news: Article[] }) {
           <div>
             <span className="eyebrow" aria-hidden />
             <h2 className="h2">Главное из мира автомобилей</h2>
+            <p className="section-sub">Публикуем всегда свежие новости</p>
           </div>
           <SliderArrows canPrev={canPrev} canNext={canNext} onStep={step} />
         </div>

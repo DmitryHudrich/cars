@@ -5,20 +5,33 @@ type PointId = keyof typeof geoMap.points;
 type CountryId = "cn" | "kr" | "jp";
 type Label = { text: string; at: PointId; dx: number; dy: number; anchor?: "start" | "middle" | "end" };
 
+const fromVladivostok = [
+  { via: ["vladivostok", "moscow"], bend: 0.16 },
+  { via: ["vladivostok", "astrakhan"], bend: 0.12 },
+  { via: ["vladivostok", "krasnodar"], bend: 0.09 },
+] satisfies { via: PointId[]; bend: number }[];
+
+const fanOut = (from: PointId) =>
+  [
+    { via: [from, "moscow"], bend: -0.18 },
+    { via: [from, "astrakhan"], bend: 0.14 },
+    { via: [from, "krasnodar"], bend: -0.12 },
+  ] satisfies { via: PointId[]; bend: number }[];
+
 const routes: Record<CountryId, { via: PointId[]; bend: number }[]> = {
-  cn: [
-    { via: ["suifenhe", "vladivostok"], bend: 0.6 },
-    { via: ["khorgos", "moscow"], bend: -0.18 },
-  ],
+  cn: [{ via: ["suifenhe", "vladivostok"], bend: 0.6 }, ...fromVladivostok, ...fanOut("khorgos")],
   kr: [
     { via: ["busan", "vladivostok"], bend: -0.25 },
-    { via: ["incheon", "bishkek", "moscow"], bend: 0.12 },
+    ...fromVladivostok,
+    { via: ["incheon", "bishkek"], bend: 0.12 },
+    ...fanOut("bishkek"),
   ],
   jp: [
     { via: ["maizuru", "vladivostok"], bend: 0.3 },
     { via: ["toyama", "vladivostok"], bend: 0.12 },
     { via: ["nagoya", "vladivostok"], bend: -0.12 },
     { via: ["yokohama", "vladivostok"], bend: -0.3 },
+    ...fromVladivostok,
   ],
 };
 
@@ -101,15 +114,11 @@ export function GeoMap({ active }: { active: CountryId }) {
         </g>
       ))}
 
-      {offices.map((o) => (
-        <path key={o.at} className={styles.local} d={curve(["moscow", o.at], o.dx < 0 ? 0.15 : -0.15)} />
-      ))}
-
       <g key={active} className={styles.routes}>
         {routes[active].map((r, i) => {
           const d = curve(r.via, r.bend);
-          const delay = { animationDelay: `${i * 0.25}s` };
-          const sparkDelay = { animationDelay: `${1 + i * 0.6}s` };
+          const delay = { animationDelay: `${i * 0.15}s` };
+          const sparkDelay = { animationDelay: `${1 + i * 0.35}s` };
           return (
             <g key={r.via.join("-")}>
               <path className={styles.trace} d={d} pathLength={1} style={delay} />
@@ -140,7 +149,7 @@ export function GeoMap({ active }: { active: CountryId }) {
         return (
           <g key={o.at}>
             <g className={styles.marker}>
-              <circle className={styles.office} cx={x} cy={y} r={3.5} />
+              <circle className={styles.office} cx={x} cy={y} r={4.5} />
             </g>
             <Text {...o} className={styles.officeLabel} />
           </g>

@@ -2,11 +2,36 @@
 
 import { asset } from "@/lib/asset";
 import { useEffect, useState } from "react";
-import { ChevronDown, ChevronRight, Heart, Mail, MapPin, Menu, Search, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Heart, MapPin, Menu, Search, X } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { nav, telHref } from "@/data/site";
 import type { Site } from "@/lib/cms";
 import styles from "./Header.module.css";
+
+function Typewriter({ text, className }: { text: string; className: string }) {
+  const [count, setCount] = useState(text.length);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let n = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      n = n >= text.length ? 0 : n + 1;
+      setCount(n);
+      timer = setTimeout(tick, n === text.length ? 6000 : n === 0 ? 400 : 45);
+    };
+    timer = setTimeout(tick, 600);
+    return () => clearTimeout(timer);
+  }, [text]);
+
+  return (
+    <p className={className} aria-label={text}>
+      <span aria-hidden>{text.slice(0, count)}</span>
+      <span aria-hidden className={styles.caret} data-done={count === text.length || undefined} />
+      <span aria-hidden className={styles.ghost}>{text.slice(count)}</span>
+    </p>
+  );
+}
 
 export function Header({ site }: { site: Site }) {
   const [open, setOpen] = useState(false);
@@ -31,14 +56,14 @@ export function Header({ site }: { site: Site }) {
     <>
       <div className={styles.topbar}>
         <div className={`container ${styles.topbarInner}`}>
-          <p className={styles.promo}>Узнавайте первыми о новых поступлениях с выгодными ценами - в наших каналах</p>
+          <Typewriter className={styles.promo} text="Узнавайте первыми о новых поступлениях с выгодными ценами - в наших каналах" />
           <div className={styles.topLinks}>
             <a href={site.socials.telegram} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-tg.svg")} alt="" width={18} height={18} />
+              <img src={asset("/icons/soc-tg.svg")} alt="" width={18} height={18} className={styles.blink} />
               Telegram
             </a>
             <a href={site.socials.max} target="_blank" rel="noopener" className={styles.topLink}>
-              <img src={asset("/icons/soc-max.svg")} alt="" width={16} height={16} />
+              <img src={asset("/icons/soc-max.svg")} alt="" width={16} height={16} className={styles.blink} />
               MAX
             </a>
             <a href={telHref(site.phoneShort)} className={styles.topPhone}>
@@ -155,12 +180,6 @@ export function Header({ site }: { site: Site }) {
             {site.phone}
           </a>
           <ul className={styles.mobileContacts}>
-            <li>
-              <a href={`mailto:${site.email}`}>
-                <Mail size={18} />
-                {site.email}
-              </a>
-            </li>
             {site.offices.map((o) => (
               <li key={o.address}>
                 <a href="#contacts">

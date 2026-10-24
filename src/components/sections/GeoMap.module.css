@@ -37,13 +37,6 @@
   opacity: 0.55;
 }
 
-.local {
-  fill: none;
-  stroke: rgba(251, 219, 179, 0.35);
-  stroke-width: 1.2;
-  stroke-dasharray: 3 4;
-}
-
 .trace {
   fill: none;
   stroke: rgba(251, 219, 179, 0.22);
@@ -125,14 +118,15 @@
 }
 
 .officeLabel {
-  font-size: calc(12px / var(--zoom, 1));
-  fill: rgba(255, 255, 255, 0.75);
+  font-size: calc(14px / var(--zoom, 1));
+  font-weight: 700;
+  fill: #fbdbb3;
 }
 
 .office {
-  fill: var(--c-white);
-  stroke: var(--c-dark);
-  stroke-width: 1.2;
+  fill: #fff4e6;
+  stroke: var(--c-gold);
+  stroke-width: 1.5;
 }
 
 .destHalo {
@@ -203,7 +197,7 @@
   }
 
   .officeLabel {
-    font-size: calc(18px / var(--zoom, 1));
+    font-size: calc(20px / var(--zoom, 1));
   }
 }
 

@@ -37,10 +37,6 @@ export function Contacts({ site }: { site: Site }) {
               <span className={styles.link}>{site.phone}</span>
               <small>{site.phoneNote}</small>
             </a>
-            <h3 className={`${styles.label} ${styles.gap}`}>Почта</h3>
-            <a href={`mailto:${site.email}`} className={styles.link}>
-              {site.email}
-            </a>
           </div>
 
           <div className={styles.col}>
@@ -69,15 +65,24 @@ export function Contacts({ site }: { site: Site }) {
           </div>
 
           <div className={styles.col}>
-            <h3 className={styles.label}>Мессенджеры</h3>
+            <h3 className={styles.label}>Соц. сети</h3>
             <div className={styles.socials}>
               <a href={site.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте">
                 <img src={asset("/icons/soc-vk.svg")} alt="" width={44} height={44} />
               </a>
-              <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram">
+              <a href={site.socials.telegram} target="_blank" rel="noopener" aria-label="Telegram-канал">
                 <img src={asset("/icons/soc-tg.svg")} alt="" width={44} height={44} />
               </a>
               <a href={site.socials.max} target="_blank" rel="noopener" aria-label="MAX">
+                <img src={asset("/icons/soc-max.svg")} alt="" width={44} height={44} />
+              </a>
+            </div>
+            <h3 className={`${styles.label} ${styles.gap}`}>Мессенджеры</h3>
+            <div className={styles.socials}>
+              <a href={site.socials.chat} target="_blank" rel="noopener" aria-label="Написать в Telegram">
+                <img src={asset("/icons/soc-tg.svg")} alt="" width={44} height={44} />
+              </a>
+              <a href={site.socials.max} target="_blank" rel="noopener" aria-label="Написать в MAX">
                 <img src={asset("/icons/soc-max.svg")} alt="" width={44} height={44} />
               </a>
             </div>
