@@ -17,12 +17,17 @@ jobs:
             echo "== /$p/ http=$code size=$(wc -c < pages/$p.html 2>/dev/null)"
             echo "article.card: $(grep -o '<article class="card"' pages/$p.html | wc -l)  itemprop=price: $(grep -o 'itemprop="price"' pages/$p.html | wc -l)  card__: $(grep -o 'card__[a-z-]*' pages/$p.html | sort | uniq -c | sort -rn | head -8 | tr '\n' ' ')"
           done
-          echo "== first card markup (china-used)"
           python3 - <<'PY'
           import re
-          h = open("pages/china-used.html", encoding="utf-8", errors="replace").read()
-          m = re.search(r'<article[^>]*class="[^"]*card[\s\S]{0,6000}?</article>', h)
-          print(m.group(0)[:6000] if m else h[:3000])
+          for p in ["china-used", "korea", "statistika"]:
+              h = open(f"pages/{p}.html", encoding="utf-8", errors="replace").read()
+              idx = [m.start() for m in re.finditer(r'itemprop="price"', h)]
+              print(f"===== {p}: price at {idx[:4]}")
+              if len(idx) >= 2:
+                  a = idx[0]
+                  start = h.rfind("itemscope", 0, a)
+                  start = h.rfind("<", 0, start)
+                  print(h[max(0, start - 1500):idx[1] + 300])
           PY
       - uses: actions/upload-artifact@v4
         with:
