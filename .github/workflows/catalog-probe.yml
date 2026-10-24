@@ -3,33 +3,14 @@ name: Catalog probe
 on:
   push:
     branches: [claude/update-website-news-16fehx]
-    paths: [.github/workflows/catalog-probe.yml]
+    paths: [.github/workflows/catalog-probe.yml, scripts/check-catalog.ts, src/lib/catalog/parse.ts]
 
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch catalog pages
-        run: |
-          mkdir -p pages
-          for p in china-used korea statistika auktsiony; do
-            code=$(curl -sSL -A "RangAutoSite/1.0" --max-time 30 -o pages/$p.html -w '%{http_code}' "https://catalog.rangauto.ru/$p/" || echo ERR)
-            echo "== /$p/ http=$code size=$(wc -c < pages/$p.html 2>/dev/null)"
-            echo "article.card: $(grep -o '<article class="card"' pages/$p.html | wc -l)  itemprop=price: $(grep -o 'itemprop="price"' pages/$p.html | wc -l)  card__: $(grep -o 'card__[a-z-]*' pages/$p.html | sort | uniq -c | sort -rn | head -8 | tr '\n' ' ')"
-          done
-          python3 - <<'PY'
-          import re
-          for p in ["china-used", "korea", "statistika"]:
-              h = open(f"pages/{p}.html", encoding="utf-8", errors="replace").read()
-              idx = [m.start() for m in re.finditer(r'itemprop="price"', h)]
-              print(f"===== {p}: price at {idx[:4]}")
-              if len(idx) >= 2:
-                  a = idx[0]
-                  start = h.rfind("itemscope", 0, a)
-                  start = h.rfind("<", 0, start)
-                  print(h[max(0, start - 1500):idx[1] + 300])
-          PY
-      - uses: actions/upload-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          name: catalog-pages
-          path: pages
+          node-version: 22
+      - run: npx -y tsx@4.20.6 scripts/check-catalog.ts

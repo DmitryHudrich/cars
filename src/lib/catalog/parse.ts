@@ -11,47 +11,69 @@ const decode = (s: string) =>
 const text = (html: string) => decode(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
 const money = (s: string) => Number(text(s).replace(/\D/g, ""));
 
-const meta = (block: string, prop: string) =>
-  block.match(new RegExp(`itemprop="${prop}"\\s+content="([^"]*)"`))?.[1];
+const meta = (block: string, prop: string) => block.match(new RegExp(`itemprop="${prop}"\\s+content="([^"]*)"`))?.[1];
 
-function tone(cls: string, label: string): "up" | "down" | "mid" {
-  if (/is-good/.test(cls) || /^Дешевле/i.test(label)) return "down";
-  if (/is-high/.test(cls) || /^Дороже/i.test(label)) return /is-mid/.test(cls) ? "mid" : "up";
+const DRIVES: Record<string, string> = { FWD: "Передний", RWD: "Задний", AWD: "Полный", "4WD": "Полный" };
+
+function spec(raw: string) {
+  const volume = raw.match(/^(\d{3,5})\s*(см|сс|cc)/i);
+  if (volume) return `${(Number(volume[1]) / 1000).toFixed(1)} л`;
+  if (DRIVES[raw.toUpperCase()]) return DRIVES[raw.toUpperCase()];
+  if (/^автомат/i.test(raw) || /\(AT\)|\(АТ\)/.test(raw)) return "Автомат";
+  if (/механ/i.test(raw)) return "Механика";
+  if (/вариатор/i.test(raw)) return "Вариатор";
+  if (/робот/i.test(raw)) return "Робот";
+  if (!/[а-яё]/i.test(raw) || /^\d{2}\.\d{2}\.\d{4}$/.test(raw)) return "";
+  return raw;
+}
+
+function tone(cls: string): "up" | "down" | "mid" {
+  if (cls === "good") return "down";
+  if (cls === "high") return "up";
   return "mid";
 }
 
 export function parseCatalogCards(html: string, country: CountryId, origin: string): Car[] {
+  const starts = [...html.matchAll(/<div class="card-row[^"]*"[^>]*itemtype="http:\/\/schema\.org\/Car"/g)].map((m) => m.index!);
   const cars: Car[] = [];
-  for (const [block] of html.matchAll(/<article class="card"[\s\S]*?<\/article>/g)) {
-    const id = block.match(/data-id="([^"]+)"/)?.[1];
-    const href = block.match(/class="card__title"\s+href="([^"]+)"/)?.[1] ?? block.match(/class="card__photo"\s+href="([^"]+)"/)?.[1];
-    const title = text(block.match(/class="card__title"[^>]*>([\s\S]*?)<\/a>/)?.[1] ?? "") || decode(meta(block, "name") ?? "");
-    const price = Number(meta(block, "price") ?? 0);
-    const img = meta(block, "image") ?? block.match(/<img src="([^"]+)"/)?.[1];
-    if (!id || !title || !price || !img) continue;
 
-    const specsHtml = block.match(/class="card__specs">([\s\S]*?)<\/div>/)?.[1] ?? "";
-    const specs = [...specsHtml.matchAll(/<span><i>[^<]*<\/i>([^<]*)<\/span>/g)].map((m) => decode(m[1]).trim()).filter(Boolean);
+  starts.forEach((start, i) => {
+    const block = html.slice(start, starts[i + 1] ?? start + 20000);
+    const nameLink = block.match(/class="card-row__name"\s+href="([^"]+)"\s*>([\s\S]*?)(?:<div|<\/a>)/);
+    const href = nameLink?.[1];
+    const name = (nameLink ? text(nameLink[2]) : "") || decode(meta(block, "name") ?? "");
+    const price = Math.round(Number(meta(block, "price") ?? 0)) || money(block.match(/class="price-val">([^<]*)/)?.[1] ?? "");
+    const img = block.match(/<img[^>]*\ssrc="(https?:[^"]+)"/)?.[1] ?? meta(block, "image");
+    if (!href || !name || !price || !img) return;
 
-    const ends = [...block.matchAll(/class="pgauge__end">([^<]*)</g)].map((m) => money(m[1]));
-    const rate = block.match(/class="pgauge__rate([^"]*)">([^<]*)</);
-    const position = Number(block.match(/pgauge__mark"\s+style="left:\s*([\d.]+)%/)?.[1]);
-    const label = rate ? text(rate[2]) : "";
+    const age = [...(block.match(/class="card-row__age">([\s\S]*?)<\/div>/)?.[1] ?? "").matchAll(/<span>([\s\S]*?)<\/span>/g)].map((m) => text(m[1]));
+    const mileage = age.find((a) => /км/.test(a));
+    const date = age.find((a) => /\d{4}/.test(a) && !/км/.test(a))?.replace(/\s*г\.?$/, "");
+
+    const info = block.slice(block.indexOf("card-row__info"), block.indexOf("card-row__price"));
+    const specs = [...info.matchAll(/<span[^>]*>([\s\S]*?)<\/span>/g)].map((m) => spec(text(m[1]))).filter(Boolean);
+    if (mileage) specs.push(mileage);
+
+    const zone = block.match(/compare-price--(good|mid|high)/)?.[1];
+    const min = block.match(/class="compare-price__min">([^<]*)</)?.[1];
+    const max = block.match(/class="compare-price__max">([^<]*)</)?.[1];
+    const label = text(block.match(/class="compare-price__value">([^<]*)</)?.[1] ?? "");
+    const position = Number(block.match(/compare-price__dot"\s+style="left:\s*([\d.]+)%/)?.[1]);
 
     cars.push({
-      id,
+      id: href,
       country,
-      title,
+      title: date ? `${name}, ${date}` : name,
       price,
-      specs: specs.join(" · "),
+      specs: [...new Set(specs)].join(" · "),
       img,
-      url: href ? new URL(href, origin).toString() : undefined,
-      priceDrop: text(block.match(/class="badge badge--deal">([\s\S]*?)<\/span>/)?.[1] ?? "") || undefined,
+      url: new URL(href, origin).toString(),
       market:
-        ends.length === 2 && label && Number.isFinite(position)
-          ? { min: ends[0], max: ends[1], position: position / 100, label, tone: tone(rate![1], label) }
+        zone && min && max && label && Number.isFinite(position)
+          ? { min: money(min), max: money(max), position: position / 100, label, tone: tone(zone) }
           : undefined,
     });
-  }
+  });
+
   return cars;
 }
