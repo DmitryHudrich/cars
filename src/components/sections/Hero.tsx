@@ -3,12 +3,13 @@ import { ArrowUpRight } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { Icon } from "@/components/ui/Icon";
 import type { HeroStat } from "@/data/content";
+import type { CatalogBrands } from "@/lib/catalog";
 import { HeroCountry } from "./HeroCountry";
 import { HeroSearch } from "./HeroSearch";
 import { ClientsStrip } from "./ClientsStrip";
 import styles from "./Hero.module.css";
 
-export function Hero({ heroStats }: { heroStats: HeroStat[] }) {
+export function Hero({ heroStats, brands }: { heroStats: HeroStat[]; brands: CatalogBrands }) {
   return (
     <section className={styles.hero} id="top">
       <div className={styles.bg} aria-hidden>
@@ -50,7 +51,7 @@ export function Hero({ heroStats }: { heroStats: HeroStat[] }) {
           ))}
         </ul>
 
-        <HeroSearch />
+        <HeroSearch brands={brands} />
       </div>
 
       <ClientsStrip />

@@ -79,3 +79,16 @@ export function parseCatalogCards(html: string, country: CountryId, origin: stri
 
   return cars;
 }
+
+export type CatalogOption = { value: string; label: string; popular?: boolean };
+
+export function parseSelectOptions(html: string, name: string): CatalogOption[] {
+  const select = html.match(new RegExp(`<select[^>]*name="${name}"[^>]*>([\\s\\S]*?)</select>`))?.[1] ?? "";
+  return [...select.matchAll(/<option([^>]*)value=['"]([^'"]+)['"]([^>]*)>([\s\S]*?)<\/option>/g)]
+    .map((m) => ({
+      value: m[2],
+      label: text(m[4]).replace(/\s*\([\d\s]+\)$/, ""),
+      popular: /class=["'][^"']*bold/.test(m[1] + m[3]) || undefined,
+    }))
+    .filter((o) => o.label);
+}
