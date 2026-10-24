@@ -18,6 +18,8 @@ const DRIVES: Record<string, string> = { FWD: "Передний", RWD: "Задн
 function spec(raw: string) {
   const volume = raw.match(/^(\d{3,5})\s*(см|сс|cc)/i);
   if (volume) return `${(Number(volume[1]) / 1000).toFixed(1)} л`;
+  const power = raw.match(/^([\d.,]+)\s*л\.с\./);
+  if (power) return `${Math.round(Number(power[1].replace(",", ".")))} л.с.`;
   if (DRIVES[raw.toUpperCase()]) return DRIVES[raw.toUpperCase()];
   if (/^автомат/i.test(raw) || /\(AT\)|\(АТ\)/.test(raw)) return "Автомат";
   if (/механ/i.test(raw)) return "Механика";
