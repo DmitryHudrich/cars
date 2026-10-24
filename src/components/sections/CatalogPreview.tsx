@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Heart, Info, TrendingDown } from "lucide-react";
 import { LeadButton } from "@/components/lead/LeadModal";
 import { countries, type Car, type CountryId } from "@/data/content";
-import { CATALOG_FILTER_EVENT } from "./HeroSearch";
 import { catalogUrls } from "@/data/site";
 import styles from "./CatalogPreview.module.css";
 
@@ -12,12 +11,6 @@ const rub = (n: number) => n.toLocaleString("ru-RU").replace(/,/g, " ") + " ₽"
 
 export function CatalogPreview({ cars }: { cars: Car[] }) {
   const [country, setCountry] = useState<CountryId>("cn");
-
-  useEffect(() => {
-    const onFilter = (e: Event) => setCountry((e as CustomEvent<{ country: CountryId }>).detail.country);
-    window.addEventListener(CATALOG_FILTER_EVENT, onFilter);
-    return () => window.removeEventListener(CATALOG_FILTER_EVENT, onFilter);
-  }, []);
 
   const list = cars.filter((c) => c.country === country);
 
