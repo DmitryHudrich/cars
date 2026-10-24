@@ -56,6 +56,16 @@
   border-radius: 2px;
 }
 
+.flag[data-bare] {
+  padding: 0;
+  overflow: hidden;
+}
+
+.flag[data-bare] img {
+  object-fit: cover;
+  border-radius: 0;
+}
+
 .tab:hover {
   box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.55);
   transform: translateY(-1px);
@@ -344,6 +354,10 @@
     width: 32px;
     height: 24px;
     padding: 2px;
+  }
+
+  .flag[data-bare] {
+    padding: 0;
   }
 }
 
