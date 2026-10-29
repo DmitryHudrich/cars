@@ -4,8 +4,6 @@ import path from "node:path";
 const TOKEN = process.env.PHOTO_BOT_TOKEN ?? "";
 const API = process.env.TELEGRAM_API_URL ?? "https://api.telegram.org";
 const DATA = path.resolve(process.env.PHOTO_BOT_DATA ?? "./photo-bot-data");
-const CMS_URL = process.env.CMS_URL ?? "";
-const NEWS_FILE = process.env.PHOTO_BOT_NEWS_FILE ?? "";
 const ALLOWED = new Set(
   (process.env.PHOTO_BOT_ALLOWED_IDS ?? "")
     .split(",")
@@ -75,59 +73,6 @@ function serial(key, fn) {
   const next = prev.then(fn, fn);
   queues.set(key, next.catch(() => {}));
   return next;
-}
-
-let articlesCache = { at: 0, list: [] };
-
-async function localArticles() {
-  if (!NEWS_FILE) return [];
-  try {
-    const src = await fs.readFile(NEWS_FILE, "utf8");
-    return [...src.matchAll(/slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"/g)].map(([, slug, title]) => ({ slug, title }));
-  } catch {
-    return [];
-  }
-}
-
-async function articles() {
-  if (Date.now() - articlesCache.at < 10 * 60 * 1000) return articlesCache.list;
-  if (!CMS_URL) {
-    articlesCache = { at: Date.now(), list: await localArticles() };
-    return articlesCache.list;
-  }
-  try {
-    const res = await fetch(`${CMS_URL}/api/articles?pagination[pageSize]=100&fields[0]=title&fields[1]=slug`, {
-      signal: AbortSignal.timeout(5000),
-    });
-    const json = await res.json();
-    const list = (json.data ?? []).map((a) => ({ slug: a.slug ?? a.attributes?.slug, title: a.title ?? a.attributes?.title }));
-    articlesCache = { at: Date.now(), list: list.length ? list : await localArticles() };
-  } catch (e) {
-    console.error("[photo-bot] cms", e.message);
-    articlesCache = { at: Date.now(), list: await localArticles() };
-  }
-  return articlesCache.list;
-}
-
-const words = (s) =>
-  String(s)
-    .toLowerCase()
-    .replace(/ё/g, "е")
-    .split(/[^a-zа-я0-9]+/)
-    .filter((w) => w.length > 2)
-    .map((w) => w.slice(0, 5));
-
-async function guessArticle(caption) {
-  const list = await articles();
-  const cap = new Set(words(caption));
-  if (!cap.size) return null;
-  let best = null;
-  for (const a of list) {
-    const aw = new Set([...words(a.title), ...words(String(a.slug ?? "").replace(/-/g, " "))]);
-    const score = [...cap].filter((w) => aw.has(w)).length;
-    if (score > 0 && (!best || score > best.score)) best = { ...a, score };
-  }
-  return best && { slug: best.slug, title: best.title };
 }
 
 function pickFile(msg) {
@@ -257,31 +202,19 @@ function zip(entries) {
   return Buffer.concat([...locals, ...centrals, end]);
 }
 
-function instructions(groups, list) {
+function instructions(groups) {
   const lines = [
-    "# Замена фотографий в статьях rangauto.ru",
+    "# Фотографии для статей",
     "",
-    "Задача для Claude: в этом архиве фотографии, которые автор подписал — подпись говорит, к какой статье относится фото.",
+    "Фотографии в этом архиве подписаны автором: подпись говорит, к какой статье относится фото и, возможно, куда его поставить.",
+    "Замени фотографии в соответствующих статьях. Опирайся только на подписи. Если по подписи статью или место однозначно определить нельзя — не угадывай, перечисли такие фото и спроси.",
     "",
-    "1. Для каждой группы ниже найди статью сайта по подписи (подсказка `slug`, если она есть, — это догадка бота, проверь её по смыслу подписи).",
-    "2. Статьи живут в CMS (Strapi, тип «Статьи» — `cms/src/api/article`, поле `cover`) и в запасном локальном списке `src/data/news.ts` (поле `img`, файлы в `public/img/news/`).",
-    "3. Если для статьи одно фото — замени им обложку (`cover` / `img`). Если фото несколько — первое станет обложкой, остальные вставь в текст статьи (`body`) в подходящие по смыслу места, если подпись не говорит иное.",
-    "4. Перед сохранением в `public/img/news/` переведи фото в `.webp` (ширина до 1600 px), имя файла — по slug статьи.",
-    "5. Если подпись указывает конкретное место в статье («в раздел про…», «вместо второй картинки») — следуй ей.",
-    "6. Если статью однозначно определить нельзя — не угадывай, перечисли такие фото в конце ответа и спроси.",
-    "",
-    "Полные данные в машиночитаемом виде — `manifest.json`.",
+    "Те же данные в JSON — `manifest.json`.",
     "",
   ];
   for (const g of groups) {
     lines.push(`## ${g.caption || "Без подписи"}`, "");
-    if (g.guess) lines.push(`Похоже на статью: **${g.guess.title}** (\`${g.guess.slug}\`)`, "");
     for (const it of g.items) lines.push(`- \`${it.path}\`${it.captionSource === "inherited" ? " (подпись взята из альбома или предыдущего сообщения)" : ""}`);
-    lines.push("");
-  }
-  if (list.length) {
-    lines.push("## Статьи на сайте на момент выгрузки", "");
-    for (const a of list) lines.push(`- \`${a.slug}\` — ${a.title}`);
     lines.push("");
   }
   return lines.join("\n");
@@ -301,20 +234,18 @@ async function buildArchive(chatId) {
   let i = 0;
   for (const [caption, items] of byCaption) {
     i++;
-    const guess = caption ? await guessArticle(caption) : null;
-    const folder = `photos/${String(i).padStart(2, "0")}-${slugify(guess?.slug ?? caption)}`;
+    const folder = `photos/${String(i).padStart(2, "0")}-${slugify(caption)}`;
     const groupItems = [];
     for (const it of items) {
       const p = `${folder}/${it.name}`;
       entries.push({ name: p, data: await fs.readFile(path.join(sessionDir(chatId), "files", it.name)) });
       groupItems.push({ path: p, captionSource: it.captionSource, width: it.width, height: it.height, original: it.original, from: it.from, date: it.date });
     }
-    groups.push({ caption, guess, items: groupItems });
+    groups.push({ caption, items: groupItems });
   }
-  const list = await articles();
-  const manifest = { createdAt: new Date().toISOString(), site: "rangauto.ru", groups, articles: list };
+  const manifest = { createdAt: new Date().toISOString(), groups };
   entries.unshift(
-    { name: "CLAUDE.md", data: Buffer.from(instructions(groups, list), "utf8") },
+    { name: "CLAUDE.md", data: Buffer.from(instructions(groups), "utf8") },
     { name: "manifest.json", data: Buffer.from(JSON.stringify(manifest, null, 2), "utf8") },
   );
   return { buffer: zip(entries), count: s.items.length, groups };

@@ -36,8 +36,6 @@ jobs:
           mkdir -p release/.next
           cp -r .next/static release/.next/static
           cp -r public release/public
-          mkdir -p release/photo-bot
-          cp bots/photo-bot/bot.mjs release/photo-bot/
 
       - name: Configure SSH
         run: |
