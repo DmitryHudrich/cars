@@ -110,7 +110,12 @@ async function addPhoto(msg, file) {
   if (msg.media_group_id) {
     if (caption) s.groups[msg.media_group_id] = caption;
     else caption = s.groups[msg.media_group_id] ?? "";
-    if (caption) for (const it of s.items) if (it.mediaGroup === msg.media_group_id && !it.caption) it.caption = caption;
+    if (caption)
+      for (const it of s.items)
+        if (it.mediaGroup === msg.media_group_id && !it.caption) {
+          it.caption = caption;
+          it.captionSource = "inherited";
+        }
   }
   if (!caption && !msg.media_group_id) caption = s.lastCaption;
   if (caption) s.lastCaption = caption;
@@ -220,7 +225,9 @@ function instructions(groups) {
   return lines.join("\n");
 }
 
-async function buildArchive(chatId) {
+const PART_LIMIT = 45 * 1024 * 1024;
+
+async function buildArchives(chatId) {
   const s = await loadSession(chatId);
   if (!s.items.length) return null;
   const byCaption = new Map();
@@ -229,39 +236,54 @@ async function buildArchive(chatId) {
     if (!byCaption.has(key)) byCaption.set(key, []);
     byCaption.get(key).push(it);
   }
-  const groups = [];
-  const entries = [];
+  const parts = [];
+  let part = { groups: [], entries: [], size: 0 };
   let i = 0;
   for (const [caption, items] of byCaption) {
     i++;
     const folder = `photos/${String(i).padStart(2, "0")}-${slugify(caption)}`;
-    const groupItems = [];
+    const group = { caption, items: [] };
+    const files = [];
     for (const it of items) {
       const p = `${folder}/${it.name}`;
-      entries.push({ name: p, data: await fs.readFile(path.join(sessionDir(chatId), "files", it.name)) });
-      groupItems.push({ path: p, captionSource: it.captionSource, width: it.width, height: it.height, original: it.original, from: it.from, date: it.date });
+      files.push({ name: p, data: await fs.readFile(path.join(sessionDir(chatId), "files", it.name)) });
+      group.items.push({ path: p, captionSource: it.captionSource, width: it.width, height: it.height, original: it.original, from: it.from, date: it.date });
     }
-    groups.push({ caption, items: groupItems });
+    const size = files.reduce((n, f) => n + f.data.length, 0);
+    if (part.entries.length && part.size + size > PART_LIMIT) {
+      parts.push(part);
+      part = { groups: [], entries: [], size: 0 };
+    }
+    part.groups.push(group);
+    part.entries.push(...files);
+    part.size += size;
   }
-  const manifest = { createdAt: new Date().toISOString(), groups };
-  entries.unshift(
-    { name: "CLAUDE.md", data: Buffer.from(instructions(groups), "utf8") },
-    { name: "manifest.json", data: Buffer.from(JSON.stringify(manifest, null, 2), "utf8") },
-  );
-  return { buffer: zip(entries), count: s.items.length, groups };
+  parts.push(part);
+  return parts.map((p) => {
+    const manifest = { createdAt: new Date().toISOString(), groups: p.groups };
+    const entries = [
+      { name: "CLAUDE.md", data: Buffer.from(instructions(p.groups), "utf8") },
+      { name: "manifest.json", data: Buffer.from(JSON.stringify(manifest, null, 2), "utf8") },
+      ...p.entries,
+    ];
+    return { buffer: zip(entries), count: p.groups.reduce((n, g) => n + g.items.length, 0), groups: p.groups };
+  });
 }
 
 async function sendArchive(chatId) {
-  const built = await buildArchive(chatId);
-  if (!built) return say(chatId, "Пока нет ни одной фотографии. Перешлите сообщения с фото и подписями.");
+  const parts = await buildArchives(chatId);
+  if (!parts) return say(chatId, "Пока нет ни одной фотографии. Перешлите сообщения с фото и подписями.");
   const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-");
-  const form = new FormData();
-  form.append("chat_id", String(chatId));
-  form.append("caption", `Фото: ${built.count}, статей: ${built.groups.length}. Закиньте архив в Cowork — внутри CLAUDE.md с разметкой.`);
-  form.append("document", new Blob([built.buffer], { type: "application/zip" }), `photos-${stamp}.zip`);
-  const res = await fetch(`${API}/bot${TOKEN}/sendDocument`, { method: "POST", body: form, signal: AbortSignal.timeout(300000) });
-  const json = await res.json().catch(() => ({}));
-  if (!json.ok) throw new Error(`sendDocument: ${res.status} ${JSON.stringify(json)}`);
+  for (const [k, built] of parts.entries()) {
+    const suffix = parts.length > 1 ? `-part${k + 1}of${parts.length}` : "";
+    const form = new FormData();
+    form.append("chat_id", String(chatId));
+    form.append("caption", `${parts.length > 1 ? `Часть ${k + 1} из ${parts.length}. ` : ""}Фото: ${built.count}, подписей: ${built.groups.length}. Внутри CLAUDE.md с разметкой.`);
+    form.append("document", new Blob([built.buffer], { type: "application/zip" }), `photos-${stamp}${suffix}.zip`);
+    const res = await fetch(`${API}/bot${TOKEN}/sendDocument`, { method: "POST", body: form, signal: AbortSignal.timeout(300000) });
+    const json = await res.json().catch(() => ({}));
+    if (!json.ok) throw new Error(`sendDocument: ${res.status} ${JSON.stringify(json)}`);
+  }
   await fs.rm(sessionDir(chatId), { recursive: true, force: true });
 }
 
