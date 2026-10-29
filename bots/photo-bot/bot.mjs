@@ -5,6 +5,7 @@ const TOKEN = process.env.PHOTO_BOT_TOKEN ?? "";
 const API = process.env.TELEGRAM_API_URL ?? "https://api.telegram.org";
 const DATA = path.resolve(process.env.PHOTO_BOT_DATA ?? "./photo-bot-data");
 const CMS_URL = process.env.CMS_URL ?? "";
+const NEWS_FILE = process.env.PHOTO_BOT_NEWS_FILE ?? "";
 const ALLOWED = new Set(
   (process.env.PHOTO_BOT_ALLOWED_IDS ?? "")
     .split(",")
@@ -78,18 +79,32 @@ function serial(key, fn) {
 
 let articlesCache = { at: 0, list: [] };
 
+async function localArticles() {
+  if (!NEWS_FILE) return [];
+  try {
+    const src = await fs.readFile(NEWS_FILE, "utf8");
+    return [...src.matchAll(/slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"/g)].map(([, slug, title]) => ({ slug, title }));
+  } catch {
+    return [];
+  }
+}
+
 async function articles() {
-  if (!CMS_URL) return [];
   if (Date.now() - articlesCache.at < 10 * 60 * 1000) return articlesCache.list;
+  if (!CMS_URL) {
+    articlesCache = { at: Date.now(), list: await localArticles() };
+    return articlesCache.list;
+  }
   try {
     const res = await fetch(`${CMS_URL}/api/articles?pagination[pageSize]=100&fields[0]=title&fields[1]=slug`, {
       signal: AbortSignal.timeout(5000),
     });
     const json = await res.json();
     const list = (json.data ?? []).map((a) => ({ slug: a.slug ?? a.attributes?.slug, title: a.title ?? a.attributes?.title }));
-    articlesCache = { at: Date.now(), list };
+    articlesCache = { at: Date.now(), list: list.length ? list : await localArticles() };
   } catch (e) {
     console.error("[photo-bot] cms", e.message);
+    articlesCache = { at: Date.now(), list: await localArticles() };
   }
   return articlesCache.list;
 }

@@ -35,5 +35,5 @@ bash bots/photo-bot/server-setup.sh <токен> [telegram_id]
 Нужен только Node 22, зависимостей нет:
 
 ```bash
-PHOTO_BOT_TOKEN=<токен> CMS_URL=https://rangauto.ru/cms node bots/photo-bot/bot.mjs
+PHOTO_BOT_TOKEN=<токен> CMS_URL=https://rangauto.ru/cms PHOTO_BOT_NEWS_FILE=src/data/news.ts node bots/photo-bot/bot.mjs
 ```
